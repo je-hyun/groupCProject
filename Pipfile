@@ -6,6 +6,8 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+pytest = "*"
+flask = "*"
 
 [requires]
 python_version = "3.6"

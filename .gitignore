@@ -1,0 +1,10 @@
+.DS_Store
+.env
+*.pyc
+*.pyo
+env/
+env*
+dist/
+build/
+.pytest_cache/
+Pipfile.lock
