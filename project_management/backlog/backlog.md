@@ -1,26 +1,86 @@
 #### Project Backlog
 **Itinerary App**
-
+- ID:001, **Use-case: Set distance preference**
+  - _Description_: The user can set the radius that he is willing to travel during the day.
+  - _Actor_: Regular User
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:002, **Use-case: Set Money Preference**
+  - _Description_: The user can set the amount of money in the preference pane that he is willing to spend in total that day.
+  - _Actor_: Regular User
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:003, **Use-case: “Like” events**
+  - _Description_: A like button can be clicked for events, and the likes are logged and displayed for each event.
+  - _Actor_: Regular User
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:004, **Use-case: Suggesting events based on “Like”s**
+  - _Description_: Events in the same category as liked events will be suggested.
+  - _Actor_: Regular User
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:005, **Use-case: Login/account system**
+  - _Description_: A standard login system, which will allow you to do actions and see things specific to you, such as preferences and scheduling.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
 - ID:016 , **Use-case: Display Current Schedule**
   - _Description_: A menu that displays the current events that the user has added onto their calendar
   - _Actor_: Regular User
   - _Assigned to_ : None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
-
-- ID:032 , **Use-case: Event Recommendations based on Friends**
-  - _Description_: Events that are recommended to you will be based on other events your friends are in.
-  - _Actor_: Regular User
-  - _Assigned to_ : None
-  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
-
 - ID:033 , **Use-case: Add Friends**
   - _Description_: Allow users to add and search for friends.  As well as have a menu for the list of friends.
   - _Actor_: Regular User
   - _Assigned to_ : None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
-
+- ID:032 , **Use-case: Event Recommendations based on Friends**
+  - _Description_: Events that are recommended to you will be based on other events your friends are in.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:035, **Use-case: Give New Suggestion**
+  - _Description_: When a suggested event is not liked, click an “x” button if you don’t like the suggestion, and it will fill the spot with something else within your preferences.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:037, **Use-case: Registration for Event Organizers**
+  - _Description_: Event organizers should also be able to register accounts.
+  - _Actor_: Event Organizer.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
 - ID:038 , **Use-case: Event Recommendations based on Weather**
   - _Description_: Based on different weather conditions, some events will be excluded and some will be included
   - _Actor_: Regular User
   - _Assigned to_ : None
+- ID:039, **Use-case: Day planner privacy**
+  - _Description_: Make a daily planner private or public
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:041, **Use-case: Prioritize New Events**
+  - _Description_: The same event will not be suggested twice within a time period. Prioritize new things within suggestions (restaurants/events you haven’t attended
+  - _Actor_: Event Organizer.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:042, **Use-case: View friend’s public plans**
+  - _Description_: Friends will be able to view plans of other friends if it is made public
+  - _Actor_: Event Organizer.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:043, **Use-case: Sort events by popular**
+  - _Description_: When a list of events is shown, user can sort it by popularity (number of people signed up)
+  - _Actor_: Event Organizer.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:045, **Use-case: Missed event suggestions**
+  - _Description_: If missed an event, we can suggest a new event that you could still make it to.
+  - _Actor_: Event Organizer.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:046, **Use-case: Sort events by least crowded**
+  - _Description_: When a list of events is shown, user can sort it by the least amount of people.
+  - _Actor_: Event Organizer.
+  - _Assigned to_ : None,
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
