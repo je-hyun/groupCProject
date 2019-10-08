@@ -1,3 +1,5 @@
+#### Project Backlog
+**Itinerary App**
 - ID:001, **Use-case: Set distance preference**
   - _Description_: The user can set the radius that he is willing to travel during the day.
   - _Actor_: Regular User
@@ -23,6 +25,21 @@
   - _Actor_: Regular User.
   - _Assigned to_ : None,
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:016 , **Use-case: Display Current Schedule**
+  - _Description_: A menu that displays the current events that the user has added onto their calendar
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:033 , **Use-case: Add Friends**
+  - _Description_: Allow users to add and search for friends.  As well as have a menu for the list of friends.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:032 , **Use-case: Event Recommendations based on Friends**
+  - _Description_: Events that are recommended to you will be based on other events your friends are in.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
 - ID:035, **Use-case: Give New Suggestion**
   - _Description_: When a suggested event is not liked, click an “x” button if you don’t like the suggestion, and it will fill the spot with something else within your preferences.
   - _Actor_: Regular User.
@@ -33,6 +50,10 @@
   - _Actor_: Event Organizer.
   - _Assigned to_ : None,
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:038 , **Use-case: Event Recommendations based on Weather**
+  - _Description_: Based on different weather conditions, some events will be excluded and some will be included
+  - _Actor_: Regular User
+  - _Assigned to_ : None
 - ID:039, **Use-case: Day planner privacy**
   - _Description_: Make a daily planner private or public
   - _Actor_: Regular User.
