@@ -4,8 +4,7 @@
     * Actor: Regular User
     * Assigned to : None
     * Refs: use-case_doc, issue (http://link_to_github_issue_item)
-
-    * Subtasks for Event Preferences
+    * Subtasks for Event Preferences:
       * Christopher Fitzpatrick
         * Design and implement database table for preferences
       * Rachel Taylor
