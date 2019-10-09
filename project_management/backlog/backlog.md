@@ -1,4 +1,4 @@
-#### Project Backlog
+﻿#### Project Backlog
 **Itinerary App**
 - ID:001, **Use-case: Set distance preference**
   - _Description_: The user can set the radius that he is willing to travel during the day.
@@ -25,10 +25,55 @@
   - _Actor_: Regular User.
   - _Assigned to_ : None,
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:006, **Use-case: Save event history**
+  - _Description_: Save the cache of events.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:012, **Use-case: Link to Google Account**
+  - _Description_: Self explanatory. Link Google account to import things such as schedule, map preferences, etc. 
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:013, **Use-case: Set initial location (home)** 
+  - _Description_: Choose an initial location (such as home) that will allow the program to base its events/locations off of.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:014, **Use-case: Whitelisitng events**
+  - _Description_: Set a preference towards events/restaurants/etc of a certain type, letting the algorithm prioritize these event types.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:015, **Use-case: Registering Events**
+  - _Description_: Selecting an event that you would like to attend and registering for it.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
 - ID:016 , **Use-case: Display Current Schedule**
   - _Description_: A menu that displays the current events that the user has added onto their calendar
   - _Actor_: Regular User
   - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:019 , **Use-case: Single or Group Outing**
+  - _Description_: User selects if they are going out by themselves or with a group. Number of people is entered.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:029 , **Use-case: Location Safety**
+  - _Description_: Areas that have a lot of crime are indicated and shown last.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:030 , **Use-case: Save Previous liked events**
+  - _Description_: When the user likes an event they went to, it will be saved and when the event occurs again will notify the user.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:031 , **Use-case: Show stats on the number of participants**
+  - _Description_: Show stats on the number of people that go the event. For example, average number of participants.
+  - _Actor_: Regular User
+  - _Assigned to_: None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
 - ID:033 , **Use-case: Add Friends**
   - _Description_: Allow users to add and search for friends.  As well as have a menu for the list of friends.
@@ -83,4 +128,9 @@
   - _Description_: When a list of events is shown, user can sort it by the least amount of people.
   - _Actor_: Event Organizer.
   - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:047, **Use-case: Calculate time with friends**
+  - _Description_: Calculate total time spent with friends, events, groups
+  - _Actor_: Regular User
+  - _Assigned to_: None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
