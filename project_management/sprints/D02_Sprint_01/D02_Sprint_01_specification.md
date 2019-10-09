@@ -5,7 +5,7 @@
     * Assigned to : None
     * Refs: use-case_doc, issue (http://link_to_github_issue_item)
 
-    Subtasks for Event Preferences
+    * Subtasks for Event Preferences
       * Christopher Fitzpatrick
         * Design and implement database table for preferences
       * Rachel Taylor
@@ -18,7 +18,7 @@
     * Actor: Regular User
     * Assigned to : None
     * Refs: use-case_doc, issue (http://link_to_github_issue_item)
-      Subtasks for Display Calendar:
+    * Subtasks for Display Calendar:
       * Navneet Singh
         * Design and implement database table for user
       * Je Hyun Kim
