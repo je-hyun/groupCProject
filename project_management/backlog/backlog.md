@@ -55,13 +55,48 @@
   - _Actor_: Regular User
   - _Assigned to_ : None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
-- ID:033 , **Use-case: Add Friends**
+- ID:017 , **Use-case: Blacklist**
+  - _Description_: Being able to blacklist activities by name, organizer, or area.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:018 , **Use-case: Sharing with plans friends**
+  - _Description_: The ability to share plans with people you know
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:020 , **Use-case: Link to facebook**
+  - _Description_: The ability to link the program (or account the program has) for integration, like auto posting plans
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:023 , **Use-case: Sharing as a message**
+  - _Description_: Being able to send a message to your contacts
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:026 , **Use-case: Bookmarking events**
+  - _Description_: Being able to bookmark events that have not been scheduled so you can remember them later
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:027 , **Use-case: Notifications**
+  - _Description_: The ability for the app to notify you when an event you planned for or bookmarked is coming up
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:032 , **Use-case: Add Friends**
   - _Description_: Allow users to add and search for friends.  As well as have a menu for the list of friends.
   - _Actor_: Regular User
   - _Assigned to_ : None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
-- ID:032 , **Use-case: Event Recommendations based on Friends**
+- ID:033 , **Use-case: Event Recommendations based on Friends**
   - _Description_: Events that are recommended to you will be based on other events your friends are in.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:034 , **Use-case: tutorial**
+  - _Description_: An interactive tutorial that will guide you through the apps features
   - _Actor_: Regular User
   - _Assigned to_ : None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
@@ -69,6 +104,11 @@
   - _Description_: When a suggested event is not liked, click an “x” button if you don’t like the suggestion, and it will fill the spot with something else within your preferences.
   - _Actor_: Regular User.
   - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:036 , **Use-case: Searching scheduled events by day/week/month**
+  - _Description_: Searching events that have either been scheduled or that have not been scheduled in a day, week, or month format.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
 - ID:037, **Use-case: Registration for Event Organizers**
   - _Description_: Event organizers should also be able to register accounts.
@@ -99,13 +139,36 @@
   - _Actor_: Event Organizer.
   - _Assigned to_ : None,
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:044 , **Use-case: Area (51) Blacklist**
+  - _Description_: If you don't want to go to a certain area you can paint a zone that it won't suggest events from.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue 
 - ID:045, **Use-case: Missed event suggestions**
   - _Description_: If missed an event, we can suggest a new event that you could still make it to.
   - _Actor_: Event Organizer.
   - _Assigned to_ : None,
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+
 - ID:046, **Use-case: Sort events by least crowded**
   - _Description_: When a list of events is shown, user can sort it by the least amount of people.
   - _Actor_: Event Organizer.
   - _Assigned to_ : None,
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:048 , **Use-case: Sorting**
+  - _Description_: Being able to sort search results/scheduled events by
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue 
+- ID:049 , **Use-case: Duplicate prevention**
+  - _Description_: A feature that would prevent a user from adding the same.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue 
+- ID:050 , **Use-case: Sync Schedule with friends**
+  - _Description_: User could sync a day or group of days with a friend, allowing them to share editing on a day planner.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue 
+
+
