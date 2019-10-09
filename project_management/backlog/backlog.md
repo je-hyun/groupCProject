@@ -1,4 +1,4 @@
-#### Project Backlog
+﻿#### Project Backlog
 **Itinerary App**
 - ID:001, **Use-case: Set distance preference**
   - _Description_: The user can set the radius that he is willing to travel during the day.
@@ -22,6 +22,31 @@
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
 - ID:005, **Use-case: Login/account system**
   - _Description_: A standard login system, which will allow you to do actions and see things specific to you, such as preferences and scheduling.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:006, **Use-case: Save event history**
+  - _Description_: Save the cache of events.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:012, **Use-case: Link to Google Account**
+  - _Description_: Self explanatory. Link Google account to import things such as schedule, map preferences, etc. 
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:013, **Use-case: Set initial location (home)** 
+  - _Description_: Choose an initial location (such as home) that will allow the program to base its events/locations off of.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:014, **Use-case: Whitelisitng events**
+  - _Description_: Set a preference towards events/restaurants/etc of a certain type, letting the algorithm prioritize these event types.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:015, **Use-case: Registering Events**
+  - _Description_: Selecting an event that you would like to attend and registering for it.
   - _Actor_: Regular User.
   - _Assigned to_ : None,
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
