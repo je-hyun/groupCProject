@@ -1,4 +1,4 @@
-﻿#### Project Backlog
+#### Project Backlog
 **Itinerary App**
 - ID:001, **Use-case: Set distance preference**
   - _Description_: The user can set the radius that he is willing to travel during the day.
@@ -65,6 +65,11 @@
   - _Actor_: Regular User
   - _Assigned to_ : None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:019 , **Use-case: Single or Group Outing**
+  - _Description_: User selects if they are going out by themselves or with a group. Number of people is entered.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
 - ID:020 , **Use-case: Link to facebook**
   - _Description_: The ability to link the program (or account the program has) for integration, like auto posting plans
   - _Actor_: Regular User
@@ -84,6 +89,21 @@
   - _Description_: The ability for the app to notify you when an event you planned for or bookmarked is coming up
   - _Actor_: Regular User
   - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:029 , **Use-case: Location Safety**
+  - _Description_: Areas that have a lot of crime are indicated and shown last.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:030 , **Use-case: Save Previous liked events**
+  - _Description_: When the user likes an event they went to, it will be saved and when the event occurs again will notify the user.
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:031 , **Use-case: Show stats on the number of participants**
+  - _Description_: Show stats on the number of people that go the event. For example, average number of participants.
+  - _Actor_: Regular User
+  - _Assigned to_: None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
 - ID:032 , **Use-case: Add Friends**
   - _Description_: Allow users to add and search for friends.  As well as have a menu for the list of friends.
@@ -149,11 +169,15 @@
   - _Actor_: Event Organizer.
   - _Assigned to_ : None,
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
-
 - ID:046, **Use-case: Sort events by least crowded**
   - _Description_: When a list of events is shown, user can sort it by the least amount of people.
   - _Actor_: Event Organizer.
   - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:047, **Use-case: Calculate time with friends**
+  - _Description_: Calculate total time spent with friends, events, groups
+  - _Actor_: Regular User
+  - _Assigned to_: None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
 - ID:048 , **Use-case: Sorting**
   - _Description_: Being able to sort search results/scheduled events by
@@ -170,5 +194,3 @@
   - _Actor_: Regular User
   - _Assigned to_ : None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue 
-
-
