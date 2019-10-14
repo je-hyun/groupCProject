@@ -1,5 +1,5 @@
 #### Project Backlog
-**Itinerary App**
+**Itinerary App** - An app to suggest personalized events nearby that fit in your schedule.
 - ID:001, **Use-case: Set distance preference**
   - _Description_: The user can set the radius that he is willing to travel during the day.
   - _Actor_: Regular User
