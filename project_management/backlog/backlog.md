@@ -30,6 +30,31 @@
   - _Actor_: Regular User.
   - _Assigned to_ : None,
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:007, **Use-case: Compare schedule with friend**
+  - _Description_: Compare a day-by-day schedule with your friends.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:008, **Use-case: Find group actives to go with friends **
+  - _Description_: Finds free time from all members from group and finds events that occur at the free time.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:009, **Use-case: Calculate travel time**
+  - _Description_: Calculates travel time to events.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:010, **Use-case: Look at a list of future**
+  - _Description_: If search for week or months, we should be able to list all the events.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:011, **Use-case: activites near by**
+  - _Description_: Search for gym or fitness centers.
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
 - ID:012, **Use-case: Link to Google Account**
   - _Description_: Self explanatory. Link Google account to import things such as schedule, map preferences, etc. 
   - _Actor_: Regular User.
@@ -75,8 +100,28 @@
   - _Actor_: Regular User
   - _Assigned to_ : None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:021 , **Use-case: Facebook settings**
+  - _Description_: For linking with facebook to control aspects of it like auto posting or if the app can access private information
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:022 , **Use-case: List all the events that are avaliable for today**
+  - _Description_: List all the events that are possible in you free time
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
 - ID:023 , **Use-case: Sharing as a message**
   - _Description_: Being able to send a message to your contacts
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:024 , **Use-case: Built in calendar**
+  - _Description_: Use the built in calendar
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:025 , **Use-case: Ability to import a calendar from another app**
+  - _Description_: Import a calendar from another app
   - _Actor_: Regular User
   - _Assigned to_ : None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
@@ -87,6 +132,11 @@
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
 - ID:027 , **Use-case: Notifications**
   - _Description_: The ability for the app to notify you when an event you planned for or bookmarked is coming up
+  - _Actor_: Regular User
+  - _Assigned to_ : None
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:028 , **Use-case: Reminders from your calendar**
+  - _Description_: Reminders on your devices from your calendar
   - _Actor_: Regular User
   - _Assigned to_ : None
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
@@ -141,6 +191,11 @@
   - _Assigned to_ : None
 - ID:039, **Use-case: Day planner privacy**
   - _Description_: Make a daily planner private or public
+  - _Actor_: Regular User.
+  - _Assigned to_ : None,
+  - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
+- ID:040, **Use-case: Group chat**
+  - _Description_: Communicate with group via group chat
   - _Actor_: Regular User.
   - _Assigned to_ : None,
   - _Refs_: [use-case_doc](http://link_to_use_case_documentation), issue (http://link_to_github_issue_item)
