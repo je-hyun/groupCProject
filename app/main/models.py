@@ -55,16 +55,21 @@ class Event(db.Model):
     price = db.Column(db.String)
     location = db.Column(db.String)
     categories = db.relationship('Category', secondary='eventCategory')
+    def conflictsWithEvent(event):
+        return start<=event.end && event.start<=end
+
+
+
 
 class EventCategory(db.Model):
     __tablename__ = 'eventCategory'
-    
+
     event_id = db.Column(
                          db.Integer,
                          db.ForeignKey('event.id'),
                          primary_key=True
                          )
-        
+
                          category_id = db.Column(
                                                  db.Integer,
                                                  db.ForeignKey('category.id'),
@@ -82,5 +87,6 @@ class Users(db.Model):
     users_id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String)
     lastname = db.Column(db.String)
-
-
+    
+    def canAddEvent():
+        for x in
