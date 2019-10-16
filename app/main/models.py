@@ -84,3 +84,11 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     events = db.relationship('Event', secondary='eventCategory')
+
+
+class Attend_Event(db.Model):
+    __tablename__ = 'Attend_Event'
+    user_id = db.Column(db.Integer, primary_key=True)
+    user_name = db.COlumn(db.String, primary_key=True)
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'), primary_key=True)
+
