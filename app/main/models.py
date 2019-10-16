@@ -99,3 +99,12 @@ class Attend_Event(db.Model):
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'), primary_key=True)
     event_name = db.COlumn(db.String)
 
+    
+class Preference(db.Model):
+    __tablename__ = 'preference'
+    preference_id = db.Column(db.Integer, primary_key=True)
+    price = db.Column(db.Double)
+    location = db.Column(db.String)
+    size = db.Column(db.String)
+    DayFree = db.relationship(db.String)
+    hoursFree = db.relationship(db.String)
