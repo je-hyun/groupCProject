@@ -1,10 +1,14 @@
 from app.main import bp
-from flask import render_template
+from flask import Flask, render_template, request
 
+from app.models import db, Users
+from flask_sqlalchemy import SQLAlchemy
 
 @bp.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template("calender.html")
+    #users = Users.query.all()
+    users = db.session.query(Users).all()
+    return render_template("calender.html", users=users)
 
 @bp.route('/pref', methods=['GET', 'POST'])
 def index2():
