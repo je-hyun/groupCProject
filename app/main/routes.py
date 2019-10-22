@@ -3,11 +3,27 @@ from flask import Flask, render_template, request
 
 from app.models import *
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
+'''
 @bp.route('/testroute', methods=['GET','POST'])
 def testroute():
     users = db.session.query(Users).all()
+    my_user = db.session.query(Users).get(1)
+
+
+    event = Event(
+        id = 3,
+        start = datetime.datetime(2018, 6, 3),
+        end = datetime.datetime(2018, 6, 4),
+        name = "SJU Event",
+        price = "30",
+        location = "Queens"
+    )
+    succesfullyAdded = my_user.attend_event(event)
+    print(succesfullyAdded)
     return render_template("test.html", users=users)
+'''
 
 @bp.route('/', methods=['GET', 'POST'])
 def index():
