@@ -8,8 +8,8 @@ import datetime
 '''
 @bp.route('/testroute', methods=['GET','POST'])
 def testroute():
-    users = db.session.query(Users).all()
-    my_user = db.session.query(Users).get(1)
+    users = db.session.query(User).all()
+    my_user = db.session.query(User).get(1)
 
 
     event = Event(
