@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+ <div class="container-fluid">
+        <h1 class="mt-4">Preferences</h1>
+     <form action="{{url_for('main.add_preference')}}" method="post">
+        <input type="number" name="Max Price" placeholder="Maximum Cost" ><br/>
+        <input type="number" name="Distance" placeholder="Distance"><br/>
+        <input type="text" name="Location" placeholder="Location"><br/>
+         <button type="button", onClick="hideSize()">Size of the event</button>
+         <div id="size">
+        <input type="radio", name="size", value="large">Large<br/>
+        <input type="radio", name="size", value="medium", checked>Medium<br/>
+        <input type="radio", name="size", value="small">Small<br/>
+         </div><br/>
+        <input type="submit", value="Save Changes">
+        </form>
+      </div>
+<script>
+function hideSize() {
+  var x = document.getElementById("size");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+
+{% endblock %}
