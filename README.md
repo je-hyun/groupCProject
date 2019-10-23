@@ -21,8 +21,8 @@ The project uses `pipenv` virtual environment. Make sure you install `pipenv` on
 pipenv shell
 ```
 
-```
-<Activate your virtual environment now>
+Once your virtual environment is activated,
+```shell
 pip install flask
 pip install flask_sqlalchemy
 flask run
