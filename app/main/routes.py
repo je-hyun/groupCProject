@@ -5,25 +5,26 @@ from app.models import *
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 
-'''
+
 @bp.route('/testroute', methods=['GET','POST'])
 def testroute():
     users = db.session.query(User).all()
-    my_user = db.session.query(User).get(1)
-
+    my_user = db.session.query(User).get(0)
 
     event = Event(
-        id = 3,
-        start = datetime.datetime(2018, 6, 3),
-        end = datetime.datetime(2018, 6, 4),
-        name = "SJU Event",
-        price = "30",
-        location = "Queens"
+        id = 0,
+        start = datetime.datetime(2018, 8, 1),
+        end = datetime.datetime(2018, 8, 2),
+        name = "Rock climbing event",
+        price = "10",
+        location = "NYC"
     )
-    succesfullyAdded = my_user.attend_event(event)
+    succesfullyAdded = db.session.query(User).get(0).attend_event(event)
+    succesfullyAdded = db.session.query(User).get(1).attend_event(event)
+    succesfullyAdded = db.session.query(User).get(2).attend_event(event)
     print(succesfullyAdded)
     return render_template("test.html", users=users)
-'''
+
 
 @bp.route('/', methods=['GET', 'POST'])
 def index():
@@ -31,8 +32,8 @@ def index():
 
 @bp.route('/events_page', methods=['GET', 'POST'])
 def events_page():
-    events = db.session.query(Event).all()
-    return render_template('events_page.html')
+    events = Event.query.all()
+    return render_template('events_page.html', events=events)
 
 @bp.route('/pref', methods=['GET', 'POST'])
 def index2():

@@ -2,8 +2,14 @@
 
 
 {% block content %}
- <div class="container-fluid">
-  <h1 class="mt-4">Events</h1>
-  <p>This is a Calender page</p>
-</div>
+{% for event in events %}
+<p><b>ID: </b> {{event.id}} </p>
+<p><b>Start: </b> {{event.start}} </p>
+<p><b>End: </b> {{event.end}} </p>
+<p><b>Name: </b> {{event.name}} </p>
+<p><b>Price: </b> {{event.price}} </p>
+<p><b>Location: </b> {{event.location}} </p>
+<p><b>Categories: </b> {{event.categories}} </p>
+<p><b>Attendees: </b> {{event.attending_user}} </p>
+{% endfor %}
 {% endblock %}

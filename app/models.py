@@ -12,8 +12,8 @@ class Event(db.Model):
     name = db.Column(db.String)
     price = db.Column(db.String)
     location = db.Column(db.String)
-    categories = db.relationship('Category', secondary='eventCategory')
-    attending_users = db.relationship('Users', secondary='attendEvent')
+    categories = db.relationship('Category', secondary='eventCategory', back_populates="events")
+    attending_user = db.relationship('User', secondary='attendEvent', back_populates="events")
     def conflicts_with_event(self, event):
         return self.start<=event.end and event.start<=self.end
 
@@ -34,14 +34,14 @@ class Category(db.Model):
     __tablename__ = 'category'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    events = db.relationship('Event', secondary='eventCategory')
+    events = db.relationship('Event', secondary='eventCategory', back_populates="categories")
 
 class User(db.Model):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String)
     lastname = db.Column(db.String)
-    events = db.relationship('Event', secondary='attendEvent')
+    events = db.relationship('Event', secondary='attendEvent', back_populates="attending_user")
     def attend_event(self, event):
         # checks if event conflicts with any event inside the user's event list
         #   adds event to the user's events list
@@ -64,7 +64,7 @@ class User(db.Model):
 
 class AttendEvent(db.Model):
     __tablename__ = 'attendEvent'
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'), primary_key=True)
 
 class Preference(db.Model):
