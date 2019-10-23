@@ -35,6 +35,11 @@ def events_page():
     events = Event.query.all()
     return render_template('events_page.html', events=events)
 
+@bp.route('/like_page', methods=['GET', 'POST'])
+def like_page():
+    events = Event.query.all()
+    return render_template('like_page.html', events=events)
+
 @bp.route('/pref', methods=['GET', 'POST'])
 def index2():
     return render_template("Preference.html")
