@@ -35,10 +35,10 @@ def events_page():
     events = Event.query.all()
     return render_template('events_page.html', events=events)
 
-@bp.route('/like_page', methods=['GET', 'POST'])
-def like_page():
+@bp.route('/liked_page', methods=['GET', 'POST'])
+def liked_page():
     events = Event.query.all()
-    return render_template('like_page.html', events=events)
+    return render_template('liked_page.html', events=events)
 
 @bp.route('/pref', methods=['GET', 'POST'])
 def index2():
