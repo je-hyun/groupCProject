@@ -1,5 +1,6 @@
 from app.main import bp
 from flask import Flask, render_template, request
+import calendar
 
 from app.models import *
 from flask_sqlalchemy import SQLAlchemy
@@ -28,7 +29,11 @@ def testroute():
 
 @bp.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template("calender.html")
+
+    c = calendar.TextCalendar(calendar.SUNDAY)
+
+    daylist = list(c.itermonthdays(2019, 10))
+    return render_template("calender.html", daylist=daylist)
 
 @bp.route('/events_page', methods=['GET', 'POST'])
 def events_page():
