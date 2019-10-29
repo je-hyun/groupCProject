@@ -12,10 +12,20 @@
         <div class="toggle__option">week</div>
         <div class="toggle__option toggle__option--selected">month</div>
       </div>
-      <div class="current-month">June 2016</div>
-      <div class="search-input">
-        <input type="text" value="What are you looking for?">
-        <i class="fa fa-search"></i>
+      <div class="current-month">{{month_name}} {{year}}</div>
+      <div>
+        {% if month == 1 %}
+        <a href={{url_for('main.calendar_page_monthly', year=year-1, month=12)}}><</a>
+        {% else %}
+        <a href={{url_for('main.calendar_page_monthly', year=year, month=month-1)}}><</a>
+        {% endif %}
+
+        <a href={{url_for('main.calendar_page_monthly', year=now.year, month=now.month)}}>Today</a>
+        {% if month == 12 %}
+        <a href={{url_for('main.calendar_page_monthly', year=year+1, month=1)}}>></a>
+        {% else %}
+        <a href={{url_for('main.calendar_page_monthly', year=year, month=month+1)}}>></a>
+        {% endif %}
       </div>
     </div>
     <div class="calendar">
@@ -29,18 +39,21 @@
         <div>sat</div>
       </div>
       {%for week in range(0,5)%}
-
-      <div class="calendar__week">
-        {% for day in range(0,7) %}
-        {%if daylist[day + week * 7] == 0%}
-     <div class="calendar__day day"></div>
-        {%else%}
-        <div class="calendar__day day">{{daylist[day + week * 7]}}</div>
-      {%endif%}
+        <div class="calendar__week">
+          {% for day in range(0,7) %}
+            {%if daylist[day + week * 7] == 0%}
+              <div class="calendar__day day"></div>
+            {%else%}
+              <div class="calendar__day day">{{daylist[day + week * 7]}}
+                <br/>
+                {% for event in event_list[day+week*7] %}
+                  <li><a href="">{{event.name}} {{event.start}} to {{event.end}}</a></li>
+                {% endfor %}
+              </div>
+            {%endif%}
+          {%endfor%}
+        </div>
       {%endfor%}
-      </div>
-
-        {%endfor%}
     </div>
     <br/>
   </main>
@@ -48,5 +61,3 @@
 
 </body>
 {% endblock %}
-
-
