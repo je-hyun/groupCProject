@@ -4,7 +4,7 @@
 {% block content %}
  <div class="container-fluid">
         <h1 class="mt-4">Preferences</h1>
-     <form action="{{url_for('main.Save_Prefrence')}}" method="post">
+     <form action="{{url_for('main.save_preference')}}" method="post">
         <input type="number" name="Max Price" placeholder="Maximum Cost" ><br/>
         <input type="number" name="Distance" placeholder="Distance"><br/>
         <input type="text" name="Location" placeholder="Location"><br/>

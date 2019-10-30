@@ -40,6 +40,7 @@ def calendar_page_monthly(year, month):
     if (month > 12 or month < 1):
         return ("Oops, the month is out of range!")
     # Initialize some useful variables:
+    current_user_id = 0
     c = calendar.TextCalendar(calendar.SUNDAY) # Calendar object starting on Sunday
     now = datetime.datetime.now()
     event_list = Event.query.all()
@@ -57,7 +58,7 @@ def calendar_page_monthly(year, month):
     for day_index in range(len(daylist)):
         if daylist[day_index] != 0:
             day = datetime.datetime(year, month, daylist[day_index])
-            event_list[day_index] = Event.query.filter(Event.start >= day, Event.start < day+day_delta).all()
+            event_list[day_index] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
     return render_template("calender.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list)
 
 
@@ -69,3 +70,7 @@ def events_page():
 @bp.route('/pref', methods=['GET', 'POST'])
 def index2():
     return render_template("Preference.html")
+
+@bp.route('/save_preference', methods=['POST'])
+def save_preference():
+    return render_template("save_preference.html")
