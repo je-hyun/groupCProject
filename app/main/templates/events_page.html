@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-
+<form method="POST">
 {% block content %}
 {% for event in events %}
 <p><b>ID: </b> {{event.id}} </p>
@@ -11,5 +11,7 @@
 <p><b>Location: </b> {{event.location}} </p>
 <p><b>Categories: </b> {{event.categories}} </p>
 <p><b>Attendees: </b> {{event.attending_user}} </p>
+<p>{{form.submit}}</p>
 {% endfor %}
 {% endblock %}
+</form>
