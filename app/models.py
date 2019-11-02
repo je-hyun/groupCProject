@@ -51,7 +51,6 @@ class User(db.Model):
         for x in userAttendEvent:
             if x.conflicts_with_event(event):
                 conflicts = True
-
         if conflicts:
             return False
         else:
