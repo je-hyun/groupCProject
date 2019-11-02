@@ -1,12 +1,10 @@
 from app.main import bp
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect, url_for
+import calendar
 from app.main.forms import EventForm, EventsPageForm
-
 from app.models import *
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import and_
 import datetime
-from sqlalchemy import func
 
 
 @bp.route('/testroute', methods=['GET','POST'])

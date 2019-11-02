@@ -1697,3 +1697,14 @@ venv/tcl/tk8.5/ttk/vistaTheme.tcl
 venv/tcl/tk8.5/ttk/winTheme.tcl
 venv/tcl/tk8.5/ttk/xpTheme.tcl
 .vscode/settings.json
+venv/Lib/site-packages/setuptools/_imp.py
+venv/Lib/site-packages/setuptools/py34compat.py
+venv/Lib/site-packages/setuptools-41.6.0.dist-info/dependency_links.txt
+venv/Lib/site-packages/setuptools-41.6.0.dist-info/entry_points.txt
+venv/Lib/site-packages/setuptools-41.6.0.dist-info/INSTALLER
+venv/Lib/site-packages/setuptools-41.6.0.dist-info/LICENSE
+venv/Lib/site-packages/setuptools-41.6.0.dist-info/METADATA
+venv/Lib/site-packages/setuptools-41.6.0.dist-info/RECORD
+venv/Lib/site-packages/setuptools-41.6.0.dist-info/top_level.txt
+venv/Lib/site-packages/setuptools-41.6.0.dist-info/WHEEL
+venv/Lib/site-packages/setuptools-41.6.0.dist-info/zip-safe
