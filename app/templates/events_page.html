@@ -2,6 +2,19 @@
 
 <form method="POST">
 {% block content %}
+<link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/events_page.css')}}">
+<h1>Events</h1>
+<div class="dropdown">
+  <button class="dropbtn">Sort By</button>
+  <div class="dropdown-content">
+    <a href="/events_page/0/">ID</a>
+    <a href="/events_page/1/">Start Time</a>
+    <a href="/events_page/2/">Name</a>
+    <a href="/events_page/3/">Price</a>
+    <a href="/events_page/4/">Location</a>
+  </div>
+</div>
+
 {% for event in events %}
 <p><b>ID: </b> {{event.id}} </p>
 <p><b>Start: </b> {{event.start}} </p>
