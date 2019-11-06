@@ -15,7 +15,7 @@
     *Assigned to: Christopher Fitzpatrick
     *Refs: use-case_doc, issue (http://link_to_github_issue_item)
 * ID:006 , Use-case: Sorting Events Page
-    * Description: Has a drop down menu that will give you options to sort events by name, cost, day 
+    * Description: Has a drop down menu that will give you options to sort events by ID, Start, Name, Price, Location 
     * Actor: Regular User
     * Assigned to : Matthew Nguyen
     * Refs: use-case_doc, issue (http://link_to_github_issue_item)
