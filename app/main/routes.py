@@ -6,6 +6,8 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 
 
+
+
 @bp.route('/testroute', methods=['GET','POST'])
 def testroute():
     users = db.session.query(User).all()
@@ -43,6 +45,13 @@ def liked_page():
     events = LikedEvent.query.all()
     print(events)
     items = list()
+    # 1. Get the user object for the current user (by id)
+    current_user_id = 1 # Assume current user id is 1, for testing
+    current_user = db.session.query(User).get(current_user_id)
+    # 2. Get the event object you want to add
+    
+    # 3. Add the current event to the liked_events list
+
     for liked_item in events:
         event_name = Event.query.get(liked_item.id).name
         user_who_liked_event = User.query.get(liked_item.user_id).lastname
@@ -54,10 +63,13 @@ def liked_page():
 def index2():
     return render_template("Preference.html")
 
-@bp.route("/like/", methods=['POST'])
-def like_button():
-    #Moving forward code
-    print(str(request.form))
-    print("like button clicked")
-    events = Event.query.all()
-    return render_template('events_page.html', events=events)
+@bp.route("/like/", methods=['GET', 'POST'])
+@bp.route('/add_events', methods=['GET', 'POST'])
+def add_events():
+    event_form = EventForm()
+    if event_form.validate_on_submit():
+        event = Event(start=event_form.start.data, end=event_form.end.data, name=event_form.name.data, price=event_form.price.data, location=event_form.location.data)
+        db.session.add(event)
+        db.session.commit()
+        flash('Event Added.')
+    return render_template('add_events.html', event_form=event_form)

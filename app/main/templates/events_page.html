@@ -11,8 +11,9 @@
 <p><b>Location: </b> {{event.location}} </p>
 <p><b>Categories: </b> {{event.categories}} </p>
 <p><b>Attendees: </b> {{event.attending_user}} </p>
-<form action="/like/" method="post">
-    <button name="likeBtn" type="submit">Like</button>
+<form action="/like/" method="POST">
+    <button name="likeBtn" type="submit" href="{{url_for('main.like_button', id=event.id, start=event.start, end=event.end, name=event.name,
+    price=event.price, location=event.price, categories=event.categories, attendees=event.attending_user)}}">Like</button>
 </form>
 {% endfor %}
 {% endblock %}

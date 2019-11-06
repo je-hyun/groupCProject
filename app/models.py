@@ -81,7 +81,9 @@ class LikedEvent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
-
+    # user_id = db.relationship('User', secondary='user', back_populates="likeEvents")
+    # event_id = db.relationship('Event', secondary='event', back_populates="likeEvents")
+#
 class LikedEventViewModel:
     def __init__(self, event_name, user_liked):
         self.event_name = event_name
