@@ -8,8 +8,7 @@
     * Actor: Regular User
     * Assigned to : George Stephanoff
     * Refs: use-case_doc, issue 
-* ID: 005, 
- Use Case:  Create Page for individual events. Add more dummy data for database
+* ID: 005, Use Case:  Create Page for individual events. Add more dummy data for database
     * Description: creating a page for when an individual even is selected on calendar.
     * Actor: Regular User
     *Assigned to: Christopher Fitzpatrick
@@ -19,13 +18,12 @@
     * Actor: Regular User
     * Assigned to : Matthew Nguyen
     * Refs: use-case_doc, issue (http://link_to_github_issue_item)
-*ID:007 , Use-case: Make a work time form and save work time data
+* ID:007 , Use-case: Make a work time form and save work time data
       * Description: create a work form html file to input time unavailable. The work time data is stored in the database and be displayed on the calendar. 
       * Actor: Regular User
       * Assigned to: Kamil Peza
       * Refs: Refs: use-case_doc, issue (http://link_to_github_issue_item)
-* ID008:
-      * Use Case: Show reviews events tab.
+* ID008: , Use Case: Show reviews events tab.
       * Description: For each event create a display with aggregated 0-5 star rating from past users, and create a small window where past users reviews/input can be displayed. 
       * Actor: Regular User
       * Assigned to: Leon Magara
@@ -40,8 +38,7 @@
     * Actor: Regular User
     * Assigned to : Rachel Taylor
     * Refs: use-case_doc, issue (http://link_to_github_issue_item/)
-* ID 012:
-      * Use Case: Show reviews events tab.
+* ID 012: , Use Case: Show reviews events tab.
       * Description: For each event create a display with aggregated 0-5 star rating from past users, and create a small window where past users reviews/input can be displayed. 
       *Actor: Regular User
       * Assigned to: Leon Magara
