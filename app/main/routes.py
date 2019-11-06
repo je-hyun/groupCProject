@@ -1,6 +1,6 @@
 from app.main import bp
 from flask import Flask, render_template, request
-
+# from models
 from app.models import *
 from flask_sqlalchemy import SQLAlchemy
 import datetime
@@ -33,13 +33,31 @@ def index():
 @bp.route('/events_page', methods=['GET', 'POST'])
 def events_page():
     events = Event.query.all()
+    # print(event.attending_user)
+    for event in events:
+        print(event.attending_user)
     return render_template('events_page.html', events=events)
 
 @bp.route('/liked_page', methods=['GET', 'POST'])
 def liked_page():
-    events = Event.query.all()
-    return render_template('liked_page.html', events=events)
+    events = LikedEvent.query.all()
+    print(events)
+    items = list()
+    for liked_item in events:
+        event_name = Event.query.get(liked_item.id).name
+        user_who_liked_event = User.query.get(liked_item.user_id).lastname
+        items.append(LikedEventViewModel(event_name, user_who_liked_event))
+
+    return render_template('liked_page.html', events=items)
 
 @bp.route('/pref', methods=['GET', 'POST'])
 def index2():
     return render_template("Preference.html")
+
+@bp.route("/like/", methods=['POST'])
+def like_button():
+    #Moving forward code
+    print(str(request.form))
+    print("like button clicked")
+    events = Event.query.all()
+    return render_template('events_page.html', events=events)

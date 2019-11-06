@@ -75,3 +75,15 @@ class Preference(db.Model):
     size = db.Column(db.String)
     DayFree = db.Column(db.String)
     hoursFree = db.Column(db.String)
+
+class LikedEvent(db.Model):
+    __tablename__ = 'likeEvents'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
+
+class LikedEventViewModel:
+    def __init__(self, event_name, user_liked):
+        self.event_name = event_name
+        self.user_liked = user_liked
+

@@ -11,5 +11,8 @@
 <p><b>Location: </b> {{event.location}} </p>
 <p><b>Categories: </b> {{event.categories}} </p>
 <p><b>Attendees: </b> {{event.attending_user}} </p>
+<form action="/like/" method="post">
+    <button name="likeBtn" type="submit">Like</button>
+</form>
 {% endfor %}
 {% endblock %}
