@@ -40,6 +40,6 @@
     * Refs: use-case_doc, issue (http://link_to_github_issue_item/)
 * ID 012: , Use Case: Show reviews events tab.
     * Description: For each event create a display with aggregated 0-5 star rating from past users, and create a small window where past users reviews/input can be displayed. 
-      *Actor: Regular User
+    * Actor: Regular User
     * Assigned to: Leon Magara
     * Refs: use-case doc, isue(http://link_to_github_issue_item/)
