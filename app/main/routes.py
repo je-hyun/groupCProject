@@ -1,10 +1,10 @@
+
 from app.main import bp
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 # from models
 from app.models import *
 from flask_sqlalchemy import SQLAlchemy
 import datetime
-
 
 
 
@@ -42,34 +42,21 @@ def events_page():
 
 @bp.route('/liked_page', methods=['GET', 'POST'])
 def liked_page():
-    events = LikedEvent.query.all()
-    print(events)
-    items = list()
-    # 1. Get the user object for the current user (by id)
-    current_user_id = 1 # Assume current user id is 1, for testing
-    current_user = db.session.query(User).get(current_user_id)
-    # 2. Get the event object you want to add
-    
-    # 3. Add the current event to the liked_events list
-
-    for liked_item in events:
-        event_name = Event.query.get(liked_item.id).name
-        user_who_liked_event = User.query.get(liked_item.user_id).lastname
-        items.append(LikedEventViewModel(event_name, user_who_liked_event))
-
-    return render_template('liked_page.html', events=items)
+    events = Event.query.all()
+    return render_template('liked_page.html', events=events)
 
 @bp.route('/pref', methods=['GET', 'POST'])
 def index2():
     return render_template("Preference.html")
 
-@bp.route("/like/", methods=['GET', 'POST'])
-@bp.route('/add_events', methods=['GET', 'POST'])
-def add_events():
-    event_form = EventForm()
-    if event_form.validate_on_submit():
-        event = Event(start=event_form.start.data, end=event_form.end.data, name=event_form.name.data, price=event_form.price.data, location=event_form.location.data)
-        db.session.add(event)
-        db.session.commit()
-        flash('Event Added.')
-    return render_template('add_events.html', event_form=event_form)
+@bp.route('/add_like/<int:event_id>', methods=['GET', 'POST'])
+def add_like(event_id):
+    current_user_id = 0
+    event = Event.query.get(event_id)
+    user = User.query.get(current_user_id)
+    event.liked_user.append(user)
+    db.session.add(event)
+    db.session.add(user)
+    db.session.commit()
+    # add user in likedEvent
+    return redirect("/liked_page")

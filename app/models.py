@@ -14,6 +14,7 @@ class Event(db.Model):
     location = db.Column(db.String)
     categories = db.relationship('Category', secondary='eventCategory', back_populates="events")
     attending_user = db.relationship('User', secondary='attendEvent', back_populates="events")
+    liked_user = db.relationship('User', secondary='likedEvent', back_populates="liked_event")
     def conflicts_with_event(self, event):
         return self.start<=event.end and event.start<=self.end
 
@@ -42,6 +43,7 @@ class User(db.Model):
     firstname = db.Column(db.String)
     lastname = db.Column(db.String)
     events = db.relationship('Event', secondary='attendEvent', back_populates="attending_user")
+    liked_event = db.relationship('Event', secondary='likedEvent', back_populates="liked_user")
     def attend_event(self, event):
         # checks if event conflicts with any event inside the user's event list
         #   adds event to the user's events list
@@ -77,15 +79,9 @@ class Preference(db.Model):
     hoursFree = db.Column(db.String)
 
 class LikedEvent(db.Model):
-    __tablename__ = 'likeEvents'
+    __tablename__ = 'likedEvent'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
-    # user_id = db.relationship('User', secondary='user', back_populates="likeEvents")
-    # event_id = db.relationship('Event', secondary='event', back_populates="likeEvents")
-#
-class LikedEventViewModel:
-    def __init__(self, event_name, user_liked):
-        self.event_name = event_name
-        self.user_liked = user_liked
+
 
