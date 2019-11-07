@@ -1,8 +1,11 @@
+from app import create_app
+from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
-#from app import db
+
 db = SQLAlchemy()
-
+app = create_app()
 
 class Event(db.Model):
     __tablename__ = 'event'
@@ -36,7 +39,7 @@ class Category(db.Model):
     name = db.Column(db.String)
     events = db.relationship('Event', secondary='eventCategory', back_populates="categories")
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String)
@@ -60,6 +63,11 @@ class User(db.Model):
             db.session.commit()
             return True
 
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 class AttendEvent(db.Model):
     __tablename__ = 'attendEvent'
@@ -74,3 +82,7 @@ class Preference(db.Model):
     size = db.Column(db.String)
     DayFree = db.Column(db.String)
     hoursFree = db.Column(db.String)
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
