@@ -19,7 +19,7 @@
     * Actor: Regular User
     * Assigned to : Matthew Nguyen
     * Refs: use-case_doc, issue (http://link_to_github_issue_item)
-*ID:007 , Use-case: Make a work time form and save work time data
+* ID:007 , Use-case: Make a work time form and save work time data
     * Description: create a work form html file to input time unavailable. The work time data is stored in the database and be displayed on the calendar. 
     * Actor: Regular User
     * Assigned to: Kamil Peza
