@@ -51,7 +51,6 @@ class User(db.Model):
         for x in userAttendEvent:
             if x.conflicts_with_event(event):
                 conflicts = True
-
         if conflicts:
             return False
         else:
@@ -80,5 +79,5 @@ class TimeSlot(db.Model):
     __tablename__ = 'timeslot'
     timeslot_id = db.Column(db.Integer, primary_key=True)
     day = db.Column(db.String)
-    startTime = db.Column(db.String)
-    endTime = db.Column(db.String)
+    start_time = db.Column(db.String)
+    end_time = db.Column(db.String)

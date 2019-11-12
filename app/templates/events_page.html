@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+<form method="POST">
+{% block content %}
+<link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/events_page.css')}}">
+<h1>Events</h1>
+<div class="dropdown">
+  <button class="dropbtn">Sort By</button>
+  <div class="dropdown-content">
+    <a href="/events_page/0/">ID</a>
+    <a href="/events_page/1/">Start Time</a>
+    <a href="/events_page/2/">Name</a>
+    <a href="/events_page/3/">Price</a>
+    <a href="/events_page/4/">Location</a>
+  </div>
+</div>
+
+{% for event in events %}
+<p><b>ID: </b> {{event.id}} </p>
+<p><b>Start: </b> {{event.start}} </p>
+<p><b>End: </b> {{event.end}} </p>
+<p><b>Name: </b> {{event.name}} </p>
+<p><b>Price: </b> {{event.price}} </p>
+<p><b>Location: </b> {{event.location}} </p>
+<p><b>Categories: </b> {{event.categories}} </p>
+<p><b>Attendees: </b> {{event.attending_user}} </p>
+<p>{{form.submit}}</p>
+{% endfor %}
+{% endblock %}
+</form>
