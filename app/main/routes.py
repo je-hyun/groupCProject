@@ -102,3 +102,15 @@ def index2():
 @bp.route('/save_preference', methods=['POST'])
 def save_preference():
     return render_template("save_preference.html")
+
+@bp.route('/event/<int:id>', methods=['GET', 'POST'])
+def event(id):
+    form = EventsPageForm()
+
+    if form.validate_on_submit():
+        event_id = request.form['event.id']
+        attend = AttendEvent(user_id=id, event_id=event_id)
+        flash('Test')
+
+    a = [Event.query.get(id)]
+    return render_template('events_page.html', events=a, form=form)
