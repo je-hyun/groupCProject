@@ -3,17 +3,19 @@
 <!--{% block title %} TimeSlots for when you are Working/Busy {% endblock title %}-->
 
 {% block content %}
+	<P>Hello World</P>
+
 	<h1>Welcome to your Time Slot List</h1>
 	<p>Select a day of the week, then the start and end time of when you are working or unavailable</p>
 
 	<ul>
 		{% for timeslot in timeslots %}
-		<li><a href="{{ url_for('add_TimeSlot', timeslot_id=timeslot.id) }}">(ID:{{ timeslot.timeslot_id }}) {{ timeslot.day }} - {{ timeslot.startTime }} - {{ timeslot.endTime }}</a></li>
+		<li> <a href="{{url_for('add_TimeSlot', timeslot_id=timeslot.id) }}">(ID:{{ timeslot.timeslot_id }}) {{ timeslot.day }} - {{ timeslot.startTime }} - {{ timeslot.endTime }}</a></li>
 		{% endfor %}
 
 	</ul>
 
-	<form action="{{ url_for('add_TimeSlot') }}" method="POST" name="TimeSlotForm">
+	<form action="{{ url_for('add_TimeSlot') }}" method="POST"> # name="TimeSlotForm"
 		<label>Add a new Time Slot: </label>
 
 			<select>
@@ -39,129 +41,4 @@
 
 {% endblock %}
 
-<!--
 
-
-
-<script type="text/javascript" src="C:\Users\Polska\Desktop\workform_folder\work_form_input.js"></script>
-</html>
-
-
-
-
-<button type="button" onclick="createTimeSlot()">Add Time Slot</button>
-		&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-
-
-<br><br><br><br><br><br><br><br><br><br>
-
-<script type="text/javascript" src="C:\Users\Polska\PycharmProjects\groupCProject\app\static\js\work_form_script.js"></script>
-
-
--->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-<!DOCTYPE html>
-<HTML>
-	<head>	
-	<p>Please enter what time your are working/unavailable for each day. Enter the start and ent time for each day. 
-	Leave blank if you are free all day. Press the x in the date box to clear the time entered. Leave the time box clear if that day is free.</p>
-	</head>
-		
-	<body>
-		<p>Please enter the start and end of the time period you will be working and/or be busy.</p>
-		<form action="/action_page.php">
-		
-			Monday: <br>
-			Start Time:
-			<input type="time" name="Monday Start Time">		
-			&nbsp &nbsp
-			End Time:
-			<input type="time" name="Monday End Time"><br><br>
-					
-			Tuesday: <br>
-			Start Time:
-			<input type="time" name="Tuesday Start Time"> 
-			&nbsp &nbsp
-			End Time:
-			<input type="time" name="Tuesday End Time"><br><br>
-			
-			Wednesday: <br>
-			Start Time:
-			<input type="time" name="Wednesday Start Time"> 
-			&nbsp &nbsp
-			End Time:
-			<input type="time" name="Wednesday End Time"> <br><br>
-			
-			Thursday: <br>
-			Start Time:
-			<input type="time" name="Thurday Start Time"> 
-			&nbsp &nbsp
-			End Time:
-			<input type="time" name="Thursday End Time"> <br><br>
-			
-			Friday: <br>
-			Start Time:
-			<input type="time" name="Friday Start Time"> 
-			&nbsp &nbsp
-			End Time:
-			<input type ="time" name="Friday End Time"> <br><br>
-			
-			Saturday: <br>
-			Start Time:
-			<input type="time" name="Saturday Start Time"> 
-			&nbsp &nbsp
-			End Time:
-			<input type="time" name="Saturday End Time"> <br><br>
-			
-			Sunday: <br>
-			Start Time:
-			<input type="time" name="Sunday Start Time">
-			&nbsp &nbsp
-			End Time:
-			<input type="time" name="Sunday End Time"> <br><br>
-			
-			<input type="submit" value="Submit">
-		</form>
-		
-
-
-
-	</body>
-	
-</html>
-
-
-
-
-
-
-<iframe src="https://calendar.google.com/calendar/embed?src=en.usa%23holiday%40group.v.calendar.google.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-
-<select>
-			<option value="AM">AM</option>
-			<option value="PM">PM</option>
-		<select>
-
--->

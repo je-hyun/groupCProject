@@ -7,6 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 
 
+
 @bp.route('/testroute', methods=['GET','POST'])
 def testroute():
     users = db.session.query(User).all()
@@ -111,13 +112,13 @@ def add_TimeSlot():
     timeslot = TimeSlot(timeslot_id=timeslot_id, day=day, start_time=start_time, end_time=end_time)
     db.session.add(timeslot)
     db.session.commit()
-    timeslot = TimeSlot.query.all()
-    return render_template("app/templates/workingtime_form.html", timeslot=timeslot)
-
+    timeslots = TimeSlot.query.all()
+    return render_template("app/templates/workingtime_form.html", timeslots=timeslots)
 
 
 ''' unused code/testing
-
+if__name__ == '__main__':
+    bp.run(debug=True)
 def add_course():
     id = request.form.get("id")
     course_number = request.form.get("course_number")
