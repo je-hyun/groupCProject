@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block title %} TimeSlots for when you are Working/Busy {% endblock title %}
+<!--{% block title %} TimeSlots for when you are Working/Busy {% endblock title %}-->
 
 {% block content %}
 
@@ -9,8 +9,10 @@
 
 	<ul>
 		{% for timeslot in timeslots %}
+
 		<li><a href="{{ url_for('add_TimeSlot', timeslot_id=timeslot_id) }}">(ID:{{ timeslot.timeslot_id }}) {{ timeslot.day }} - {{ timeslot.startTime }} - {{ timeslot.endTime }}</a></li>
 		{% endfor %}
+
 	</ul>
 
 	<form action="{{ url_for('add_TimeSlot') }}" method="POST" name="TimeSlotForm>

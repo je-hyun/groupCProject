@@ -39,16 +39,16 @@ def events_page():
 def index2():
     return render_template("Preference.html")
 
-@bp.route('/add_TimeSlot', methods=["POST"])
+@bp.route('/workingtime', methods=['GET', 'POST'])
 def add_TimeSlot():
     timeslot_id = request.form.get("timeslot_id")
-    #timeslot_id =
     day = request.form.get("day")
     startTime = request.form.get("startTime")
     endTime = request.form.get("endTime")
-    timeslot = TimeSlot(timeslot_id = timeslot_id, day= day, startTime = startTime,endTime= endTime)
-    timeSlot = TimeSlot.query.all()
-    render_template('workingtime_form.html', timeslot = timeslot)
+    timeslot = TimeSlot(timeslot_id=timeslot_id, day=day, startTime=startTime, endTime=endTime)
+    timeslot = TimeSlot.query.all()
+    return render_template("workingtime_form.html")
+    #, timeslot=timeslot
 
 '''
 def add_course():
