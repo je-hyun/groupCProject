@@ -38,3 +38,48 @@
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #ddd;}
+
+
+.event {
+position: relative;
+top: 20px;
+border-top: 1px solid #e1e1e1;
+border-right: 1px solid #e1e1e1;
+}
+
+.event_title {
+position: relative;
+cursor: pointer;
+font-size: 32px;
+color: black;
+}
+
+.event_title:hover {
+color: #11afcf;
+}
+
+.event_info {
+  border-right: .6px solid #e1e1e1;
+  border-top: .6px solid #e1e1e1;
+  position: relative;
+  top: 12px;
+  padding: 10px 12px;
+  text-decoration: none;
+  background-color: #f1f1f1;
+  display: inline-table;
+  cursor: pointer;
+}
+
+.event_submit {
+  position: relative;
+  top: 15px;
+  padding: 5px 12px;
+  display table;
+  text-decoration: none;
+  visibility: visible;
+}
+
+
+.event_time {
+font-size: 18px;
+}
