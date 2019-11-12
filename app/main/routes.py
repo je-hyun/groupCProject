@@ -38,3 +38,28 @@ def events_page():
 @bp.route('/pref', methods=['GET', 'POST'])
 def index2():
     return render_template("Preference.html")
+
+@bp.route('/add_TimeSlot', methods=["POST"])
+def add_TimeSlot():
+    timeslot_id = request.form.get("timeslot_id")
+    #timeslot_id =
+    day = request.form.get("day")
+    startTime = request.form.get("startTime")
+    endTime = request.form.get("endTime")
+    timeslot = TimeSlot(timeslot_id = timeslot_id, day= day, startTime = startTime,endTime= endTime)
+    timeSlot = TimeSlot.query.all()
+    render_template('workingtime_form.html', timeslot = timeslot)
+
+'''
+def add_course():
+    id = request.form.get("id")
+    course_number = request.form.get("course_number")
+    course_title = request.form.get("course_title")
+    
+    course = Course(id = id ,course_number=course_number, course_title = course_title)
+    db.session.add(course)
+    db.session.commit()
+    course = Course.query.all()
+    return render_template('index.html', course = course)
+
+'''

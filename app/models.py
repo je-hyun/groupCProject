@@ -75,3 +75,10 @@ class Preference(db.Model):
     size = db.Column(db.String)
     DayFree = db.Column(db.String)
     hoursFree = db.Column(db.String)
+
+class TimeSlot(db.Model):
+    __tablename__ = 'timeslot'
+    timeslot_id = db.Column(db.Integer, primary_key=True)
+    day = db.Column(db.String)
+    startTime = db.Column(db.String)
+    endTime = db.Column(db.String)

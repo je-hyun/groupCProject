@@ -1,3 +1,87 @@
+{% extends 'layout.html' %}
+
+{% block title %} TimeSlots for when you are Working/Busy {% endblock title %}
+
+{% block content %}
+
+	<h1>Welcome to your Time Slot List</h1>
+	<p>Select a day of the week, then the start and end time of when you are working or unavailable</p>
+
+	<ul>
+		{% for timeslot in timeslots %}
+		<li><a href="{{ url_for('add_TimeSlot', timeslot_id=timeslot_id) }}">(ID:{{ timeslot.timeslot_id }}) {{ timeslot.day }} - {{ timeslot.startTime }} - {{ timeslot.endTime }}</a></li>
+		{% endfor %}
+	</ul>
+
+	<form action="{{ url_for('add_TimeSlot') }}" method="POST" name="TimeSlotForm>
+		<label>Add a new Time Slot: </label>
+
+		<select>
+			<option value=">Monday</option>
+			<option value="Tuesday">Tuesday</option>
+			<option value="Wednesday">Wednesday</option>
+			<option value="Thursday">Thursday</option>
+			<option value="Friday">Friday</option>
+			<option value="Saturday">Saturday</option>
+			<option value="Sunday">Sunday</option>
+		</select>
+
+		<label id="Start Time">Start Time:</label>
+		<input type="time" name="StartTime" id="StartTime" placeholder="Start Time">
+
+		<label id="End Time">End Time:</label>
+		<input type="time" name="EndTime" id="EndTime" placeholder="End Time">
+
+		<br><br><br>
+		<input type="submit" value="Submit">
+
+	</form>
+
+{% endblock %}
+
+<!--
+
+
+
+<script type="text/javascript" src="C:\Users\Polska\Desktop\workform_folder\work_form_input.js"></script>
+</html>
+
+
+
+
+<button type="button" onclick="createTimeSlot()">Add Time Slot</button>
+		&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+
+
+<br><br><br><br><br><br><br><br><br><br>
+
+<script type="text/javascript" src="C:\Users\Polska\PycharmProjects\groupCProject\app\static\js\work_form_script.js"></script>
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 <!DOCTYPE html>
 <HTML>
 	<head>	
@@ -71,7 +155,7 @@
 
 
 
-<!--    
+
 
 <iframe src="https://calendar.google.com/calendar/embed?src=en.usa%23holiday%40group.v.calendar.google.com&ctz=America%2FNew_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 
