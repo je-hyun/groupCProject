@@ -112,4 +112,4 @@ def event(id):
         flash('Test')
 
     a = [Event.query.get(id)]
-    return render_template('events_page.html', events=a, form=form)
+    return render_template('single_event_page.html', events=a, form=form)
