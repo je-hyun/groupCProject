@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% from 'map.html' import map_styles, map, map_scripts %}
+
+{% block styles %}
+{{ map_styles() }}
+{% endblock %}
+
+<form method="POST">
+{% block content %}
+<link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/events_page.css')}}">
+<h1>Event</h1>
+{% for event in events %}
+<p><b>ID: </b> {{event.id}} </p>
+<p><b>Start: </b> {{event.start}} </p>
+<p><b>End: </b> {{event.end}} </p>
+<p><b>Name: </b> {{event.name}} </p>
+<p><b>Price: </b> {{event.price}} </p>
+<p><b>Location: </b> {{event.location}} </p>
+<p><b>Categories: </b> {{event.categories}} </p>
+<p><b>Attendees: </b> {{event.attending_user}} </p>
+<p>{{form.submit}}</p>
+{{ map() }}
+{% endfor %}
+{% endblock %}
+</form>
+
+{% block scripts%}
+{{ map_scripts(events[0].latitude, events[0].longitude, 15) }}
+{% endblock %}

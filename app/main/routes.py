@@ -25,7 +25,7 @@ def testroute():
     #succesfullyAdded = db.session.query(User).get(1).attend_event(event)
     #succesfullyAdded = db.session.query(User).get(2).attend_event(event)
     #print(succesfullyAdded)
-    return render_template("test.html", users=users)
+    return render_template("test.html", map_lat=0.0, map_lon=0.0)
 
 
 @bp.route('/', methods=['GET', 'POST'])
@@ -35,7 +35,6 @@ def index():
 
 @bp.route('/calendar_page/monthly/<int:year>/<int:month>/')
 def calendar_page_monthly(year, month):
-
     if (month > 12 or month < 1):
         return ("Oops, the month is out of range!")
     # Initialize some useful variables:
@@ -113,4 +112,4 @@ def event(id):
         flash('Test')
 
     a = [Event.query.get(id)]
-    return render_template('events_page.html', events=a, form=form)
+    return render_template('single_event_page.html', events=a, form=form)

@@ -14,4 +14,3 @@ class EventsPageForm(FlaskForm):
     submit = SubmitField('Attend Event')
 
 #class PreferenceForm(FlaskForm):
-    
