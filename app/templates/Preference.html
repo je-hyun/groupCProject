@@ -1,13 +1,15 @@
 {% extends 'layout.html' %}
-
-
+{% from 'map.html' import map_styles, map_input, map_input_scripts %}
+{% block styles %}
+{{ map_styles() }}
+{% endblock styles %}
 {% block content %}
  <div class="container-fluid">
         <h1 class="mt-4">Preferences</h1>
      <form action="{{url_for('main.save_preference')}}" method="post">
         <input type="number" name="Max Price" placeholder="Maximum Cost" ><br/>
         <input type="number" name="Distance" placeholder="Distance"><br/>
-        <input type="text" name="Location" placeholder="Location"><br/>
+        {{ map_input() }}
          <button type="button", onClick="hideSize()">Size of the event</button>
          <div id="size">
         <input type="radio", name="size", value="large">Large<br/>
@@ -27,6 +29,8 @@ function hideSize() {
   }
 }
 </script>
+{% endblock %}
 
-
+{% block scripts %}
+{{ map_input_scripts() }}
 {% endblock %}

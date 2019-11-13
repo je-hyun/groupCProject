@@ -47,7 +47,7 @@
               <div class="calendar__day day">{{daylist[day + week * 7]}}
                 <br/>
                 {% for event in event_list[day+week*7] %}
-                  <li><a href="">{{event.name}} {{event.start}} to {{event.end}}</a></li>
+                  <li><a href="">{{event.name}} {{event.start}} to {{event.end}} in {{event.get_address()}}</a></li>
                 {% endfor %}
               </div>
             {%endif%}

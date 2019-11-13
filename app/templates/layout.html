@@ -8,13 +8,14 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Itinerary App</title>
+  <title>{% block title %}Itinerary App{% endblock title %}</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/bootstrap/css/bootstrap.min.css')}}">
     <!-- Custom styles for this template -->
   <link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/simple-sidebar.css')}}">
-
+  {% block styles %}
+  {% endblock %}
 </head>
 
 <body>
@@ -56,11 +57,11 @@
 
 {% block content %}
 {% endblock %}
-
     <!-- /#page-content-wrapper -->
-
   </div>
 </div>
+{% block scripts %}
+{% endblock scripts%}
 </body>
 
 </html>
