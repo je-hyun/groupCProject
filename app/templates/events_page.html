@@ -16,15 +16,17 @@
 </div>
 
 {% for event in events %}
-<p><b>ID: </b> {{event.id}} </p>
-<p><b>Start: </b> {{event.start}} </p>
-<p><b>End: </b> {{event.end}} </p>
-<p><b>Name: </b> {{event.name}} </p>
-<p><b>Price: </b> {{event.price}} </p>
-<p><b>Location: </b> {{event.location}} </p>
-<p><b>Categories: </b> {{event.categories}} </p>
-<p><b>Attendees: </b> {{event.attending_user}} </p>
-<p>{{form.submit}}</p>
+<div class="event">
+<a href="/event/{{event.id}}" class="event_title">{{event.name}}</a>
+</br><a class="event_time">{{event.start}} to {{event.end}}</a>
+</br><a class="event_info"><b>ID: </b> {{event.id}} </a>
+</br><a class="event_info"><b>Price: </b> {{event.price}} </a>
+</br><a class="event_info"><b>Location: </b> {{event.location}} </a>
+</br><a class="event_info"><b>Categories: </b> {{event.categories}} </a>
+</br><a class="event_info"><b>Attendees: </b> {{event.attending_user}}</a>
+</br><p class="event_submit">{{form.submit}}</p>
+</br>
+</div>
 {% endfor %}
 {% endblock %}
 </form>
