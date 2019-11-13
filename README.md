@@ -25,6 +25,7 @@ Once your virtual environment is activated,
 ```shell
 pip install flask
 pip install flask_sqlalchemy
+pip install Flask-WTF
 flask run
 ```
 

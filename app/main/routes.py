@@ -60,14 +60,28 @@ def calendar_page_monthly(year, month):
     return render_template("calender.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list)
 
 
-@bp.route('/events_page', methods=['GET', 'POST'])
-def events_page():
+@bp.route('/events_page/<int:sortby>/', methods=['GET', 'POST'])
+def events_page(sortby):
+    #sortby can be [0,1,2,3,4], representing sorting by:
+    #ID/Start Time/Name/Price/Location Respectively
     form = EventsPageForm()
     if form.validate_on_submit():
         event_id = request.form['event.id']
         attend = AttendEvent(user_id=0, event_id=event_id)
         flash('Test')
-    events = Event.query.all()
+    if sortby==0:
+        events = Event.query.order_by(Event.id)
+    elif sortby==1:
+        events = Event.query.order_by(Event.start)
+    elif sortby==2:
+        events = Event.query.order_by(Event.name)
+    elif sortby==3:
+        events = Event.query.order_by(Event.price)
+    elif sortby==4:
+        events = Event.query.order_by(Event.location)
+    else:
+        events = Event.query.order_by(Event.id)
+
     return render_template('events_page.html', events=events, form=form)
 
 @bp.route('/add_events', methods=['GET', 'POST'])
@@ -87,3 +101,15 @@ def index2():
 @bp.route('/save_preference', methods=['POST'])
 def save_preference():
     return render_template("save_preference.html")
+
+@bp.route('/event/<int:id>', methods=['GET', 'POST'])
+def event(id):
+    form = EventsPageForm()
+
+    if form.validate_on_submit():
+        event_id = request.form['event.id']
+        attend = AttendEvent(user_id=id, event_id=event_id)
+        flash('Test')
+
+    a = [Event.query.get(id)]
+    return render_template('events_page.html', events=a, form=form)
