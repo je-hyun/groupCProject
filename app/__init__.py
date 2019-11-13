@@ -1,11 +1,12 @@
 from flask import Flask, current_app
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import login_manager
+from flask_login import LoginManager
 
+db = SQLAlchemy()
 login = LoginManager()
 login.login_view = 'auth.login'
-login.login_message = _l('Please log in to access this page.')
+#login.login_message = _l('Please log in to access this page.')
 
 def create_app():
     app = Flask(__name__, template_folder="templates")

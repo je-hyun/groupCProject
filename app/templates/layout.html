@@ -26,7 +26,7 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">Itinerary App</div>
       <div class="list-group list-group-flush">
-        <a href="/" class="list-group-item list-group-item-action bg-light">Calender</a>
+        <a href="/" class="list-group-item list-group-item-action bg-light">Calendar</a>
         <a href="/pref" class="list-group-item list-group-item-action bg-light">Preferences</a>
        <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
         <a href="/add_events" class="list-group-item list-group-item-action bg-light">Add Events</a>
@@ -56,7 +56,15 @@
           </ul>
         </div>
       </nav>
-
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          <ul>
+              {% for message in messages %}
+              <li>{{ message }}</li>
+              {% endfor %}
+          </ul>
+      {% endif %}
+  {% endwith %}
 {% block content %}
 {% endblock %}
 

@@ -1,11 +1,10 @@
-from app import create_app
+from app import create_app, db
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from app import login
 
-
-db = SQLAlchemy()
-app = create_app()
+#app = create_app()
 
 class Event(db.Model):
     __tablename__ = 'event'

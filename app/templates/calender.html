@@ -15,16 +15,16 @@
       <div class="current-month">{{month_name}} {{year}}</div>
       <div>
         {% if month == 1 %}
-        <a href={{url_for('main.calendar_page_monthly', year=year-1, month=12)}}><</a>
+        <a href={{url_for('main.calendar_page_monthly', year=year-1, month=12)}}></a>
         {% else %}
-        <a href={{url_for('main.calendar_page_monthly', year=year, month=month-1)}}><</a>
+        <a href={{url_for('main.calendar_page_monthly', year=year, month=month-1)}}></a>
         {% endif %}
 
         <a href={{url_for('main.calendar_page_monthly', year=now.year, month=now.month)}}>Today</a>
         {% if month == 12 %}
-        <a href={{url_for('main.calendar_page_monthly', year=year+1, month=1)}}>></a>
+        <a href={{url_for('main.calendar_page_monthly', year=year+1, month=1)}}></a>
         {% else %}
-        <a href={{url_for('main.calendar_page_monthly', year=year, month=month+1)}}>></a>
+        <a href={{url_for('main.calendar_page_monthly', year=year, month=month+1)}}></a>
         {% endif %}
       </div>
     </div>

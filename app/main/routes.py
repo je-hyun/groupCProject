@@ -7,13 +7,13 @@ from flask_sqlalchemy import SQLAlchemy
 
 from app.main import bp
 from app.main.forms import EventForm, EventsPageForm
-import app.models
+from app.models import *
 
 
 @bp.route('/testroute', methods=['GET','POST'])
 def testroute():
-    users = app.models.db.session.query(app.models.User).all()
-    my_user = app.models.db.session.query(app.models.User).get(0)
+    users = db.session.query(User).all()
+    my_user = db.session.query(User).get(0)
 
     """ event = app.models.Event(
         id = 0,
@@ -36,7 +36,7 @@ def index():
     now = datetime.datetime.now()
     return redirect(url_for('main.calendar_page_monthly', year=now.year, month=now.month))
 
-@bp.route('/calendar_page/monthly/<int:year>/<int:month>/')
+@bp.route('/calendar_page/monthly/<int:year>/<int:month>/', methods=['GET', 'POST'])
 def calendar_page_monthly(year, month):
 
     if (month > 12 or month < 1):
@@ -45,7 +45,7 @@ def calendar_page_monthly(year, month):
     current_user_id = 0
     c = calendar.TextCalendar(calendar.SUNDAY) # Calendar object starting on Sunday
     now = datetime.datetime.now()
-    event_list = app.models.Event.query.all()
+    event_list = Event.query.all()
     month_name = calendar.month_name[month]
     daylist = list(c.itermonthdays(year, month))
     print("daylist = ",daylist, "length", len(daylist))
@@ -60,28 +60,32 @@ def calendar_page_monthly(year, month):
     for day_index in range(len(daylist)):
         if daylist[day_index] != 0:
             day = datetime.datetime(year, month, daylist[day_index])
-            event_list[day_index] = app.models.Event.query.filter(app.models.Event.start >= day, app.models.Event.start < day+day_delta, app.models.Event.attending_user.any(app.models.User.id==current_user_id)).all()
+            event_list[day_index] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
     return render_template("calender.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list)
 
 
 @bp.route('/events_page', methods=['GET', 'POST'])
 def events_page():
     form = EventsPageForm()
-    if form.validate_on_submit():
-        event_id = request.form['event.id']
-        attend = app.models.AttendEvent(user_id=0, event_id=event_id)
-        flash('Test')
-    events = app.models.Event.query.all()
+    #if form.validate_on_submit():
+    if request.method == "POST":
+        event_id = request.form.get('event.id')
+        event_id = int(event_id)
+        attend = AttendEvent(user_id=0, event_id=event_id)
+        db.session.add(attend)
+        db.session.commit()
+        flash('Event added to calendar.')
+    events = Event.query.all()
     return render_template('events_page.html', events=events, form=form)
 
 @bp.route('/add_events', methods=['GET', 'POST'])
 def add_events():
     event_form = EventForm()
     if event_form.validate_on_submit():
-        event = app.models.Event(start=event_form.start.data, end=event_form.end.data, name=event_form.name.data, price=event_form.price.data, location=event_form.location.data)
-        app.models.db.session.add(event)
-        app.models.db.session.commit()
-        flash('app.models.Event Added.')
+        event = Event(start=event_form.start.data, end=event_form.end.data, name=event_form.name.data, price=event_form.price.data, location=event_form.location.data)
+        db.session.add(event)
+        db.session.commit()
+        flash('Event Added.')
     return render_template('add_events.html', event_form=event_form)
 
 @bp.route('/pref', methods=['GET', 'POST'])
@@ -98,7 +102,7 @@ def login():
         return redirect(url_for('index'))
     login_form = LoginForm()
     if login_form.validate_on_submit():
-        user = app.models.User.query.filter_by(username=login_form.username.data).first()
+        user = User.query.filter_by(username=login_form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password.')
             return redirect(url_for('login'))
