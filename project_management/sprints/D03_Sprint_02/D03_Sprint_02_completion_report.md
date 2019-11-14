@@ -57,3 +57,9 @@ app/main/templates/event_page.html, app/main/templates/like_page.html
     * Refs: use-case_doc, issue  (https://github.com/je-hyun/groupCProject/tree/like_page)
     * Completion status: Finished.
     * Issues/Difficulties:: currently on like_page(branch), waiting to merge, Code is functional
+* ID:0011 , Use-case: Store Preferences & Calculate Travel Time
+    * Description: Send the preferences taken in through the Web form and store it in the sql database and use the location to calculate travel time to the event
+    * Actor: Regular User
+    * Assigned to : Rachel Taylor * Refs: use-case_doc, issue (http://link_to_github_issue_item/)
+    * Completion Status: Preferences finished; GoogleMaps API in process of being integrated
+    * Issues/Difficulties: integrating GoogleMaps in order to display travel time rather than a location
