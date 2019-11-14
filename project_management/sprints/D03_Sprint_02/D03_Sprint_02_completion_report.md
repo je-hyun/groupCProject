@@ -33,12 +33,12 @@
     * Completion status: Finished.
     * Issues/Difficulties: None.
 *ID:007 , Use-case: Make a work time form and save work time data to the database
-      * Description: create a work form html file to input timeslot when you are unavailable. The work time data is stored in the database and will filter available events based on the time slots you entered
-      * Actor: Regular User
-      * Assigned to: Kamil Peza
-      * Refs: Refs: use-case_doc, issue (http://link_to_github_issue_item)
-      * Completion status: Just needs some fixing up
-      * Issues/Difficulties: had trouble with display template because there are two 
+    * Description: create a work form html file to input timeslot when you are unavailable. The work time data is stored in the database and will filter available events based on the time slots you entered
+    * Actor: Regular User
+    * Assigned to: Kamil Peza
+    * Refs: Refs: use-case_doc, issue (http://link_to_github_issue_item)
+    * Completion status: Just needs some fixing up
+    * Issues/Difficulties: had trouble with display template because there are two 
       route.py files and had to specify which one to use 
 * ID: 009, Use-case: Creating Events Page
     * Description: Display a list of events on the right side of the page (Querying from database)
