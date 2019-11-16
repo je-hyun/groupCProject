@@ -14,7 +14,7 @@ class Event(db.Model):
     name = db.Column(db.String)
     price = db.Column(db.String)
 
-    location = db.Column(db.String) # TODO: Deprecate this
+    location = db.Column(db.String)
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
 
