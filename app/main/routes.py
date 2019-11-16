@@ -19,7 +19,7 @@ def testroute():
         name = "Rock climbing event",
         price = "10",
         location = "NYC"
-    ) """
+    )
 
     #succesfullyAdded = db.session.query(User).get(0).attend_event(event)
     #succesfullyAdded = db.session.query(User).get(1).attend_event(event)
@@ -128,7 +128,9 @@ def add_TimeSlot():
     return render_template("app/templates/workingtime_form.html", timeslots=timeslots)
 
 
-''' unused code/testing
+
+'''     unused code/testing
+
 if__name__ == '__main__':
     bp.run(debug=True)
 def add_course():
@@ -141,5 +143,5 @@ def add_course():
     db.session.commit()
     course = Course.query.all()
     return render_template('index.html', course = course)
-
+    
 '''
