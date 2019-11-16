@@ -7,7 +7,6 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 
 
-
 @bp.route('/testroute', methods=['GET','POST'])
 def testroute():
     users = db.session.query(User).all()
@@ -20,12 +19,13 @@ def testroute():
         name = "Rock climbing event",
         price = "10",
         location = "NYC"
-    )
-    succesfullyAdded = db.session.query(User).get(0).attend_event(event)
-    succesfullyAdded = db.session.query(User).get(1).attend_event(event)
-    succesfullyAdded = db.session.query(User).get(2).attend_event(event)
-    print(succesfullyAdded)
-    return render_template("test.html", users=users)
+    ) """
+
+    #succesfullyAdded = db.session.query(User).get(0).attend_event(event)
+    #succesfullyAdded = db.session.query(User).get(1).attend_event(event)
+    #succesfullyAdded = db.session.query(User).get(2).attend_event(event)
+    #print(succesfullyAdded)
+    return render_template("test.html", map_lat=0.0, map_lon=0.0)
 
 
 @bp.route('/', methods=['GET', 'POST'])
@@ -102,6 +102,18 @@ def index2():
 @bp.route('/save_preference', methods=['POST'])
 def save_preference():
     return render_template("save_preference.html")
+
+@bp.route('/event/<int:id>', methods=['GET', 'POST'])
+def event(id):
+    form = EventsPageForm()
+
+    if form.validate_on_submit():
+        event_id = request.form['event.id']
+        attend = AttendEvent(user_id=id, event_id=event_id)
+        flash('Test')
+
+    a = [Event.query.get(id)]
+    return render_template('single_event_page.html', events=a, form=form)
 
 @bp.route('/add_TimeSlot', methods=['GET', 'POST'])
 def add_TimeSlot():

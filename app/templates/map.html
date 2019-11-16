@@ -1,0 +1,62 @@
+<!--
+ * map.html is a file used to import styles/scripts needed to display a map
+ *
+ * For a static map, we need to
+ *      % from 'map.html' import map_styles, map, map_scripts %
+ *
+ * For a map for a form we need to
+ *      % from 'map.html' import map_styles, map_input, map_input_scripts %
+ * [Both of these scripts we need to wrap with curly brackets]
+ *
+ * Then, we put map_styles in the styles block, map_scripts into the scripts block,
+ * and map into the html where the map should be displayed.
+-->
+
+
+{% macro map_styles() %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+{% endmacro %}
+
+{% macro map(width=600, height=400) %}
+<div id="map" style="width: {{width}}px; height: {{height}}px"></div>
+{% endmacro %}
+
+{% macro map_input(width=600, height=400) %}
+<input type="hidden" id="locationLatitude" placeholder="Latitude" name="locationLatitude" value="42.697765">
+<input type="hidden" id="locationLongitude" placeholder="Longitude" name="locationLongitude" value="-73.108005">
+<div id="map" style="width: {{width}}px; height: {{height}}px"></div>
+{% endmacro %}
+
+{% macro map_scripts(map_lat, map_lon, zoom=3) %}
+<script>
+
+  // Initialize the map coordinates, map, and options.
+  var map = L.map('map').setView([{{map_lat}}, {{map_lon}}], {{zoom}});
+  var on_screen_map=new L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+  var marker = new L.marker([{{map_lat}}, {{map_lon}}]).addTo(map);
+</script>
+{% endmacro %}
+
+{% macro map_input_scripts(map_lat, map_lon) %}
+<script>
+  // Initialize the map coordinates, map, and options.
+  var map = L.map('map').setView([42.697765, -73.108005], 3);
+  var mapOptions = {'collapsed':false, 'placeholder':'Your Location', 'position':'bottomleft', 'id':'mapSearchbarId'};
+
+  // Initialize the location field from html form
+  var locationLatitude = document.getElementById("locationLatitude");
+  var locationLongitude = document.getElementById("locationLongitude");
+
+  // Add geocoder control (searchbar for addresses) onto map
+  var geocoder = L.Control.geocoder(mapOptions);
+  geocoder.on('markgeocode', function(e) {
+    locationLatitude.value = e.geocode.properties.lat;
+    locationLongitude.value = e.geocode.properties.lon;
+  }).addTo(map);
+
+  var on_screen_map=new L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+</script>
+{% endmacro %}

@@ -1,4 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
+from geopy.geocoders import Nominatim
+from app.location_utils import coordinatesToAddress, addressToCoordinates
 
 #from app import db
 db = SQLAlchemy()
@@ -11,9 +13,17 @@ class Event(db.Model):
     end = db.Column(db.DateTime)
     name = db.Column(db.String)
     price = db.Column(db.String)
-    location = db.Column(db.String)
+
+    location = db.Column(db.String) # TODO: Deprecate this
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
+
     categories = db.relationship('Category', secondary='eventCategory', back_populates="events")
     attending_user = db.relationship('User', secondary='attendEvent', back_populates="events")
+
+    def get_address(self):
+        return coordinatesToAddress(self.latitude, self.longitude)
+
     def conflicts_with_event(self, event):
         return self.start<=event.end and event.start<=self.end
 
@@ -70,7 +80,11 @@ class Preference(db.Model):
     __tablename__ = 'preference'
     preference_id = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Float)
-    location = db.Column(db.String)
+
+    location = db.Column(db.String) # TODO: Deprecate this
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
+
     size = db.Column(db.String)
     DayFree = db.Column(db.String)
     hoursFree = db.Column(db.String)
@@ -81,3 +95,6 @@ class TimeSlot(db.Model):
     day = db.Column(db.String)
     start_time = db.Column(db.String)
     end_time = db.Column(db.String)
+
+    def get_address(self):
+        return coordinatesToAddress(self.latitude, self.longitude)

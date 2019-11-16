@@ -1,14 +1,14 @@
 {% extends 'layout.html' %}
+{% from 'map.html' import map_styles, map, map_scripts %}
 
+{% block styles %}
+{{ map_styles() }}
+{% endblock %}
 
 {% block content %}
- <div class="container-fluid">
-  <h1 class="mt-4">Calender</h1>
-  <p>This is a Calender page</p>
-  <ol>
-  {% for user in users %}
-    <li>{{ user.firstname }} {{ user.lastname }}</li>
-  {% endfor %}
-</ol>
-</div>
+{{ map() }}
+{% endblock %}
+
+{% block scripts %}
+{{ map_scripts(map_lat, map_lon) }}
 {% endblock %}

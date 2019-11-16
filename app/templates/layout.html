@@ -8,13 +8,14 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Simple Sidebar - Start Bootstrap Template</title>
+  <title>{% block title %}Itinerary App{% endblock title %}</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/bootstrap/css/bootstrap.min.css')}}">
     <!-- Custom styles for this template -->
   <link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/simple-sidebar.css')}}">
-
+  {% block styles %}
+  {% endblock %}
 </head>
 
 <body>
@@ -24,16 +25,14 @@
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Start Bootstrap </div>
+      <div class="sidebar-heading">Itinerary App</div>
       <div class="list-group list-group-flush">
         <a href="/" class="list-group-item list-group-item-action bg-light">Calender</a>
-        <a href="/events_page" class="list-group-item list-group-item-action bg-light">Events</a>
         <a href="/pref" class="list-group-item list-group-item-action bg-light">Preferences</a>
-        <a href="/add_TimeSlot" class="list-group-item list-group-item-action bg-light">Time Busy</a>
-
-       <!-- <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
+       <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
+        <a href="/add_events" class="list-group-item list-group-item-action bg-light">Add Events</a>
+        <a href="/events_page/0/" class="list-group-item list-group-item-action bg-light">Events</a>
+        <!--<a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>-->
       </div>
     </div>
@@ -52,20 +51,17 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Options</a>
             </li>
-
           </ul>
         </div>
       </nav>
-    <!--</div>>-->
 
 {% block content %}
-
 {% endblock %}
-
     <!-- /#page-content-wrapper -->
-
   </div>
-
+</div>
+{% block scripts %}
+{% endblock scripts%}
 </body>
 
 </html>
