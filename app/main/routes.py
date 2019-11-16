@@ -6,13 +6,13 @@ from app.models import *
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 
-
+'''
 @bp.route('/testroute', methods=['GET','POST'])
 def testroute():
     users = db.session.query(User).all()
     my_user = db.session.query(User).get(0)
 
-    event = Event(
+     event = Event(
         id = 0,
         start = datetime.datetime(2018, 8, 1),
         end = datetime.datetime(2018, 8, 2),
@@ -26,7 +26,7 @@ def testroute():
     #succesfullyAdded = db.session.query(User).get(2).attend_event(event)
     #print(succesfullyAdded)
     return render_template("test.html", map_lat=0.0, map_lon=0.0)
-
+'''
 
 @bp.route('/', methods=['GET', 'POST'])
 def index():
