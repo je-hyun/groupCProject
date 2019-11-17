@@ -26,10 +26,23 @@ Once your virtual environment is activated,
 pip install flask
 pip install flask_sqlalchemy
 pip install Flask-WTF
+pip install geopy
 flask run
 ```
 
 You may need to specify the flask app name running the command.
 ```shell  
  export FLASK_APP=app.py
+```
+
+#### Changing models.py
+If you are adding to the project, you may find you want to change the database schema. If so, a database migration will be necessary. After you change the models.py file, you can run the following commands inside the project root directory to migrate the database.
+```
+flask db migrate -m "your description of changes"
+flask db upgrade
+```
+
+If, for any reason during development, you need to downgrade to a previous version of the database, simply use this command.
+```
+flask db downgrade
 ```
