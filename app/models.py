@@ -1,10 +1,15 @@
+from flask import app
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from geopy.geocoders import Nominatim
 from app.location_utils import coordinatesToAddress, addressToCoordinates
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
 
 #from app import db
 db = SQLAlchemy()
-
+migrate = Migrate(app, db)
+#Manager.add_command('db', MigrateCommand)
 
 class Event(db.Model):
     __tablename__ = 'event'
@@ -70,7 +75,6 @@ class User(db.Model):
             db.session.commit()
             return True
 
-
 class AttendEvent(db.Model):
     __tablename__ = 'attendEvent'
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
@@ -89,6 +93,7 @@ class Preference(db.Model):
     DayFree = db.Column(db.String)
     hoursFree = db.Column(db.String)
 
+
 class TimeSlot(db.Model):
     __tablename__ = 'timeslot'
     timeslot_id = db.Column(db.Integer, primary_key=True)
@@ -96,5 +101,9 @@ class TimeSlot(db.Model):
     start_time = db.Column(db.String)
     end_time = db.Column(db.String)
 
-    def get_address(self):
+
+def get_address(self):
         return coordinatesToAddress(self.latitude, self.longitude)
+
+if __name__ == "__main__":
+    Manager.run()

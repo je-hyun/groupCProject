@@ -26,6 +26,7 @@ def testroute():
     #succesfullyAdded = db.session.query(User).get(2).attend_event(event)
     #print(succesfullyAdded)
     return render_template("test.html", map_lat=0.0, map_lon=0.0)
+
 '''
 
 @bp.route('/', methods=['GET', 'POST'])
@@ -125,7 +126,7 @@ def add_TimeSlot():
     db.session.add(timeslot)
     db.session.commit()
     timeslots = TimeSlot.query.all()
-    return render_template("app/templates/workingtime_form.html", timeslots=timeslots)
+    return render_template("main.workingtime_form.html", timeslots=timeslots)
 
 
 
