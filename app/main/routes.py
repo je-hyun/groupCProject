@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 import calendar
 from app.main.forms import EventForm, EventsPageForm
 from app.models import *
+from app import db
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 
