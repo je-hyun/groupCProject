@@ -10,12 +10,12 @@
 
 	<ul>
 		{% for timeslot in timeslots %}
-		<li> <a href="{{url_for('add_TimeSlot', timeslot_id=timeslot.id) }}">(ID:{{ timeslot.timeslot_id }}) {{ timeslot.day }} - {{ timeslot.startTime }} - {{ timeslot.endTime }}</a></li>
+		<li> <a href="{{url_for('main.add_TimeSlot')}}">(ID:{{ timeslot.timeslot_id }}) {{ timeslot.day }} - {{ timeslot.startTime }} - {{ timeslot.endTime }}</a></li>
 		{% endfor %}
 
 	</ul>
 
-	<form action="{{ url_for('add_TimeSlot') }}" method="POST"> # name="TimeSlotForm"
+	<form action="{{url_for('main.add_TimeSlot')}}" method="post">
 		<label>Add a new Time Slot: </label>
 
 			<select>

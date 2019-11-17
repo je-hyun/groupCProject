@@ -122,11 +122,11 @@ def add_TimeSlot():
     day = request.form.get("day")
     start_time = request.form.get("start_time")
     end_time = request.form.get("end_time")
-    timeslot = TimeSlot(timeslot_id=timeslot_id, day=day, start_time=start_time, end_time=end_time)
-    db.session.add(timeslot)
+    timeslots = TimeSlot(timeslot_id=timeslot_id, day=day, start_time=start_time, end_time=end_time)
+    db.session.add(timeslots)
     db.session.commit()
     timeslots = TimeSlot.query.all()
-    return render_template("main.workingtime_form.html", timeslots=timeslots)
+    return render_template('app\templates\workingtime_form.html', timeslots=timeslots)
 
 
 
