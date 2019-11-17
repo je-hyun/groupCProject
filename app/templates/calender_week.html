@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+<link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/calender.css')}}">
+<link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/calendar_week.css')}}">
+
+<!--        <div class="calendar__day day">1</div> -->
+<div class="container-fluid">
+  <main>
+    <br/>
+    <div class="toolbar">
+      <div class="toggle">
+        <div class="toggle__option toggle__option--selected">week</div>
+        <a class="link_no_formatting" href={{url_for('main.calendar_page_monthly', year=year, month=month)}}><div class="toggle__option">month</div></a>
+      </div>
+      <div class="current-month">{{month_name}} {{year}} Week {{week}}</div>
+      <div>
+
+        {% if week != 1 %}
+        <a href={{url_for('main.calendar_page_weekly', year=year, month=month, week=week-1)}}><</a>
+        {% else %}
+          {% if month == 1 %}
+          <a href={{url_for('main.calendar_page_weekly', year=year-1, month=12, week=(days_in_previous_month / 7)|round(0,'floor')|int)}}><</a>
+          {% else %}
+          <a href={{url_for('main.calendar_page_weekly', year=year, month=month-1, week=(days_in_previous_month / 7)|round(0,'floor')|int)}}><</a>
+          {% endif %}
+        {% endif %}
+
+        <a href={{url_for('main.calendar_page_weekly', year=now.year, month=now.month, week=week_of_today)}}>Today</a>
+        {% if daylist|length > week * 7 %}
+        <a href={{url_for('main.calendar_page_weekly', year=year, month=month, week=week+1)}}>></a>
+        {% else %}
+          {% if month == 12 %}
+          <a href={{url_for('main.calendar_page_weekly', year=year+1, month=1, week=1)}}>></a>
+          {% else %}
+          <a href={{url_for('main.calendar_page_weekly', year=year, month=month+1, week=1)}}>></a>
+          {% endif %}
+        {% endif %}
+
+        {#
+        {% if month == 1 %}
+        <a href={{url_for('main.calendar_page_weekly', year=year-1, month=12)}}><</a>
+        {% else %}
+        <a href={{url_for('main.calendar_page_weekly', year=year, month=month-1)}}><</a>
+        {% endif %}
+
+
+        <a href={{url_for('main.calendar_page_weekly', year=now.year, month=now.month, week=0)}}>Today</a>
+
+        {% if month == 12 %}
+        <a href={{url_for('main.calendar_page_weekly', year=year+1, month=1)}}>></a>
+        {% else %}
+        <a href={{url_for('main.calendar_page_weekly', year=year, month=month+1)}}>></a>
+        {% endif %}
+        #}
+
+      </div>
+    </div>
+    <div class="calendar">
+      <div class="calendar__header">
+        <div>sun</div>
+        <div>mon</div>
+        <div>tue</div>
+        <div>wed</div>
+        <div>thu</div>
+        <div>fri</div>
+        <div>sat</div>
+      </div>
+
+        <div class="calendar__week">
+          {% for day in range(0,7) %}
+            {%if daylist[day + (week-1) * 7] == 0%}
+              <div class="calendar__day day"></div>
+            {%else%}
+              <div class="calendar__day day">{{daylist[day + (week-1) * 7]}}
+                <br/>
+                {% for event in event_list[day+(week-1)*7] %}
+                  <li><a href="/event/{{event.id}}">{{event.name}} {{event.start}} to {{event.end}}</a></li>
+                {% endfor %}
+              </div>
+            {%endif%}
+          {%endfor%}
+        </div>
+
+    </div>
+    <br/>
+  </main>
+</div>
+
+</body>
+{% endblock %}

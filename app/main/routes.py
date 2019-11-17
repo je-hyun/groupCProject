@@ -44,7 +44,6 @@ def calendar_page_monthly(year, month):
     event_list = Event.query.all()
     month_name = calendar.month_name[month]
     daylist = list(c.itermonthdays(year, month))
-    print("daylist = ",daylist, "length", len(daylist))
     day_delta = datetime.timedelta(days=1)
     # daylist is the list of numbers to put in each box of the calendar,
     # where 0 is an empty box, and 1 is the 1st of the month, etc.
@@ -58,6 +57,40 @@ def calendar_page_monthly(year, month):
             day = datetime.datetime(year, month, daylist[day_index])
             event_list[day_index] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
     return render_template("calender.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list)
+
+@bp.route('/calendar_page/weekly/<int:year>/<int:month>/<int:week>')
+def calendar_page_weekly(year, month, week):
+    if (month > 12 or month < 1):
+        return ("Oops, the month is out of range!")
+    # Initialize some useful variables:
+    current_user_id = 0
+    c = calendar.TextCalendar(calendar.SUNDAY) # Calendar object starting on Sunday
+    now = datetime.datetime.now()
+    event_list = Event.query.all()
+    month_name = calendar.month_name[month]
+    daylist = list(c.itermonthdays(year, month))
+    day_delta = datetime.timedelta(days=1)
+    # daylist is the list of numbers to put in each box of the calendar,
+    # where 0 is an empty box, and 1 is the 1st of the month, etc.
+    # example: [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 0, 0]
+    if len(daylist) <= (week-1) * 7 or week < 1:
+        return ("Oops, the week is out of range!")
+
+    if (month == 1):
+        days_in_previous_month = len(list(c.itermonthdays(year-1,12)))
+    else:
+        days_in_previous_month = len(list(c.itermonthdays(year,month-1)))
+
+    event_list = [None] * len(daylist)
+
+    week_of_today = (daylist.index(now.day) // 7) + 1
+    # The following loop creates an event_list with event objects inside
+    # The indices correspond with the indices in daylist
+    for day_index in range(len(daylist)):
+        if daylist[day_index] != 0:
+            day = datetime.datetime(year, month, daylist[day_index])
+            event_list[day_index] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
+    return render_template("calender_week.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, week=week, days_in_previous_month=days_in_previous_month, week_of_today=week_of_today)
 
 
 @bp.route('/events_page/<int:sortby>/', methods=['GET', 'POST'])
