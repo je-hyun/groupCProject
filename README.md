@@ -27,6 +27,7 @@ pip install flask
 pip install flask_sqlalchemy
 pip install Flask-WTF
 pip install geopy
+pip install flask-migrate
 flask run
 ```
 
