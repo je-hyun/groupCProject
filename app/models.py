@@ -1,9 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
 from geopy.geocoders import Nominatim
 from app.location_utils import coordinatesToAddress, addressToCoordinates
+from app import db
 
 #from app import db
-db = SQLAlchemy()
+#db = SQLAlchemy()
 
 
 class Event(db.Model):
