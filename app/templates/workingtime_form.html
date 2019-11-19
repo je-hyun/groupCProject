@@ -1,44 +1,41 @@
-{% extends 'layout.html' %}
-
-<!--{% block title %} TimeSlots for when you are Working/Busy {% endblock title %}-->
+{% extends "layout.html" %}
 
 {% block content %}
-	<P>Hello World</P>
+<h1>Welcome to your Time Slot List</h1>
+<p>Select a day of the week, then the start and end time of when you are working or unavailable.</p>
 
-	<h1>Welcome to your Time Slot List</h1>
-	<p>Select a day of the week, then the start and end time of when you are working or unavailable</p>
-
-	<ul>
-		{% for timeslot in timeslots %}
-		<li> <a href="{{url_for('main.add_TimeSlot')}}">(ID:{{ timeslot.timeslot_id }}) {{ timeslot.day }} - {{ timeslot.startTime }} - {{ timeslot.endTime }}</a></li>
+<form action="" method="POST" novalidate>
+	{{timeslot_form.hidden_tag()}}
+	<label>Add a new Time Slot: </label>
+	<p>
+		{{timeslot_form.day.label}}<br>
+		{{timeslot_form.day(size=32)}}<br>
+		{% for error in timeslot_form.day.errors %}
+		<span style="color: red;">[{{ error }}]</span>
 		{% endfor %}
-
-	</ul>
-
-	<form action="{{url_for('main.add_TimeSlot')}}" method="post">
-		<label>Add a new Time Slot: </label>
-
-			<select>
-				<option value="Monday"> Monday</option>
-				<option value="Tuesday">Tuesday</option>
-				<option value="Wednesday">Wednesday</option>
-				<option value="Thursday">Thursday</option>
-				<option value="Friday">Friday</option>
-				<option value="Saturday">Saturday</option>
-				<option value="Sunday">Sunday</option>
-			</select>
-
-		<label id="Start Time">Start Time:</label>
-		<input type="time" name="StartTime" id="StartTime" placeholder="Start Time">
-
-		<label id="End Time">End Time:</label>
-		<input type="time" name="EndTime" id="EndTime" placeholder="End Time">
-
-		<br><br><br>
-		<input type="submit" value="Submit">
-
-	</form>
-
+	</p>
+	<p>
+		{{timeslot_form.startTime.label}}<br>
+		{{timeslot_form.startTime(size=32)}}<br>
+		{% for error in timeslot_form.startTime.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+		{% endfor %}
+	</p>
+	<p>
+		{{timeslot_form.endTime.label}}<br>
+		{{timeslot_form.endTime(size=32)}}<br>
+		{% for error in timeslot_form.endTime.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+		{% endfor %}
+	</p>
+	<p>{{timeslot_form.submit()}}</p>
+</form>
 {% endblock %}
+
+
+
+
+
+
 
 

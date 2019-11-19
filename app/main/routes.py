@@ -1,7 +1,7 @@
 from app.main import bp
 from flask import Flask, render_template, request, flash, redirect, url_for
 import calendar
-from app.main.forms import EventForm, EventsPageForm
+from app.main.forms import EventForm, EventsPageForm, TimeSlotForm
 from app.models import *
 from flask_sqlalchemy import SQLAlchemy
 import datetime
@@ -116,21 +116,28 @@ def event(id):
     a = [Event.query.get(id)]
     return render_template('single_event_page.html', events=a, form=form)
 
-@bp.route('/add_TimeSlot', methods=['GET', 'POST'])
-def add_TimeSlot():
+@bp.route('/add_time_slot', methods=['GET', 'POST'])
+def add_time_slot():
+    timeslot_form = TimeSlotForm()
+    if timeslot_form.validate_on_submit():
+        timeslot = TimeSlot(day=timeslot_form.day.data,
+                            start_time=timeslot_form.start_time.data, end_time=timeslot_form.end_time.data)
+        db.session.add(timeslot)
+        db.session.commit()
+        flash('Time Slot Added.')
+    #timeslot = TimeSlot.query.all()
+    return render_template('workingtime_form.html', timeslot_form=timeslot_form)
+
+
+
+'''
     timeslot_id = request.form.get("timeslot_id")
     day = request.form.get("day")
     start_time = request.form.get("start_time")
     end_time = request.form.get("end_time")
-    timeslots = TimeSlot(timeslot_id=timeslot_id, day=day, start_time=start_time, end_time=end_time)
-    db.session.add(timeslots)
-    db.session.commit()
-    timeslots = TimeSlot.query.all()
-    return render_template('app\templates\workingtime_form.html', timeslots=timeslots)
+    
 
-
-
-'''     unused code/testing
+     unused code/testing
 
 if__name__ == '__main__':
     bp.run(debug=True)
@@ -145,4 +152,22 @@ def add_course():
     course = Course.query.all()
     return render_template('index.html', course = course)
     
+   
+    
+    
+ @bp.route('/add_TimeSlot/', methods=['GET', 'POST'])
+def add_TimeSlot():
+    timeslot_id = request.form.get("timeslot_id")
+    day = request.form.get("day")
+    start_time = request.form.get("start_time")
+    end_time = request.form.get("end_time")
+    timeslot = TimeSlot(timeslot_id=timeslot_id, day=day, start_time=start_time, end_time=end_time)
+    db.session.add(timeslot)
+    db.session.commit()
+    timeslots = TimeSlot.query.all()
+    return render_template("workingtime_form.html", timeslots=timeslots)   
+    
+    
+    
+timeslot_id=timeslot_form.timeslot_id.data, 
 '''
