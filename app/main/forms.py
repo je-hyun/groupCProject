@@ -17,12 +17,12 @@ class EventsPageForm(FlaskForm):
 
 class TimeSlotForm(FlaskForm):
 
-    day = SelectField('day', choices=[('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'),
+    day = SelectField('[Day]', choices=[('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'),
                                       ('Thursday', 'Thursday'), ('Friday', 'Friday'), ('Saturday', 'Saturday'),
                                       ('Sunday', 'Sunday')], validators=[DataRequired()])
-    startTime = TimeField('Start time', validators=[DataRequired()])
-    endTime = TimeField('End Time', validators=[DataRequired()])
-    submit = SubmitField('Add TimeSlot')
+    startTime = TimeField('Start Time:', validators=[DataRequired()], format="%H:%M")
+    endTime = TimeField('End Time:', validators=[DataRequired()], format="%H:%M")
+    submit = SubmitField('Add Time Slot')
 
 '''
 timeslot_id = IntegerField('timeslot_id')

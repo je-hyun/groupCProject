@@ -1,29 +1,29 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Welcome to your Time Slot List</h1>
-<p>Select a day of the week, then the start and end time of when you are working or unavailable.</p>
+<h1>Your Busy Time Slot List</h1>
+<p>Select a day of the week, then the start and end time of when you are working or unavailable to attend events.</p>
 
 <form action="" method="POST" novalidate>
 	{{timeslot_form.hidden_tag()}}
-	<label>Add a new Time Slot: </label>
+	<!--<label>Add a new Time Slot: </label>-->
 	<p>
 		{{timeslot_form.day.label}}<br>
-		{{timeslot_form.day(size=32)}}<br>
+		{{timeslot_form.day(size=7)}}
 		{% for error in timeslot_form.day.errors %}
 		<span style="color: red;">[{{ error }}]</span>
 		{% endfor %}
 	</p>
-	<p>
 		{{timeslot_form.startTime.label}}<br>
-		{{timeslot_form.startTime(size=32)}}<br>
+		<!--<input type="time" id="StartTime" placeholder="1:00"> </input>><br>-->
+		{{timeslot_form.startTime(size=32, placeholder='1:00')}}<br>
 		{% for error in timeslot_form.startTime.errors %}
 		<span style="color: red;">[{{ error }}]</span>
 		{% endfor %}
 	</p>
 	<p>
 		{{timeslot_form.endTime.label}}<br>
-		{{timeslot_form.endTime(size=32)}}<br>
+		{{timeslot_form.endTime(size=32, placeholder='3:00')}}<br>
 		{% for error in timeslot_form.endTime.errors %}
 		<span style="color: red;">[{{ error }}]</span>
 		{% endfor %}

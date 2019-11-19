@@ -121,13 +121,13 @@ def add_time_slot():
     timeslot_form = TimeSlotForm()
     if timeslot_form.validate_on_submit():
         timeslot = TimeSlot(day=timeslot_form.day.data,
-                            start_time=timeslot_form.start_time.data, end_time=timeslot_form.end_time.data)
+                            startTime=timeslot_form.startTime.data,
+                            endTime=timeslot_form.endTime.data)
         db.session.add(timeslot)
         db.session.commit()
         flash('Time Slot Added.')
     #timeslot = TimeSlot.query.all()
     return render_template('workingtime_form.html', timeslot_form=timeslot_form)
-
 
 
 '''
@@ -136,7 +136,6 @@ def add_time_slot():
     start_time = request.form.get("start_time")
     end_time = request.form.get("end_time")
     
-
      unused code/testing
 
 if__name__ == '__main__':
