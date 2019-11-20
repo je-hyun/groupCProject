@@ -28,12 +28,12 @@
           {% endif %}
         {% endif %}
 
-        <a href={{url_for('main.calendar_page_daily', year=now.year, month=now.month)}}>Today</a>
+        <a href={{url_for('main.calendar_page_daily', year=now.year, month=now.month, currentDay=now.day)}}>Today</a>
 
-        {% if month == 12 and currentDay==len(daylist) %}
+        {% if month == 12 and currentDay== days_in_current_month %}
         <a href={{url_for('main.calendar_page_daily', year=year+1, month=1, currentDay=1)}}>></a>
         {% else %}
-          {% if currentDay==len(daylist) %}
+          {% if currentDay==days_in_current_month %}
           <a href={{url_for('main.calendar_page_daily', year=year, month=month+1, currentDay=1)}}>></a>
           {% else %}
             <a href={{url_for('main.calendar_page_daily', year=year, month=month, currentDay=currentDay+1)}}>></a>
@@ -42,17 +42,14 @@
       </div>
     </div>
     <div class="calendar">
-      <div class="calendar__header">
-        <div>sun</div>
-        <div>mon</div>
-        <div>tue</div>
-        <div>wed</div>
-        <div>thu</div>
-        <div>fri</div>
-        <div>sat</div>
+      <div class="calendar__week">
+            <div class="calendar__day day">
+              <br/>
+              {% for event in event_list[0] %}
+                <li><a href="/event/{{event.id}}">{{event.name}} {{event.start}} to {{event.end}}</a></li>
+              {% endfor %}
+            </div>
       </div>
-
-
     </div>
     <br/>
   </main>

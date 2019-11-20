@@ -111,19 +111,19 @@ def calendar_page_daily(year, month, currentDay):
     # example: [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 0, 0]
 
     if (month == 1):
-        days_in_previous_month = len(list(c.itermonthdays(year-1,12)))
+        days_in_previous_month = calendar.monthrange(year-1, 12)[1]
     else:
-        days_in_previous_month = len(list(c.itermonthdays(year,month-1)))
+        days_in_previous_month = calendar.monthrange(year, month-1)[1]
 
-    event_list = [None] * len(daylist)
+    days_in_current_month = calendar.monthrange(year, month)[1]
+
+    event_list = [None]
 
     # The following loop creates an event_list with event objects inside
     # The indices correspond with the indices in daylist
-    for day_index in range(len(daylist)):
-        if daylist[day_index] != 0:
-            day = datetime.datetime(year, month, daylist[day_index])
-            event_list[day_index] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
-    return render_template("calender_day.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, currentDay=currentDay, days_in_previous_month=days_in_previous_month)
+    day = datetime.datetime(year, month, currentDay)
+    event_list[0] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
+    return render_template("calender_day.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, currentDay=currentDay, days_in_previous_month=days_in_previous_month, days_in_current_month=days_in_current_month)
 
 
 
