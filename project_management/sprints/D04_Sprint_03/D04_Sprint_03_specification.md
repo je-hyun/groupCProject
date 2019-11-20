@@ -1,5 +1,5 @@
-* ID:012, Use-case: options page
-    * Description: Adding an options page so that the user can change aspects of the web-page to their liking
+* ID:012, Use-case: Saving user preferences to the database
+    * Description: Allowing the preferences page to be stored in the database and to be related to the user
     * Actor: Regular User
     * Assigned to : George Stephanoff
     * Refs: use-case_doc, issue 
