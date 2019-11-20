@@ -30,7 +30,6 @@
 
 main {
   grid-area: content;
-  padding: 48px;
 }
 
 sidebar {
