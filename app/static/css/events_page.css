@@ -59,10 +59,8 @@ color: #11afcf;
 }
 
 .event_info {
-  border-right: .6px solid #e1e1e1;
-  border-top: .6px solid #e1e1e1;
+  border: .6px solid #e1e1e1;
   position: relative;
-  top: 12px;
   padding: 10px 12px;
   text-decoration: none;
   background-color: #f1f1f1;
