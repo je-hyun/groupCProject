@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+<link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/calender.css')}}">
+<link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/calendar_week.css')}}">
+
+<!--        <div class="calendar__day day">1</div> -->
+<div class="container-fluid">
+  <main>
+    <br/>
+    <div class="toolbar">
+      <div class="toggle">
+        <div class="toggle__option toggle__option--selected">day</div>
+        <a class="link_no_formatting" href={{url_for('main.calendar_page_weekly', year=year, month=month, week=1)}}><div class="toggle__option">week</div></a>
+        <a class="link_no_formatting" href={{url_for('main.calendar_page_monthly', year=year, month=month)}}><div class="toggle__option">month</div></a>
+      </div>
+      <div class="current-month">{{month_name}} {{year}} Week {{week}}</div>
+      <div>
+
+        {% if month == 1 and currentDay==1 %}
+        <a href={{url_for('main.calendar_page_daily', year=year-1, month=12,currentDay=days_in_previous_month)}}><</a>
+        {% else %}
+          {% if currentDay==1 %}
+          <a href={{url_for('main.calendar_page_daily', year=year, month=month-1,currentDay=days_in_previous_month)}}><</a>
+          {% else %}
+            <a href={{url_for('main.calendar_page_daily', year=year, month=month, currentDay = currentDay-1)}}><</a>
+          {% endif %}
+        {% endif %}
+
+        <a href={{url_for('main.calendar_page_daily', year=now.year, month=now.month, currentDay=now.day)}}>Today</a>
+
+        {% if month == 12 and currentDay== days_in_current_month %}
+        <a href={{url_for('main.calendar_page_daily', year=year+1, month=1, currentDay=1)}}>></a>
+        {% else %}
+          {% if currentDay==days_in_current_month %}
+          <a href={{url_for('main.calendar_page_daily', year=year, month=month+1, currentDay=1)}}>></a>
+          {% else %}
+            <a href={{url_for('main.calendar_page_daily', year=year, month=month, currentDay=currentDay+1)}}>></a>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="calendar">
+      <div class="calendar__week">
+            <div class="calendar__day day">
+              <br/>
+              {% for event in event_list[0] %}
+                <li><a href="/event/{{event.id}}">{{event.name}} {{event.start}} to {{event.end}}</a></li>
+              {% endfor %}
+            </div>
+      </div>
+    </div>
+    <br/>
+  </main>
+</div>
+
+</body>
+{% endblock %}

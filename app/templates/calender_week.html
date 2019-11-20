@@ -11,6 +11,7 @@
     <br/>
     <div class="toolbar">
       <div class="toggle">
+        <a class="link_no_formatting" href={{url_for('main.calendar_page_daily', year=year, month=month, currentDay=1)}}><div class="toggle__option">day</div></a>
         <div class="toggle__option toggle__option--selected">week</div>
         <a class="link_no_formatting" href={{url_for('main.calendar_page_monthly', year=year, month=month)}}><div class="toggle__option">month</div></a>
       </div>

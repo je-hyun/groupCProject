@@ -24,7 +24,7 @@
     <a href="/event/{{event.id}}" class="event_title">{{event.name}}</a>
   </div>
   <div class="card-body">
-    <p class="card-text">{{event.start.strftime("%-m/%d/%Y %-I:%M%p")}} — {{event.end.strftime("%-m/%d/%Y %-I:%M%p")}}</p>
+    <p class="card-text">{{event.start}} — {{event.end}}</p>
     {{form.submit(class="btn btn-outline-primary")}}
   </div>
   <div class="card-footer text-muted">
