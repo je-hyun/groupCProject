@@ -1,0 +1,47 @@
+<title>Preferences</title>
+        	 	<link rel="stylesheet" media="screen" href="static/bootstrap.min.css">
+        	 	<link rel="stylesheet" href="static/bootstrap-theme.min.css">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="container">
+<h2>Preferences Form</h2>
+<form action="" method="post" role="form">
+   <!-- { { form.csrf }} -->
+<div class="form-group">
+      <label for="Location">Location:</label>
+<input type="text" class="form-control" id="location" name="location" placeholder="Where are you located?">
+
+<label for="budget">Budget:</label>
+<input type="text" class="form-control" id="budget" name="budget" placeholder=" $ amount">
+
+<label for="distance">Distance:</label>
+<input type="distance" class="form-control" id="distance" name="distance" placeholder="distance willing to travel.">
+
+</div>
+<button type="submit" class="btn btn-success">Sign Up</button>
+
+<!--
+</form>{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+
+
+{% for message in messages %}
+{% if "Error" not in message[1]: %}
+<div class="alert alert-info">
+    <strong>Success! </strong> { { message[1] }}</div>
+    -->
+
+    <!--
+
+    {% endif %}
+
+{% if "Error" in message[1]: %}
+<div class="alert alert-warning">
+                { { message[1] }}</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+</div>
+
+-->
