@@ -3,22 +3,43 @@
 {% block styles %}
 {{ map_styles() }}
 {% endblock styles %}
+{% set title = 'Preferences' %}
 {% block content %}
- <div class="container-fluid">
-        <h1 class="mt-4">Preferences</h1>
-     <form action="{{url_for('main.save_preference')}}" method="post">
-        <input type="number" name="Max Price" placeholder="Maximum Cost" ><br/>
-        <input type="number" name="Distance" placeholder="Distance"><br/>
-        {{ map_input() }}
-         <button type="button", onClick="hideSize()">Size of the event</button>
-         <div id="size">
-        <input type="radio", name="size", value="large">Large<br/>
-        <input type="radio", name="size", value="medium", checked>Medium<br/>
-        <input type="radio", name="size", value="small">Small<br/>
-         </div><br/>
-        <input type="submit", value="Save Changes">
-        </form>
-      </div>
+<div class="container">
+  <br/>
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+         <form action="{{url_for('main.save_preference')}}" method="post">
+           <div class="container">
+           <div class="row">
+               <div class="col-xs-4">
+                 <label>Maximum Cost</label>
+                  <input type="number" class="form-control" name="MaxPrice" placeholder="Maximum Cost">
+               </div>
+               <div class="col-xs-4" style="padding: 0 1em">
+                 <label>Distance</label>
+                 <input type="number" class="form-control" name="Distance" placeholder="Distance">
+               </div>
+               <div class="col-xs-4">
+               </div>
+            </div>
+            <br/>
+            </div>
+              <button class="btn btn-info" type="button", onClick="hideSize()">&#8615; Size of the event</button>
+              <div id="size">
+              <input type="radio", name="size", value="large">Large<br/>
+              <input type="radio", name="size", value="medium", checked>Medium<br/>
+              <input type="radio", name="size", value="small">Small
+            </div>
+            <br/><br/>
+            {{ map_input() }}
+            <br/>
+            <input class="btn btn-primary btn-lg" type="submit", value="Save Changes">
+
+         </form>
+  </div>
+</div>
+</div>
 <script>
 function hideSize() {
   var x = document.getElementById("size");
@@ -29,6 +50,7 @@ function hideSize() {
   }
 }
 </script>
+
 {% endblock %}
 
 {% block scripts %}

@@ -8,10 +8,11 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>{% block title %}Itinerary App{% endblock title %}</title>
+  <title>{% block title %}Outing Scout{% endblock title %}</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/bootstrap/css/bootstrap.min.css')}}">
+
     <!-- Custom styles for this template -->
   <link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/simple-sidebar.css')}}">
   {% block styles %}
@@ -25,7 +26,7 @@
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Itinerary App</div>
+      <div class="sidebar-heading">Outing Scout</div>
       <div class="list-group list-group-flush">
         <a href="/" class="list-group-item list-group-item-action bg-light">Calender</a>
         <a href="/pref" class="list-group-item list-group-item-action bg-light">Preferences</a>
@@ -44,6 +45,7 @@
       <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          {{title|default("Outing Scout")}}
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item active">
               <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
