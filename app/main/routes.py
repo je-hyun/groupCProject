@@ -1,7 +1,7 @@
 from app.main import bp
 from flask import Flask, render_template, request, flash, redirect, url_for
 import calendar
-from app.main.forms import EventForm, EventsPageForm, TimeSlotForm
+from app.main.forms import EventForm, EventsPageForm, TimeSlotForm ,LoginForm
 from app.models import *
 from flask_sqlalchemy import SQLAlchemy
 import datetime
@@ -116,20 +116,32 @@ def event(id):
     a = [Event.query.get(id)]
     return render_template('single_event_page.html', events=a, form=form)
 
+#Kamil Peza use case #2:
 @bp.route('/add_time_slot', methods=['GET', 'POST'])
 def add_time_slot():
-    timeslot_form = TimeSlotForm()
-    if timeslot_form.validate_on_submit():
-        timeslot = TimeSlot(day=timeslot_form.day.data,
-                            startTime=timeslot_form.startTime.data,
-                            endTime=timeslot_form.endTime.data)
+    form = TimeSlotForm()
+    if form.validate_on_submit():
+        timeslot = TimeSlot(day=form.day.data,
+                            startTime=form.startTime.data,
+                            endTime=form.endTime.data)
         db.session.add(timeslot)
         db.session.commit()
         flash('Time Slot Added.')
     #timeslot = TimeSlot.query.all()
-    return render_template('workingtime_form.html', timeslot_form=timeslot_form)
+    return render_template('workingtime_form.html', form=form)
+
+#Kamil Peza use case #3:
+@bp.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        flash('Login requested for user {}, remember_me={}'.format(
+            form.username.data, form.remember_me.data))
+        return redirect('login')
+    return render_template('login.html', title='Sign In', form=form)
 
 
+#https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iii-web-forms
 '''
     timeslot_id = request.form.get("timeslot_id")
     day = request.form.get("day")

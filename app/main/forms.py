@@ -16,13 +16,23 @@ class EventsPageForm(FlaskForm):
 #class PreferenceForm(FlaskForm):
 
 class TimeSlotForm(FlaskForm):
-
-    day = SelectField('[Day]', choices=[('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'),
-                                      ('Thursday', 'Thursday'), ('Friday', 'Friday'), ('Saturday', 'Saturday'),
-                                      ('Sunday', 'Sunday')], validators=[DataRequired()])
+    day = SelectField('[Day]', choices=[('Monday', 'Monday'),
+                                        ('Tuesday', 'Tuesday'),
+                                        ('Wednesday', 'Wednesday'),
+                                        ('Thursday', 'Thursday'),
+                                        ('Friday', 'Friday'),
+                                        ('Saturday', 'Saturday'),
+                                        ('Sunday', 'Sunday')], validators=[DataRequired()])
     startTime = TimeField('Start Time:', validators=[DataRequired()], format="%H:%M")
     endTime = TimeField('End Time:', validators=[DataRequired()], format="%H:%M")
     submit = SubmitField('Add Time Slot')
+
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember_me = BooleanField('Remember Me')
+    submit = SubmitField('Sign In')
+
 
 '''
 timeslot_id = IntegerField('timeslot_id')
