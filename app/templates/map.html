@@ -21,7 +21,10 @@
 {% endmacro %}
 
 {% macro map(width=600, height=400) %}
-<div id="map" style="width: {{width}}px; height: {{height}}px"></div>
+<div id="map" style="width: {{width}}px; height: {{height}}px;"></div>
+{% endmacro %}
+{% macro fullwidth_map(height=400) %}
+<div id="map" style="width: 100%; height: {{height}}px;"></div>
 {% endmacro %}
 
 {% macro map_input(width=600, height=400) %}
