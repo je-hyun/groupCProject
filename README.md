@@ -1,12 +1,17 @@
 #### Itinerary app.
 A personalized event recommendation website which accommodates to your schedule and preferences.
+<span>
+<img src="./screenshots/OutingScoutCal.png" width="45%">
+ </span>
+ <span>
+<img src="./screenshots/OutingScoutQuery.png" width="45%">
+ </span>
 
 #### Basic folder structure.
 - `app` : folder you implement your Flask project.
 - `app.py`: In the main file that starts your sample project.
 - `tests`: Here you need to include all unit and functional test for your project.
 - `project_management` : In this folder you are expected to store all project documentation, and project deliverables associated with the course.
-
 
 #### Run Instructions
 
