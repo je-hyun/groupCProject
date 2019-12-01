@@ -135,6 +135,8 @@ sidebar {
   grid-auto-rows: 50px;
   align-items: center;
   text-align: center;
+  background-color:white;
+  border-bottom: 1px solid #e1e1e1;
 }
 
 .calendar__day {
