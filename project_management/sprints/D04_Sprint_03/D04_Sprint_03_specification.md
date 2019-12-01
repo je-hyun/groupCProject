@@ -2,7 +2,7 @@
     * Description: Allowing the preferences page to be stored in the database and to be related to the user
     * Actor: Regular User
     * Assigned to : George Stephanoff
-    * Refs: use-case_doc, issue 
+    * Refs: use-case_doc, issue
 *ID:013 , Use-case: List the next ten events on your calendar
     * Description: There will be a list the goes through the calendar and displays the next ten events and show how many more days thill the event will happen
     * Actor: Regular User
@@ -18,7 +18,7 @@
     * Assigned to: Christopher Fitzpatrick
     * Refs: use-case_doc, issue (http://link_to_github_issue_item)
 * ID: 016 , Use-case: Weekly view
-    * Description: A weekly view of events for a user is displayed. 
+    * Description: A weekly view of events for a user is displayed, which allows the user to navigate between weeks using left/right buttons, move the week to week of current day, and navigate to an event by clicking on it on the calendar. The events will be displayed in boxes in the corresponding day that the event takes place. Tabs will be available to navigate to a different view of the calendar (e.g. weekly, monthly, daily).
     * Actor: Regular User
     * Assigned to : Je Hyun Kim
-    * Refs: use-case_doc, issue
+    * Refs: use-case_doc, issue (http://link_to_github_issue_item)
