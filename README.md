@@ -1,10 +1,10 @@
 #### Itinerary app.
 A personalized event recommendation website which accommodates to your schedule and preferences.
 <span>
-<img src="./screenshots/OutingScoutCal.png" width="45%">
+<img src="./screenshots/OutingScoutCal.png" width="49%">
  </span>
  <span>
-<img src="./screenshots/OutingScoutQuery.png" width="45%">
+<img src="./screenshots/OutingScoutQuery.png" width="49%">
  </span>
 
 #### Basic folder structure.
