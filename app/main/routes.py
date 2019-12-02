@@ -128,13 +128,14 @@ def add_time_slot():
         flash('Time Slot Added.')
     #timeslot = TimeSlot.query.all()
     return render_template('workingtime_form.html', timeslot_form=timeslot_form)
-
+'''
 @bp.after_request
 def sendsms(response):
     return response
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+'''
 
 '''
     timeslot_id = request.form.get("timeslot_id")
