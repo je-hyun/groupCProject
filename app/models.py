@@ -6,15 +6,16 @@ from app.location_utils import coordinatesToAddress, addressToCoordinates
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap
 from config import Config
 #bootstrap = Bootstrap(app)
 
-'''
+
 db = SQLAlchemy()
 migrate = Migrate(app, db)
-'''
+
 
 #login_manager = LoginManager()
 #login_manager.login_view = 'login'
@@ -117,7 +118,6 @@ class TimeSlot(db.Model):
 
 #Kamil Login (databse for users)
 class User(UserMixin, db.Model):
-    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), index=True, unique=True)
     email = db.Column(db.String(30), index=True, unique=True)

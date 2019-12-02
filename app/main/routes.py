@@ -1,4 +1,4 @@
-from app.main import bp
+from app.main import bp, auth
 from flask import Flask, render_template, request, flash, redirect, url_for
 import calendar
 from app.main.forms import EventForm, EventsPageForm, TimeSlotForm
@@ -6,6 +6,7 @@ from app.models import *
 from app import db
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+
 
 '''
 @bp.route('/testroute', methods=['GET','POST'])
@@ -131,9 +132,6 @@ def calendar_page_daily(year, month, currentDay):
 
 
 
-
-
-
 @bp.route('/events_page/<int:sortby>/', methods=['GET', 'POST'])
 def events_page(sortby):
     #sortby can be [0,1,2,3,4], representing sorting by:
@@ -200,6 +198,27 @@ def add_time_slot():
         flash('Time Slot Added.')
     #timeslot = TimeSlot.query.all()
     return render_template('workingtime_form.html', timeslot_form=timeslot_form)
+
+
+
+@auth.route('/login')
+def login():
+    return render_template('login.html')
+
+@auth.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+@auth.route('/logout')
+def logout():
+    return redirect(url_for('calender.html'))
+
+@auth
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+@auth.route
 '''
 @bp.after_request
 def sendsms(response):
