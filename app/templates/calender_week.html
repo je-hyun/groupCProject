@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+<link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/calender.css')}}">
+<link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/calendar_week.css')}}">
+
+<!--        <div class="calendar__day day">1</div> -->
+<main>
+<div class="container-fluid">
+    <br/>
+    <div class="toolbar">
+      <div>
+        <ul class="nav nav-tabs">
+        <li class="nav-item">
+        <a class="nav-link" href={{url_for('main.calendar_page_monthly', year=year, month=month)}}>Monthly</a>
+        </li>
+        <li class="nav-item">
+        <div class="nav-link active">Weekly</div>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href={{url_for('main.calendar_page_daily', year=year, month=month, currentDay=1)}}>Daily</a>
+        </li>
+        </ul>
+      </div>
+
+      <div class="current-month">{{month_name}} {{year}} Week {{week}}</div>
+      <div class="btn-group" role="group" aria-label="Basic example">
+
+        {% if week != 1 %}
+        <a class="btn btn-outline-primary btn-sm" href={{url_for('main.calendar_page_weekly', year=year, month=month, week=week-1)}}><</a>
+        {% else %}
+          {% if month == 1 %}
+          <a class="btn btn-outline-primary btn-sm" href={{url_for('main.calendar_page_weekly', year=year-1, month=12, week=(days_in_previous_month / 7)|round(0,'floor')|int)}}><</a>
+          {% else %}
+          <a class="btn btn-outline-primary btn-sm" href={{url_for('main.calendar_page_weekly', year=year, month=month-1, week=(days_in_previous_month / 7)|round(0,'floor')|int)}}><</a>
+          {% endif %}
+        {% endif %}
+
+        <a class="btn btn-outline-primary btn-sm" href={{url_for('main.calendar_page_weekly', year=now.year, month=now.month, week=week_of_today)}}>Today</a>
+        {% if daylist|length > week * 7 %}
+        <a class="btn btn-outline-primary btn-sm" href={{url_for('main.calendar_page_weekly', year=year, month=month, week=week+1)}}>></a>
+        {% else %}
+          {% if month == 12 %}
+          <a class="btn btn-outline-primary btn-sm" href={{url_for('main.calendar_page_weekly', year=year+1, month=1, week=1)}}>></a>
+          {% else %}
+          <a class="btn btn-outline-primary btn-sm" href={{url_for('main.calendar_page_weekly', year=year, month=month+1, week=1)}}>></a>
+          {% endif %}
+        {% endif %}
+
+      </div>
+    </div>
+    <div class="calendar">
+      <div class="calendar__header">
+        <div>sun</div>
+        <div>mon</div>
+        <div>tue</div>
+        <div>wed</div>
+        <div>thu</div>
+        <div>fri</div>
+        <div>sat</div>
+      </div>
+
+        <div class="calendar__week">
+          {% for day in range(0,7) %}
+            {%if daylist[day + (week-1) * 7] == 0%}
+              <div class="calendar__day day"></div>
+            {%else%}
+              <div class="calendar__day day">{{daylist[day + (week-1) * 7]}}
+                <br/>
+                {% for event in event_list[day+(week-1)*7] %}
+                  <li><a href="/event/{{event.id}}">{{event.name}} {{event.start}} to {{event.end}}</a></li>
+                {% endfor %}
+              </div>
+            {%endif%}
+          {%endfor%}
+        </div>
+
+    </div>
+    <br/>
+</div>
+</main>
+{% endblock %}

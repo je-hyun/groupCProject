@@ -11,7 +11,7 @@ class EventForm(FlaskForm):
     submit = SubmitField('Add Event')
 
 class EventsPageForm(FlaskForm):
-    submit = SubmitField('Attend Event')
+    submit = SubmitField('Attend')
 
 #class PreferenceForm(FlaskForm):
 

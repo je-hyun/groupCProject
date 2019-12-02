@@ -30,7 +30,6 @@
 
 main {
   grid-area: content;
-  padding: 48px;
 }
 
 sidebar {
@@ -118,7 +117,7 @@ sidebar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: -1px;
 }
 .calendar{}
 
@@ -136,6 +135,8 @@ sidebar {
   grid-auto-rows: 50px;
   align-items: center;
   text-align: center;
+  background-color:white;
+  border-bottom: 1px solid #e1e1e1;
 }
 
 .calendar__day {
@@ -152,9 +153,9 @@ sidebar {
 }
 
 body {
-  font-family: Montserrat;
-  font-weight: 100;
-  color: #A8B2B9;
+  /*font-family: Montserrat;*/
+  /*font-weight: 100;*/
+  /*color: #A8B2B9;*/
 }
 
 sidebar {
@@ -261,4 +262,9 @@ main {
   color: var(--red);
   font-weight: 500;
   box-shadow: 0px 0px 15px -5px var(--red);
+}
+
+.link_no_formatting{
+  color:inherit;
+  text-decoration: none; /* no underline */
 }

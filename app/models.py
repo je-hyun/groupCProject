@@ -2,25 +2,11 @@ from flask import app
 from flask_sqlalchemy import SQLAlchemy
 from geopy.geocoders import Nominatim
 from app.location_utils import coordinatesToAddress, addressToCoordinates
-from flask_script import Manager
-from flask_migrate import Migrate, MigrateCommand
-from flask_login import LoginManager, UserMixin
-#from flask import request
+from app import db
 
+#from app import db
+#db = SQLAlchemy()
 
-db = SQLAlchemy()
-migrate = Migrate(app, db)
-#Manager.add_command('db', MigrateCommand)
-#app.secret_key = 'sssecret'
-login_manager = LoginManager()
-login_manager.init_app(app)
-'''
-@app.after_request
-def after_request(response):
-    do_something_based_on_the_request_endpoint(request)
-    return response
-'''
-#login_manager.login_view ='login'
 
 class Event(db.Model):
     __tablename__ = 'event'
@@ -30,7 +16,7 @@ class Event(db.Model):
     name = db.Column(db.String)
     price = db.Column(db.String)
 
-    location = db.Column(db.String)
+    location = db.Column(db.String) # TODO: Deprecate this
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
 

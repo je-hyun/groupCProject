@@ -1,9 +1,14 @@
+
+{% set title = 'Events' %}
 {% extends 'layout.html' %}
 
 <form method="POST">
 {% block content %}
 <link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/events_page.css')}}">
-<h1>Events</h1>
+<br/>
+<div class="container">
+  <div class="row">
+    <div class="col">
 <div class="dropdown">
   <button class="dropbtn">Sort By</button>
   <div class="dropdown-content">
@@ -14,19 +19,35 @@
     <a href="/events_page/4/">Location</a>
   </div>
 </div>
+</div>
+<div class="col">
+  </div>
+  <div class="col">
+    <p style="text-align:right;">{{ events.count() }} events found in the database.</p>
+    </div>
+</div>
 
 {% for event in events %}
 <div class="event">
-<a href="/event/{{event.id}}" class="event_title">{{event.name}}</a>
-</br><a class="event_time">{{event.start}} to {{event.end}}</a>
-</br><a class="event_info"><b>ID: </b> {{event.id}} </a>
-</br><a class="event_info"><b>Price: </b> {{event.price}} </a>
-</br><a class="event_info"><b>Location: </b> {{event.location}} </a>
-</br><a class="event_info"><b>Categories: </b> {{event.categories}} </a>
-</br><a class="event_info"><b>Attendees: </b> {{event.attending_user}}</a>
-</br><p class="event_submit">{{form.submit}}</p>
-</br>
+<div class="card text-center">
+  <div class="card-header">
+    <a href="/event/{{event.id}}" class="event_title">{{event.name}}</a>
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{event.start}} — {{event.end}}</p>
+    {{form.submit(class="btn btn-outline-primary")}}
+  </div>
+  <div class="card-footer text-muted">
+    <a class="event_info"><b>ID: </b> {{event.id}} </a>
+    <a class="event_info"><b>Price: </b> {{event.price}} </a>
+    <a class="event_info"><b>Location: </b> {{event.location}} </a>
+    <a class="event_info"><b>Categories: </b> {% for category in event.categories %}{{ category }}{% endfor %} </a>
+    <a class="event_info"><b>Attendees: </b> {% for usr in event.attending_user %}{{usr.firstname}} {{usr.lastname}} {% endfor %}</a>
+  </div>
+</div>
+<br/>
 </div>
 {% endfor %}
+</div>
 {% endblock %}
 </form>

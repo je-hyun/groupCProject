@@ -4,32 +4,54 @@
 {% block content %}
 <link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/calender.css')}}">
 <!--        <div class="calendar__day day">1</div> -->
+<main>
 <div class="container-fluid">
-  <main>
     <br/>
     <div class="toolbar">
+
+      <div>
+        <ul class="nav nav-tabs">
+        <li class="nav-item">
+        <div class="nav-link active">Monthly</div>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href={{url_for('main.calendar_page_weekly', year=year, month=month, week=1)}}>Weekly</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href={{url_for('main.calendar_page_daily', year=year, month=month, currentDay=1)}}>Daily</a>
+        </li>
+        </ul>
+      </div>
+
+<!--
       <div class="toggle">
-        <div class="toggle__option">week</div>
+        <a class="link_no_formatting" href={{url_for('main.calendar_page_daily', year=year, month=month, currentDay=1)}}><div class="toggle__option">day</div></a>
+        <a class="link_no_formatting" href={{url_for('main.calendar_page_weekly', year=year, month=month, week=1)}}><div class="toggle__option">week</div></a>
         <div class="toggle__option toggle__option--selected">month</div>
       </div>
+-->
       <div class="current-month">{{month_name}} {{year}}</div>
-      <div>
+
+      <div class="btn-group" role="group" aria-label="Basic example">
         {% if month == 1 %}
-        <a href={{url_for('main.calendar_page_monthly', year=year-1, month=12)}}><</a>
+        <a class="btn btn-outline-primary btn-sm" href={{url_for('main.calendar_page_monthly', year=year-1, month=12)}}><</a>
         {% else %}
-        <a href={{url_for('main.calendar_page_monthly', year=year, month=month-1)}}><</a>
+        <a class="btn btn-outline-primary btn-sm" href={{url_for('main.calendar_page_monthly', year=year, month=month-1)}}><</a>
         {% endif %}
 
-        <a href={{url_for('main.calendar_page_monthly', year=now.year, month=now.month)}}>Today</a>
+        <a class="btn btn-outline-primary btn-sm" href={{url_for('main.calendar_page_monthly', year=now.year, month=now.month)}}>Today</a>
         {% if month == 12 %}
-        <a href={{url_for('main.calendar_page_monthly', year=year+1, month=1)}}>></a>
+        <a class="btn btn-outline-primary btn-sm" href={{url_for('main.calendar_page_monthly', year=year+1, month=1)}}>></a>
         {% else %}
-        <a href={{url_for('main.calendar_page_monthly', year=year, month=month+1)}}>></a>
+        <a class="btn btn-outline-primary btn-sm" href={{url_for('main.calendar_page_monthly', year=year, month=month+1)}}>></a>
         {% endif %}
       </div>
     </div>
+
+
+
     <div class="calendar">
-      <div class="calendar__header">
+      <div class="sticky-top calendar__header">
         <div>sun</div>
         <div>mon</div>
         <div>tue</div>
@@ -56,8 +78,7 @@
       {%endfor%}
     </div>
     <br/>
-  </main>
-</div>
 
-</body>
+</div>
+</main>
 {% endblock %}
