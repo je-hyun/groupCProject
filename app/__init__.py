@@ -11,8 +11,7 @@ login_manager = LoginManager()
 def create_app():
     app = Flask(__name__, template_folder="templates")
     app.config.from_object(Config)
-    #db = SQLAlchemy()
-    migrate = Migrate(app, db)
+
     # Build the database every time "flask run" is executed.
     with app.test_request_context():
         db.init_app(app)
