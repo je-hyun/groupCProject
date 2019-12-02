@@ -1,4 +1,4 @@
-#### Itinerary app.
+#### Outing Scout - A web app to find events.
 A personalized event recommendation website which accommodates to your schedule and preferences.
 <span>
 <img src="./screenshots/OutingScoutCal.png" width="49%">
@@ -20,25 +20,25 @@ git clone https://github.com/je-hyun/groupCProject.git
 cd groupCProject
 ```
 
-The project uses `pipenv` virtual environment. Make sure you install `pipenv` on your machine. Enter the virtual enviroment py typing:
-
+The project uses `pipenv` virtual environment. Make sure you install `pipenv` on your machine. Enter the virtual environment by typing:
 ```shell
 pipenv shell
 ```
 
-Once your virtual environment is activated,
+Once your virtual environment is activated, set up using these commands:
 ```shell
-pip install flask
-pip install flask_sqlalchemy
-pip install Flask-WTF
-pip install geopy
-pip install flask-migrate
+export FLASK_APP=app.py
+pip install -r requirements.txt
+```
+
+And finally, to run:
+```shell
 flask run
 ```
 
-You may need to specify the flask app name running the command.
-```shell  
- export FLASK_APP=app.py
+Optionally, you could execute the following for developer mode:
+```shell
+export FLASK_ENV=development
 ```
 
 #### Changing models.py
