@@ -5,11 +5,17 @@ from geopy.geocoders import Nominatim
 from app.location_utils import coordinatesToAddress, addressToCoordinates
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
+from flask_login import LoginManager, UserMixin
+#from app.auth import bp
 
 #from app import db
 db = SQLAlchemy()
 migrate = Migrate(app, db)
 #Manager.add_command('db', MigrateCommand)
+#app.secret_key = 'sssecret'
+login_manager = LoginManager()
+login_manager.init_app(app)
+#login_manager.login_view ='login'
 
 class Event(db.Model):
     __tablename__ = 'event'
