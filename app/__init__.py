@@ -6,7 +6,7 @@ from flask_login import LoginManager, UserMixin
 
 def create_app():
     app = Flask(__name__, template_folder="templates")
-    login_manager = LoginManager(app)
+    #login_manager = LoginManager(app)
     from app.models import db
     app.config.from_object(Config)
 
