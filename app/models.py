@@ -14,8 +14,8 @@ from config import Config
 
 
 
-db = SQLAlchemy()
-migrate = Migrate(app, db)
+#db = SQLAlchemy()
+#migrate = Migrate(app, db)
 
 
 #login_manager = LoginManager()
