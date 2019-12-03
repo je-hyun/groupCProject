@@ -27,17 +27,19 @@ class TimeSlotForm(FlaskForm):
 
 #Kamil Peza Login and Register Forms:
 #https://github.com/PrettyPrinted/building_user_login_system/blob/master/finish/app.py
+
+#https://hackersandslackers.com/authenticating-users-with-flask-login/
 class LoginForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=20)])
-    remember = BooleanField('remember me')
-    submit = SubmitField('Sign In')
+    username = StringField('Username:', validators=[InputRequired(), Length(min=4, max=15)])
+    password = PasswordField('Password:', validators=[InputRequired(), Length(min=8, max=20)])
+    #remember = BooleanField('remember me')
+    submit = SubmitField('Log In')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
-    email = StringField('email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=20)])
-    password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
+    username = StringField('Username:', validators=[InputRequired(), Length(min=4, max=15)])
+    email = StringField('Email:', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
+    password = PasswordField('Password:', validators=[InputRequired(), Length(min=8, max=20)])
+    password2 = PasswordField('Confirm Password:', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
 
     def validate_username(self, username):
