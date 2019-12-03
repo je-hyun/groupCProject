@@ -5,8 +5,8 @@ from geopy.geocoders import Nominatim
 from app.location_utils import coordinatesToAddress, addressToCoordinates
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from app import
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user #, user_loader
+
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap
@@ -127,15 +127,12 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
-'''
 
+'''
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
 '''
-
-
-
 
 def get_address(self):
         return coordinatesToAddress(self.latitude, self.longitude)

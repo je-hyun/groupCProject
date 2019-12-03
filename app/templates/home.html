@@ -6,11 +6,16 @@
         <title>Title</title>
     </head>
     <body>
-    <div>
-        Microblog:
-        <a href="/index">Home</a>
-        <a href="/login">Login</a>
-    </div>
+
+        <div>
+            Microblog:
+            <a href="{{ url_for('index') }}">Home</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </div>
 
     </body>
 </html>

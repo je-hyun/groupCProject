@@ -8,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 from werkzeug.security import generate_password_hash
 from werkzeug.urls import url_parse
+from flask_login import logout_user, login_required
 
 '''
 @bp.route('/testroute', methods=['GET','POST'])
@@ -32,8 +33,10 @@ def testroute():
 
 '''
 
+
+
 @bp.route('/', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def index():
     now = datetime.datetime.now()
     return redirect(url_for('main.calendar_page_monthly', year=now.year, month=now.month))
@@ -221,6 +224,12 @@ def login():
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
 
+@bp.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -236,6 +245,7 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
+
 '''
 @auth.route('/signup', methods=['POST'])
 def signup_post():
@@ -249,13 +259,9 @@ def signup_post():
     new_user = User(email=email. username=username, password=generate_password_hash(password, method='sha256')
 
     return render_template('signup.html', form=form)
-'''
-@bp.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('index'))
 
-'''
+
+
 @auth
 @login_manager.user_loader
 def load_user(user_id):
