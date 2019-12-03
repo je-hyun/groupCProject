@@ -53,6 +53,7 @@ class User(db.Model):
     firstname = db.Column(db.String)
     lastname = db.Column(db.String)
     events = db.relationship('Event', secondary='attendEvent', back_populates="attending_user")
+    preference = db.relationship('Preference', uselist=False, backref="user")
     def attend_event(self, event):
         # checks if event conflicts with any event inside the user's event list
         #   adds event to the user's events list
@@ -80,7 +81,9 @@ class AttendEvent(db.Model):
 class Preference(db.Model):
     __tablename__ = 'preference'
     preference_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     price = db.Column(db.Float)
+    distance = db.Column(db.Integer)
 
     location = db.Column(db.String) # TODO: Deprecate this
     latitude = db.Column(db.Float)
