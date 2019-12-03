@@ -1,12 +1,11 @@
 from app.main import bp
 from flask import Flask, render_template, request, flash, redirect, url_for
 import calendar
-from app.main.forms import EventForm, EventsPageForm
+from app.main.forms import EventForm, EventsPageForm, PreferenceForm
 from app.models import *
-from app import db
+from app import db, models
 from flask_sqlalchemy import SQLAlchemy
 import datetime
-
 
 @bp.route('/testroute', methods=['GET','POST'])
 def testroute():
@@ -166,13 +165,43 @@ def add_events():
         flash('Event Added.')
     return render_template('add_events.html', event_form=event_form)
 
-@bp.route('/pref', methods=['GET', 'POST'])
-def index2():
-    return render_template("Preference.html")
+@bp.route('/pref')
+def preferences():
+    userid = 0
+    pref = db.session.query(Preference).filter(Preference.user_id == userid).first()
+    if pref is None:
+        pref = Preference()
+        pref.price = 0
+        pref.distance = 0
+        pref.size = "large"
+        pref.latitude = 0
+        pref.longitude = 0
+    return render_template("Preference.html", preference=pref)
 
-@bp.route('/save_preference', methods=['POST'])
+@bp.route('/save_preference', methods=['GET', 'POST'])
 def save_preference():
-    return render_template("save_preference.html")
+    pref_form = PreferenceForm()
+    userid = 0
+    pref = db.session.query(Preference).filter(Preference.user_id == userid).first()
+    if pref is None:
+        prefer = Preference()
+        prefer.user_id = userid
+        prefer.price = pref_form.Price.data
+        prefer.distance = pref_form.Distance.data
+        prefer.size = request.form['size']
+        prefer.latitude = request.form['locationLatitude']
+        prefer.longitude = request.form['locationLongitude']
+        db.session.add(prefer)
+        db.session.commit()
+    else:
+        pref.price = pref_form.Price.data
+        pref.distance = pref_form.Distance.data
+        pref.size = request.form['size']
+        pref.latitude = request.form['locationLatitude']
+        pref.longitude = request.form['locationLongitude']
+        db.session.commit()
+
+    return redirect(url_for('main.preferences', preference=pref))
 
 @bp.route('/event/<int:id>', methods=['GET', 'POST'])
 def event(id):

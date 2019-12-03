@@ -14,11 +14,11 @@
            <div class="row">
                <div class="col-xs-4">
                  <label>Maximum Cost</label>
-                  <input type="number" class="form-control" name="MaxPrice" placeholder="Maximum Cost">
+                  <input type="number" class="form-control" name="Price" value={{preference.price}}>
                </div>
                <div class="col-xs-4" style="padding: 0 1em">
                  <label>Distance</label>
-                 <input type="number" class="form-control" name="Distance" placeholder="Distance">
+                   <input type="number" class="form-control" name="Distance" value={{preference.distance}}>
                </div>
                <div class="col-xs-4">
                </div>
@@ -27,12 +27,24 @@
             </div>
               <button class="btn btn-info" type="button", onClick="hideSize()">&#8615; Size of the event</button>
               <div id="size">
+              {%if preference.size == "large"%}
+                <input type="radio", name="size", value="large", checked>Large<br/>
+              {%else%}
               <input type="radio", name="size", value="large">Large<br/>
-              <input type="radio", name="size", value="medium", checked>Medium<br/>
+              {%endif%}
+              {%if preference.size == "medium"%}
+                <input type="radio", name="size", value="medium", checked>Medium<br/>
+              {%else%}
+              <input type="radio", name="size", value="medium",>Medium<br/>
+              {%endif%}
+              {%if preference.size == "small"%}
+                <input type="radio", name="size", value="small", checked>Small
+              {%else%}
               <input type="radio", name="size", value="small">Small
+               {%endif%}
             </div>
             <br/><br/>
-            {{ map_input() }}
+            {{ map_input(600, 400, preference.latitude, preference.longitude) }}
             <br/>
             <input class="btn btn-primary btn-lg" type="submit", value="Save Changes">
 
@@ -54,5 +66,9 @@ function hideSize() {
 {% endblock %}
 
 {% block scripts %}
-{{ map_input_scripts() }}
+{%if preference.latitude == 0 or preference.longitude == 0%}
+{{ map_input_scripts(0, 0, 1) }}
+{%else%}
+{{ map_input_scripts(preference.latitude, preference.longitude, 3000) }}
+{%endif%}
 {% endblock %}

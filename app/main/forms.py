@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateTimeField, IntegerField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateTimeField, IntegerField, FloatField
+from wtforms import RadioField
 from wtforms.validators import DataRequired
+
 
 class EventForm(FlaskForm):
     name = StringField('Event Name', validators=[DataRequired()])
@@ -10,7 +12,12 @@ class EventForm(FlaskForm):
     location = StringField('Location')
     submit = SubmitField('Add Event')
 
+
 class EventsPageForm(FlaskForm):
     submit = SubmitField('Attend')
 
-#class PreferenceForm(FlaskForm):
+
+class PreferenceForm(FlaskForm):
+    Price = FloatField('Price', validators=[DataRequired()])
+    Distance = IntegerField('Distance', validators=[DataRequired()])
+    Size = RadioField('size', validators=[DataRequired()])

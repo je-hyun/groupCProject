@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+<form method="POST">
+{% block content %}
+  <link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/options.css')}}">
+  <p class="title">Options</p>
+
+  <div class="options_main">
+   <form class="options" action="{{url_for('main.options')}}" method="post">
+        <input type="number" name="Font Size" placeholder="12px"><br/>
+        <input type="checkbox" name="Dark Mode">Dark Mode<br/>
+         <button type="button", onClick="hideSize()">Starting Page</button>
+         <div id="start">
+        <input type="radio", name="start", value="calendar", cheched>Calendar<br/>
+        <input type="radio", name="start", value="preferences">Preferences<br/>
+        <input type="radio", name="start", value="events">Events<br/>
+         </div><br/>
+        <input class="btn btn-primary" type="submit", value="Save Changes">
+  </form>
+  </div>
+  <script>
+  function hideSize() {
+  var x = document.getElementById("start");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+  var x = document.getElementById("sidebar-wrapper");
+    x.style.display = "none";
+</script>
+
+
+{% endblock %}
+</form>

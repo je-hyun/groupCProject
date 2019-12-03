@@ -23,9 +23,9 @@ def upgrade():
     sa.Column('name', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
-    #op.add_column('preference', sa.Column('latitude', sa.Float(), nullable=True))
+   # op.add_column('preference', sa.Column('latitude', sa.Float(), nullable=True))
     #op.add_column('preference', sa.Column('longitude', sa.Float(), nullable=True))
-    op.add_column('preference', sa.Column('user_id', sa.Integer(), nullable=false))
+    op.add_column('preference', sa.Column('user_id', sa.Integer(), nullable=True))
     # ### end Alembic commands ###
 
 
@@ -35,3 +35,6 @@ def downgrade():
     op.drop_column('preference', 'latitude')
     op.drop_table('test_table')
     # ### end Alembic commands ###
+
+
+
