@@ -7,6 +7,7 @@ from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
+
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap
 from config import Config
@@ -124,6 +125,12 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(60))
     events = db.relationship('Event', secondary='attendEvent', back_populates="attending_user")
 
+'''
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+'''
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
