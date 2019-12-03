@@ -6,12 +6,12 @@ from app.location_utils import coordinatesToAddress, addressToCoordinates
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-
+from app import
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap
 from config import Config
-#bootstrap = Bootstrap(app)
+
 
 
 db = SQLAlchemy()
@@ -120,11 +120,13 @@ class TimeSlot(db.Model):
 #Kamil Login (databse for users)
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(15), index=True, unique=True)
-    email = db.Column(db.String(30), index=True, unique=True)
-    password = db.Column(db.String(60))
+    username = db.Column(db.String(64), index=True, unique=True)
+    email = db.Column(db.String(120), index=True, unique=True)
+    password_hash = db.Column(db.String(128))
     events = db.relationship('Event', secondary='attendEvent', back_populates="attending_user")
 
+    def __repr__(self):
+        return '<User {}>'.format(self.username)
 '''
 
 @login.user_loader
@@ -132,8 +134,7 @@ def load_user(id):
     return User.query.get(int(id))
 '''
 
-    def __repr__(self):
-        return '<User {}>'.format(self.username)
+
 
 
 def get_address(self):

@@ -203,7 +203,7 @@ def add_time_slot():
 
 
 #######################################################################
-@auth.route('/login', methods=['GET', 'POST'])
+@bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -221,7 +221,7 @@ def login():
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
 
-@auth.route('/register', methods=['GET', 'POST'])
+@bp.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -250,7 +250,7 @@ def signup_post():
 
     return render_template('signup.html', form=form)
 '''
-@auth.route('/logout')
+@bp.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
