@@ -8,7 +8,7 @@ class EventForm(FlaskForm):
     name = StringField('Event Name', validators=[DataRequired()])
     start = DateTimeField('Start Date/Time', validators=[DataRequired()])
     end = DateTimeField('End Date/Time', validators=[DataRequired()])
-    price = IntegerField('Price')
+    price = FloatField('Price')
     location = StringField('Location')
     submit = SubmitField('Add Event')
 

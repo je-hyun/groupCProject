@@ -17,7 +17,7 @@
                   <input type="number" class="form-control" name="Price" value={{preference.price}}>
                </div>
                <div class="col-xs-4" style="padding: 0 1em">
-                 <label>Distance</label>
+                 <label>Distance (in miles)</label>
                    <input type="number" class="form-control" name="Distance" value={{preference.distance}}>
                </div>
                <div class="col-xs-4">
@@ -38,10 +38,15 @@
               <input type="radio", name="size", value="medium",>Medium<br/>
               {%endif%}
               {%if preference.size == "small"%}
-                <input type="radio", name="size", value="small", checked>Small
+                <input type="radio", name="size", value="small", checked>Small<br/>
               {%else%}
-              <input type="radio", name="size", value="small">Small
+              <input type="radio", name="size", value="small">Small<br/>
                {%endif%}
+               {%if preference.size == "any"%}
+                 <input type="radio", name="size", value="any", checked>Any
+               {%else%}
+               <input type="radio", name="size", value="any">Any
+                {%endif%}
             </div>
             <br/><br/>
             {{ map_input(600, 400, preference.latitude, preference.longitude) }}

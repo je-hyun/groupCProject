@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from geopy.geocoders import Nominatim
+from geopy.distance import geodesic
 from app.location_utils import coordinatesToAddress, addressToCoordinates
 from app import db
 
@@ -102,3 +103,9 @@ class Preference(db.Model):
     categories = db.relationship('Category', secondary='preferenceCategory', back_populates="preferences")
     def get_address(self):
         return coordinatesToAddress(self.latitude, self.longitude)
+
+    def distance_preference_conflicts_with_event(self, event):
+        if geodesic((self.latitude,self.longitude), (event.latitude,event.longitude)).miles<self.distance:
+            return False
+        else:
+            return True

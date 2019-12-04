@@ -118,10 +118,29 @@ def calendar_page_daily(year, month, currentDay):
 
     event_list = [None]
 
+
+    user_preferences = Preference.query.filter(Preference.user_id == current_user_id).all()
+    recommended_events = Event.query.all()
+    if len(user_preferences) == 1 :
+        user_preferences = user_preferences[0]
+        if user_preferences.price != None:
+            recommended_events = Event.query.filter(Event.price<=user_preferences.price).all()
+        if user_preferences.distance != None or user_preferences.distance != 0:
+            for event in recommended_events:
+                if user_preferences.distance_preference_conflicts_with_event(event):
+                    recommended_events.remove(event)
+
+
     # The following loop creates an event_list with event objects inside
     # The indices correspond with the indices in daylist
     day = datetime.datetime(year, month, currentDay)
     event_list[0] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
+
+
+
+    #TODO: Delete this line for testing:
+    event_list[0] = recommended_events
+
     return render_template("calender_day.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, currentDay=currentDay, days_in_previous_month=days_in_previous_month, days_in_current_month=days_in_current_month)
 
 
@@ -172,7 +191,7 @@ def preferences():
     if pref is None:
         pref = Preference()
         pref.price = 0
-        pref.distance = 0
+        pref.distance = 10
         pref.size = "large"
         pref.latitude = 0
         pref.longitude = 0
