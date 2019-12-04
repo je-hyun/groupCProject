@@ -88,3 +88,5 @@ def index2():
 @bp.route('/save_preference', methods=['POST'])
 def save_preference():
     return render_template("save_preference.html")
+
+

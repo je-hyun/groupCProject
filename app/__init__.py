@@ -1,5 +1,6 @@
-from flask import Flask, current_app
+from flask import Flask, current_app, app
 from config import Config
+from flask_mail import Mail, Message
 from flask_sqlalchemy import SQLAlchemy
 
 def create_app():
@@ -15,3 +16,23 @@ def create_app():
     from app.main import bp as main_routes_bp
     app.register_blueprint(main_routes_bp)
     return app
+
+# EMAIL SETTINGS.
+MAIL_SERVER='smtp.gmail.com',
+MAIL_PORT=465,
+MAIL_USE_SSL=True,
+MAIL_USERNAME = 'your@gmail.com',
+MAIL_PASSWORD = 'yourpassword',
+mail = Mail(app)
+
+@app.route('/send-mail/')
+def send_mail():
+	try:
+		msg = Message("Send Email",
+		  sender="sendingemail@gmail.com",
+		  recipients=["recievingemail@email.com"])
+		msg.body = "Email Body"
+		mail.send(msg)
+		return 'Message sent!'
+	except Exception as e:
+		return(str(e))
