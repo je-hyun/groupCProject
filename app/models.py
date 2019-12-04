@@ -13,7 +13,7 @@ class Event(db.Model):
     start = db.Column(db.DateTime)
     end = db.Column(db.DateTime)
     name = db.Column(db.String)
-    price = db.Column(db.String)
+    price = db.Column(db.Float)
 
     location = db.Column(db.String) # TODO: Deprecate this
     latitude = db.Column(db.Float)
@@ -46,6 +46,12 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     events = db.relationship('Event', secondary='eventCategory', back_populates="categories")
+    preferences = db.relationship('Preference', secondary='preferenceCategory', back_populates="categories")
+
+class PreferenceCategory(db.Model):
+    __tablename__ = 'preferenceCategory'
+    preference_id = db.Column(db.Integer, db.ForeignKey('preference.preference_id'), primary_key=True)
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'), primary_key=True)
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -93,5 +99,6 @@ class Preference(db.Model):
     DayFree = db.Column(db.String)
     hoursFree = db.Column(db.String)
 
+    categories = db.relationship('Category', secondary='preferenceCategory', back_populates="preferences")
     def get_address(self):
         return coordinatesToAddress(self.latitude, self.longitude)
