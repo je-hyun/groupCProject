@@ -196,8 +196,14 @@ def add_events():
     event_form = EventForm()
     if event_form.validate_on_submit():
         event = Event(start=event_form.start.data, end=event_form.end.data, name=event_form.name.data, price=event_form.price.data, latitude=event_form.locationLatitude.data, longitude=event_form.locationLongitude.data)
+        if event_form.locationLatitude.data and event_form.locationLongitude.data:
+
+            print ('hello',event_form.locationLatitude.data, event_form.locationLongitude.data, event.get_address())
+            event.location = event.get_address()
         db.session.add(event)
         db.session.commit()
+        if event_form.locationLatitude.data and event_form.locationLongitude.data:
+            print ('goodbye', event.get_address())
         event.save_list_of_categories(event_form.Categories.data.split(','))
         flash('Event Added.')
     return render_template('add_events.html', event_form=event_form)

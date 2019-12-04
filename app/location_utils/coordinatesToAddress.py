@@ -9,5 +9,6 @@ def coordinatesToAddress(latitude, longitude):
         strAddress (str): The string representation of the address
     """
     geolocator = Nominatim(user_agent="groupCProject")
-    location = geolocator.reverse(latitude, longitude)
-    return (location.address)
+    location = geolocator.reverse("%f, %f" % (latitude, longitude))
+    print("%f, %f" % (latitude, longitude))
+    return location.address
