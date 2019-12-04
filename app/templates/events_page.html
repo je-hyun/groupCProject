@@ -2,7 +2,7 @@
 {% set title = 'Events' %}
 {% extends 'layout.html' %}
 
-<form method="POST">
+
 {% block content %}
 <link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/events_page.css')}}">
 <br/>
@@ -28,26 +28,38 @@
 </div>
 
 {% for event in events %}
-<div class="event">
-<div class="card text-center">
-  <div class="card-header">
-    <a href="/event/{{event.id}}" class="event_title">{{event.name}}</a>
+<form action="{{url_for('main.events_page', sortby=0)}}" method="post">
+  <div class="event">
+  <div class="card text-center">
+    <div class="card-header">
+      <a href="/event/{{event.id}}" class="event_title">{{event.name}}{{event.is_being_attended}}</a>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{event.start}} — {{event.end}}</p>
+      {{attend_form.event_id(value=event.id, hidden=True)}}
+
+
+      {% if list_is_attending[loop.index0]==True %}
+        <input class="btn btn-outline-primary" type="submit", value="Unattend">
+      {% else %}
+        <input class="btn btn-outline-primary" type="submit", value="Attend">
+      {% endif %}
+
+
+
+    </div>
+    <div class="card-footer text-muted">
+      <a class="event_info"><b>ID: </b> {{event.id}} </a>
+      <a class="event_info"><b>Price: </b> {{event.price}} </a>
+      <a class="event_info"><b>Location: </b> {{event.location}} </a>
+      <a class="event_info"><b>Categories: </b> {% for category in event.categories %}{{ category }}{% endfor %} </a>
+      <a class="event_info"><b>Attendees: </b> {% for usr in event.attending_user %}{{usr.firstname}} {{usr.lastname}} {% endfor %}</a>
+    </div>
   </div>
-  <div class="card-body">
-    <p class="card-text">{{event.start}} — {{event.end}}</p>
-    {{form.submit(class="btn btn-outline-primary")}}
+  <br/>
   </div>
-  <div class="card-footer text-muted">
-    <a class="event_info"><b>ID: </b> {{event.id}} </a>
-    <a class="event_info"><b>Price: </b> {{event.price}} </a>
-    <a class="event_info"><b>Location: </b> {{event.location}} </a>
-    <a class="event_info"><b>Categories: </b> {% for category in event.categories %}{{ category }}{% endfor %} </a>
-    <a class="event_info"><b>Attendees: </b> {% for usr in event.attending_user %}{{usr.firstname}} {{usr.lastname}} {% endfor %}</a>
-  </div>
-</div>
-<br/>
-</div>
+</form>
 {% endfor %}
 </div>
+
 {% endblock %}
-</form>

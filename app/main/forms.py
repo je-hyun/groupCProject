@@ -14,7 +14,9 @@ class EventForm(FlaskForm):
 
 
 class EventsPageForm(FlaskForm):
+    event_id = IntegerField('Event ID')
     submit = SubmitField('Attend')
+
 
 
 class PreferenceForm(FlaskForm):
