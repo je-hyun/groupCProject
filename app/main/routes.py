@@ -120,11 +120,12 @@ def calendar_page_daily(year, month, currentDay):
 
 
     user_preferences = Preference.query.filter(Preference.user_id == current_user_id).all()
-    recommended_events = Event.query.all()
+    recommended_events = Event.query.filter(~(Event.attending_user.any(User.id==current_user_id))).all()
     if len(user_preferences) == 1 :
+
         user_preferences = user_preferences[0]
         if user_preferences.price != None:
-            recommended_events = Event.query.filter(Event.price<=user_preferences.price).all()
+            recommended_events = Event.query.filter(~(Event.attending_user.any(User.id==current_user_id)), Event.price<=user_preferences.price).all()
         if user_preferences.distance != None or user_preferences.distance != 0:
             for event in recommended_events:
                 if user_preferences.distance_preference_conflicts_with_event(event):
@@ -162,11 +163,18 @@ def events_page(sortby):
         print(attend_form.event_id.data)
         selected_event_to_attend = Event.query.get(attend_form.event_id.data)
         if not current_user.is_Attending(selected_event_to_attend):
-            current_user.attend_event(selected_event_to_attend)
+            bool_successfully_attended = current_user.attend_event(selected_event_to_attend)
+            if bool_successfully_attended:
+                flash('Successfully attended event!')
+            else:
+                flash('Could not attend that event. Please check your schedule.')
         else:
-            current_user.unattend_event(selected_event_to_attend)
+            bool_successfully_unattended = current_user.unattend_event(selected_event_to_attend)
+            if bool_successfully_unattended:
+                flash('Successfully unattended event!')
+            else:
+                flash('Could not unattend that event.')
 
-        flash('Successfully Added')
 
 
 
@@ -260,11 +268,17 @@ def event(id):
         print(attend_form.event_id.data)
         selected_event_to_attend = Event.query.get(attend_form.event_id.data)
         if not current_user.is_Attending(selected_event_to_attend):
-            current_user.attend_event(selected_event_to_attend)
+            bool_successfully_attended = current_user.attend_event(selected_event_to_attend)
+            if bool_successfully_attended:
+                flash('Successfully attended event!')
+            else:
+                flash('Could not attend that event. Please check your schedule.')
         else:
-            current_user.unattend_event(selected_event_to_attend)
-        flash('Successfully Added')
-
+            bool_successfully_unattended = current_user.unattend_event(selected_event_to_attend)
+            if bool_successfully_unattended:
+                flash('Successfully unattended event!')
+            else:
+                flash('Could not unattend that event.')
 
     event = Event.query.get(id)
 
