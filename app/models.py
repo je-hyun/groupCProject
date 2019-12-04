@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from geopy.geocoders import Nominatim
+from geopy.distance import geodesic
 from app.location_utils import coordinatesToAddress, addressToCoordinates
 from app import db
 
@@ -27,6 +28,21 @@ class Event(db.Model):
 
     def conflicts_with_event(self, event):
         return self.start<=event.end and event.start<=self.end
+
+    def save_list_of_categories(self, category_name_list):
+        print(category_name_list)
+        # Saves categories from a list of strings if the categories already exist on the database
+        print("OUT")
+        for my_cat in category_name_list:
+            my_cat = my_cat.title().strip()
+            matching_category = Category.query.filter(Category.name == my_cat).all()
+            print(matching_category)
+            print("IN")
+            if len(matching_category) == 1:
+                print("IN IN")
+                self.categories.append(matching_category[0])
+        db.session.add(self)
+        db.session.commit()
 
 class EventCategory(db.Model):
     __tablename__ = 'eventCategory'
@@ -60,6 +76,16 @@ class User(db.Model):
     lastname = db.Column(db.String)
     events = db.relationship('Event', secondary='attendEvent', back_populates="attending_user")
     preference = db.relationship('Preference', uselist=False, backref="user")
+
+    def is_Attending(self, event):
+        attending = False;
+        userAttendEvent = self.events
+        print(userAttendEvent)
+        for x in userAttendEvent:
+            if x==event:
+                attending = True
+        return attending
+
     def attend_event(self, event):
         # checks if event conflicts with any event inside the user's event list
         #   adds event to the user's events list
@@ -75,6 +101,25 @@ class User(db.Model):
             self.events.append(event)
             db.session.add(event)
             db.session.add(self)
+            db.session.commit()
+            return True
+
+
+    def unattend_event(self, event):
+        # checks if event conflicts with any event inside the user's event list
+        #   adds event to the user's events list
+        hasEvent = False;
+        userAttendEvent = self.events
+        print(userAttendEvent)
+        for x in userAttendEvent:
+            if x==event:
+                hasEvent = True
+
+
+        if not hasEvent:
+            return False
+        else:
+            self.events.remove(event)
             db.session.commit()
             return True
 
@@ -100,5 +145,27 @@ class Preference(db.Model):
     hoursFree = db.Column(db.String)
 
     categories = db.relationship('Category', secondary='preferenceCategory', back_populates="preferences")
+
+    def save_list_of_categories(self, category_name_list):
+        print(category_name_list)
+        # Saves categories from a list of strings if the categories already exist on the database
+        print("OUT")
+        for my_cat in category_name_list:
+            my_cat = my_cat.title().strip()
+            matching_category = Category.query.filter(Category.name == my_cat).all()
+            print(matching_category)
+            print("IN")
+            if len(matching_category) == 1:
+                print("IN IN")
+                self.categories.append(matching_category[0])
+        db.session.add(self)
+        db.session.commit()
+
     def get_address(self):
         return coordinatesToAddress(self.latitude, self.longitude)
+
+    def distance_preference_conflicts_with_event(self, event):
+        if geodesic((self.latitude,self.longitude), (event.latitude,event.longitude)).miles<self.distance:
+            return False
+        else:
+            return True

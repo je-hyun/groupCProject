@@ -8,16 +8,22 @@ class EventForm(FlaskForm):
     name = StringField('Event Name', validators=[DataRequired()])
     start = DateTimeField('Start Date/Time', validators=[DataRequired()])
     end = DateTimeField('End Date/Time', validators=[DataRequired()])
-    price = IntegerField('Price')
-    location = StringField('Location')
+    price = FloatField('Price')
+    #location = StringField('Location')
+    locationLatitude = FloatField('Latitude')
+    locationLongitude = FloatField('Longitude')
+    Categories = StringField('Categories', validators=[DataRequired()])
     submit = SubmitField('Add Event')
 
 
 class EventsPageForm(FlaskForm):
+    event_id = IntegerField('Event ID')
     submit = SubmitField('Attend')
+
 
 
 class PreferenceForm(FlaskForm):
     Price = FloatField('Price', validators=[DataRequired()])
     Distance = IntegerField('Distance', validators=[DataRequired()])
     Size = RadioField('size', validators=[DataRequired()])
+    Categories = StringField('Categories', validators=[DataRequired()])

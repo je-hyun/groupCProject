@@ -6,10 +6,8 @@
 <link rel="stylesheet", type="text/css", href="{{url_for('static', filename='css/events_page.css')}}">
 {% endblock %}
 
-<form method="POST">
-{% block content %}
 
-{% for event in events %}
+{% block content %}
 <div class="event">
 <div class="card text-center">
   <div class="card-header">
@@ -29,7 +27,14 @@
       </div>
     </div>
     <br/>
-    {{form.submit(class="btn btn-outline-primary")}}
+    <form action="{{url_for('main.event', id=event.id)}}" method="POST">
+    {{attend_form.event_id(value=event.id, hidden=True)}}
+    {% if is_attending %}
+      <input class="btn btn-outline-primary" type="submit", value="Unattend">
+    {% else %}
+      <input class="btn btn-outline-primary" type="submit", value="Attend">
+    {% endif %}
+    </form>
   </div>
   <div class="card-footer text-muted">
     <a class="event_info"><b>ID: </b> {{event.id}} </a>
@@ -41,10 +46,9 @@
 </div>
 <br/>
 </div>
-{% endfor %}
 {% endblock %}
-</form>
+
 
 {% block scripts%}
-{{ map_scripts(events[0].latitude, events[0].longitude, 15) }}
+{{ map_scripts(event.latitude, event.longitude, 15) }}
 {% endblock %}

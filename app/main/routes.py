@@ -118,10 +118,29 @@ def calendar_page_daily(year, month, currentDay):
 
     event_list = [None]
 
+
+    user_preferences = Preference.query.filter(Preference.user_id == current_user_id).all()
+    recommended_events = Event.query.all()
+    if len(user_preferences) == 1 :
+        user_preferences = user_preferences[0]
+        if user_preferences.price != None:
+            recommended_events = Event.query.filter(Event.price<=user_preferences.price).all()
+        if user_preferences.distance != None or user_preferences.distance != 0:
+            for event in recommended_events:
+                if user_preferences.distance_preference_conflicts_with_event(event):
+                    recommended_events.remove(event)
+
+
     # The following loop creates an event_list with event objects inside
     # The indices correspond with the indices in daylist
     day = datetime.datetime(year, month, currentDay)
     event_list[0] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
+
+
+
+    #TODO: Delete this line for testing:
+    event_list[0] = recommended_events
+
     return render_template("calender_day.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, currentDay=currentDay, days_in_previous_month=days_in_previous_month, days_in_current_month=days_in_current_month)
 
 
@@ -135,11 +154,22 @@ def calendar_page_daily(year, month, currentDay):
 def events_page(sortby):
     #sortby can be [0,1,2,3,4], representing sorting by:
     #ID/Start Time/Name/Price/Location Respectively
-    form = EventsPageForm()
-    if form.validate_on_submit():
-        event_id = request.form['event.id']
-        attend = AttendEvent(user_id=0, event_id=event_id)
-        flash('Test')
+    current_user_id = 0
+    current_user = User.query.get(current_user_id)
+    events_user_attend = current_user.events
+    attend_form = EventsPageForm()
+    if attend_form.is_submitted():
+        print(attend_form.event_id.data)
+        selected_event_to_attend = Event.query.get(attend_form.event_id.data)
+        if not current_user.is_Attending(selected_event_to_attend):
+            current_user.attend_event(selected_event_to_attend)
+        else:
+            current_user.unattend_event(selected_event_to_attend)
+
+        flash('Successfully Added')
+
+
+
     if sortby==0:
         events = Event.query.order_by(Event.id)
     elif sortby==1:
@@ -153,30 +183,38 @@ def events_page(sortby):
     else:
         events = Event.query.order_by(Event.id)
 
-    return render_template('events_page.html', events=events, form=form)
+    list_is_attending = [None] * len(events.all())
+    for i in range(len(events.all())):
+        if events[i] in events_user_attend:
+            list_is_attending[i] = True
+        else:
+            list_is_attending[i] = False
+    return render_template('events_page.html', events=events, attend_form=attend_form, list_is_attending=list_is_attending)
 
 @bp.route('/add_events', methods=['GET', 'POST'])
 def add_events():
     event_form = EventForm()
     if event_form.validate_on_submit():
-        event = Event(start=event_form.start.data, end=event_form.end.data, name=event_form.name.data, price=event_form.price.data, location=event_form.location.data)
+        event = Event(start=event_form.start.data, end=event_form.end.data, name=event_form.name.data, price=event_form.price.data, latitude=event_form.locationLatitude.data, longitude=event_form.locationLongitude.data)
         db.session.add(event)
         db.session.commit()
+        event.save_list_of_categories(event_form.Categories.data.split(','))
         flash('Event Added.')
     return render_template('add_events.html', event_form=event_form)
 
 @bp.route('/pref')
 def preferences():
+    pref_form = PreferenceForm()
     userid = 0
     pref = db.session.query(Preference).filter(Preference.user_id == userid).first()
     if pref is None:
         pref = Preference()
         pref.price = 0
-        pref.distance = 0
+        pref.distance = 10
         pref.size = "large"
         pref.latitude = 0
         pref.longitude = 0
-    return render_template("Preference.html", preference=pref)
+    return render_template("Preference.html", preference=pref, pref_form=pref_form)
 
 @bp.route('/save_preference', methods=['GET', 'POST'])
 def save_preference():
@@ -193,6 +231,7 @@ def save_preference():
         prefer.longitude = request.form['locationLongitude']
         db.session.add(prefer)
         db.session.commit()
+
     else:
         pref.price = pref_form.Price.data
         pref.distance = pref_form.Distance.data
@@ -200,17 +239,29 @@ def save_preference():
         pref.latitude = request.form['locationLatitude']
         pref.longitude = request.form['locationLongitude']
         db.session.commit()
+        pref.save_list_of_categories(pref_form.Categories.data.split(','))
 
     return redirect(url_for('main.preferences', preference=pref))
 
 @bp.route('/event/<int:id>', methods=['GET', 'POST'])
 def event(id):
-    form = EventsPageForm()
+    current_user_id = 0
+    current_user = User.query.get(current_user_id)
+    events_user_attend = current_user.events
 
-    if form.validate_on_submit():
-        event_id = request.form['event.id']
-        attend = AttendEvent(user_id=id, event_id=event_id)
-        flash('Test')
+    attend_form = EventsPageForm()
+    if attend_form.is_submitted():
+        print(attend_form.event_id.data)
+        selected_event_to_attend = Event.query.get(attend_form.event_id.data)
+        if not current_user.is_Attending(selected_event_to_attend):
+            current_user.attend_event(selected_event_to_attend)
+        else:
+            current_user.unattend_event(selected_event_to_attend)
+        flash('Successfully Added')
 
-    a = [Event.query.get(id)]
-    return render_template('single_event_page.html', events=a, form=form)
+
+    event = Event.query.get(id)
+
+
+    is_attending = event in events_user_attend
+    return render_template('single_event_page.html', event=event, attend_form=attend_form, is_attending=is_attending)
