@@ -52,7 +52,7 @@
       <a class="event_info"><b>ID: </b> {{event.id}} </a>
       <a class="event_info"><b>Price: </b> {{event.price}} </a>
       <a class="event_info"><b>Location: </b> {{event.location}} </a>
-      <a class="event_info"><b>Categories: </b> {% for category in event.categories %}{{ category }}{% endfor %} </a>
+      <a class="event_info"><b>Categories: </b> {% for category in event.categories %}{{ category.name }} {% endfor %} </a>
       <a class="event_info"><b>Attendees: </b> {% for usr in event.attending_user %}{{usr.firstname}} {{usr.lastname}} {% endfor %}</a>
     </div>
   </div>

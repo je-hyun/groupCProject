@@ -9,7 +9,10 @@ class EventForm(FlaskForm):
     start = DateTimeField('Start Date/Time', validators=[DataRequired()])
     end = DateTimeField('End Date/Time', validators=[DataRequired()])
     price = FloatField('Price')
-    location = StringField('Location')
+    #location = StringField('Location')
+    locationLatitude = FloatField('Latitude')
+    locationLongitude = FloatField('Longitude')
+    Categories = StringField('Categories', validators=[DataRequired()])
     submit = SubmitField('Add Event')
 
 
@@ -23,3 +26,4 @@ class PreferenceForm(FlaskForm):
     Price = FloatField('Price', validators=[DataRequired()])
     Distance = IntegerField('Distance', validators=[DataRequired()])
     Size = RadioField('size', validators=[DataRequired()])
+    Categories = StringField('Categories', validators=[DataRequired()])

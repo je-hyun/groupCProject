@@ -29,6 +29,21 @@ class Event(db.Model):
     def conflicts_with_event(self, event):
         return self.start<=event.end and event.start<=self.end
 
+    def save_list_of_categories(self, category_name_list):
+        print(category_name_list)
+        # Saves categories from a list of strings if the categories already exist on the database
+        print("OUT")
+        for my_cat in category_name_list:
+            my_cat = my_cat.title().strip()
+            matching_category = Category.query.filter(Category.name == my_cat).all()
+            print(matching_category)
+            print("IN")
+            if len(matching_category) == 1:
+                print("IN IN")
+                self.categories.append(matching_category[0])
+        db.session.add(self)
+        db.session.commit()
+
 class EventCategory(db.Model):
     __tablename__ = 'eventCategory'
     event_id = db.Column(
@@ -130,6 +145,22 @@ class Preference(db.Model):
     hoursFree = db.Column(db.String)
 
     categories = db.relationship('Category', secondary='preferenceCategory', back_populates="preferences")
+
+    def save_list_of_categories(self, category_name_list):
+        print(category_name_list)
+        # Saves categories from a list of strings if the categories already exist on the database
+        print("OUT")
+        for my_cat in category_name_list:
+            my_cat = my_cat.title().strip()
+            matching_category = Category.query.filter(Category.name == my_cat).all()
+            print(matching_category)
+            print("IN")
+            if len(matching_category) == 1:
+                print("IN IN")
+                self.categories.append(matching_category[0])
+        db.session.add(self)
+        db.session.commit()
+
     def get_address(self):
         return coordinatesToAddress(self.latitude, self.longitude)
 

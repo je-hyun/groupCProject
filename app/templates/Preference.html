@@ -21,6 +21,8 @@
                    <input type="number" class="form-control" name="Distance" value={{preference.distance}}>
                </div>
                <div class="col-xs-4">
+                 <label>Categories</label>
+                 {{ pref_form.Categories(size=30, placeholder="e.g. Holiday, School, Athletic, Other", class="form-control") }}
                </div>
             </div>
             <br/>
@@ -51,6 +53,7 @@
             <br/><br/>
             {{ map_input(600, 400, preference.latitude, preference.longitude) }}
             <br/>
+
             <input class="btn btn-primary btn-lg" type="submit", value="Save Changes">
 
          </form>
