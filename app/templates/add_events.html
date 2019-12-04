@@ -1,4 +1,11 @@
 {% extends "layout.html" %}
+{% from 'map.html' import map_styles, map_input, map_input_scripts %}
+
+{% block styles %}
+{{ map_styles() }}
+{% endblock styles %}
+
+{% set title = 'Add Event' %}
 
 {% block content %}
 <h1>Add Event</h1>
@@ -33,12 +40,30 @@
         {% endfor %}
     </p>
     <p>
-        {{event_form.location.label}}<br>
-        {{event_form.location(size=32)}}<br>
-        {% for error in event_form.location.errors %}
+        {{event_form.Categories.label}}<br>
+        {{ event_form.Categories(size=32, placeholder="e.g. Holiday, School, Athletic, Other") }}<br>
+        {% for error in event_form.Categories.errors %}
         <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{event_form.locationLatitude(size=32, hidden=True)}}
+        {{event_form.locationLongitude(size=32, hidden=True)}}
+    </p>
+    {{ map_input(600, 400) }}
+    <p>
+        {% for error in event_form.locationLatitude.errors %}
+        <span style="color: red;">[Location error: {{ error }}]</span>
+        {% endfor %}
+        {% for error in event_form.locationLongitude.errors %}
+        <span style="color: red;">[Location error: {{ error }}]</span>
         {% endfor %}
     </p>
     <p>{{event_form.submit()}}</p>
 </form>
+{% endblock %}
+
+
+{% block scripts %}
+{{ map_input_scripts(42.697765, -73.108005, 3000) }}
 {% endblock %}

@@ -178,14 +178,16 @@ def events_page(sortby):
 def add_events():
     event_form = EventForm()
     if event_form.validate_on_submit():
-        event = Event(start=event_form.start.data, end=event_form.end.data, name=event_form.name.data, price=event_form.price.data, location=event_form.location.data)
+        event = Event(start=event_form.start.data, end=event_form.end.data, name=event_form.name.data, price=event_form.price.data, latitude=event_form.locationLatitude.data, longitude=event_form.locationLongitude.data)
         db.session.add(event)
         db.session.commit()
+        event.save_list_of_categories(event_form.Categories.data.split(','))
         flash('Event Added.')
     return render_template('add_events.html', event_form=event_form)
 
 @bp.route('/pref')
 def preferences():
+    pref_form = PreferenceForm()
     userid = 0
     pref = db.session.query(Preference).filter(Preference.user_id == userid).first()
     if pref is None:
@@ -195,7 +197,7 @@ def preferences():
         pref.size = "large"
         pref.latitude = 0
         pref.longitude = 0
-    return render_template("Preference.html", preference=pref)
+    return render_template("Preference.html", preference=pref, pref_form=pref_form)
 
 @bp.route('/save_preference', methods=['GET', 'POST'])
 def save_preference():
@@ -212,6 +214,7 @@ def save_preference():
         prefer.longitude = request.form['locationLongitude']
         db.session.add(prefer)
         db.session.commit()
+
     else:
         pref.price = pref_form.Price.data
         pref.distance = pref_form.Distance.data
@@ -219,6 +222,7 @@ def save_preference():
         pref.latitude = request.form['locationLatitude']
         pref.longitude = request.form['locationLongitude']
         db.session.commit()
+        pref.save_list_of_categories(pref_form.Categories.data.split(','))
 
     return redirect(url_for('main.preferences', preference=pref))
 
