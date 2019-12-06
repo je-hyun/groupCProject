@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Add Event</h1>
+<form action="" method="POST" novalidate>
+    {{event_form.hidden_tag()}}
+    <p>
+        {{event_form.name.label}}<br>
+        {{event_form.name(size=32)}}<br>
+        {% for error in event_form.name.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{event_form.start.label}}<br>
+        {{event_form.start(size=32)}}<br>
+        {% for error in event_form.start.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{event_form.end.label}}<br>
+        {{event_form.end(size=32)}}<br>
+        {% for error in event_form.end.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{event_form.price.label}}<br>
+        {{event_form.price(size=32)}}<br>
+        {% for error in event_form.price.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{event_form.location.label}}<br>
+        {{event_form.location(size=32)}}<br>
+        {% for error in event_form.location.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{event_form.submit()}}</p>
+</form>
+{% endblock %}

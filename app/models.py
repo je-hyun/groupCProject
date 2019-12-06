@@ -15,13 +15,15 @@ class Event(db.Model):
     end = db.Column(db.DateTime)
     name = db.Column(db.String)
     price = db.Column(db.Float)
-
+    description = db.Column(db.String)
+    size = db.Column(db.String)
     location = db.Column(db.String) # TODO: Deprecate this
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
 
     categories = db.relationship('Category', secondary='eventCategory', back_populates="events")
     attending_user = db.relationship('User', secondary='attendEvent', back_populates="events")
+    reviews = db.relationship('Review', back_populates="event")
 
     def get_address(self):
         return coordinatesToAddress(self.latitude, self.longitude)
@@ -169,3 +171,14 @@ class Preference(db.Model):
             return False
         else:
             return True
+
+
+class Review(db.Model):
+    __tablename__ = "review"
+    review_id = db.Column(db.Integer, primary_key=True)
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
+    review_title = db.Column(db.String(10))
+    review_desc = db.Column(db.String(128))
+    review_rating = db.Column(db.Integer)
+    event = db.relationship('Event', back_populates="reviews")
+
