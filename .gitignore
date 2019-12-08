@@ -8,6 +8,7 @@ dist/
 build/
 .pytest_cache/
 Pipfile.lock
+!env.py
 venv/LICENSE.txt
 venv/Include/abstract.h
 venv/Include/asdl.h
