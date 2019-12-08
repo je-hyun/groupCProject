@@ -159,7 +159,6 @@ def events_page(sortby):
     events_user_attend = current_user.events
     attend_form = EventsPageForm()
     if attend_form.is_submitted():
-        print(attend_form.event_id.data)
         selected_event_to_attend = Event.query.get(attend_form.event_id.data)
         if not current_user.is_Attending(selected_event_to_attend):
             current_user.attend_event(selected_event_to_attend)
@@ -247,6 +246,7 @@ def save_preference():
 def event(id):
     current_user_id = 0
     current_user = User.query.get(current_user_id)
+
     events_user_attend = current_user.events
 
     attend_form = EventsPageForm()
