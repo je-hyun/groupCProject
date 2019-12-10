@@ -124,8 +124,10 @@ def add_time_slot():
         db.session.add(timeslot)
         db.session.commit()
         flash('Time Slot Added. Thank you.')
-    #timeslot = TimeSlot.query.all()
-    return render_template('workingtime_form.html', form=form)
+        return redirect(url_for('main.add_time_slot'))
+
+    added_timeslots = db.session.query(TimeSlot).all()
+    return render_template('workingtime_form.html', added_timeslots=added_timeslots, form=form)
 
 
 '''

@@ -98,8 +98,8 @@ class TimeSlot(db.Model):
     __tablename__ = 'timeslot'
     timeslot_id = db.Column(db.Integer, primary_key=True)
     day = db.Column(db.String)
-    start_time = db.Column(db.String)
-    end_time = db.Column(db.String)
+    start_time = db.Column(db.Time)
+    end_time = db.Column(db.Time)
 
 
 def get_address(self):

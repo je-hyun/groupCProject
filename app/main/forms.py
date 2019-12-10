@@ -17,9 +17,13 @@ class EventsPageForm(FlaskForm):
 
 class TimeSlotForm(FlaskForm):
 
-    day = SelectField('[Day of the Week]', choices=[('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'),
-                                      ('Thursday', 'Thursday'), ('Friday', 'Friday'), ('Saturday', 'Saturday'),
-                                      ('Sunday', 'Sunday')], validators=[InputRequired()])
+    day = SelectField('[Day of the Week]', choices=[('Monday', 'Monday'),
+                                                    ('Tuesday', 'Tuesday'),
+                                                    ('Wednesday', 'Wednesday'),
+                                                    ('Thursday', 'Thursday'),
+                                                    ('Friday', 'Friday'),
+                                                    ('Saturday', 'Saturday'),
+                                                    ('Sunday', 'Sunday')], validators=[InputRequired()])
     start_time = TimeField('Start Time:', validators=[InputRequired()], format="%H:%M")
     end_time = TimeField('End Time:', validators=[InputRequired()], format="%H:%M")
     submit = SubmitField('Add Time Slot')
