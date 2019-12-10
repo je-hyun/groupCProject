@@ -15,16 +15,16 @@
 		{% endfor %}
 	</p>
 	<p>
-		{{ form.startTime.label }}<br>
-		{{ form.startTime(size=32, placeholder='1:00') }}<br>
-		{% for error in form.startTime.errors %}
+		{{ form.start_time.label }}<br>
+		{{ form.start_time(size=32, placeholder='1:00') }}<br>
+		{% for error in form.start_time.errors %}
 		<span style="color: red;">[{{ error }}]</span>
 		{% endfor %}
 	</p>
 	<p>
-		{{ form.endTime.label }}<br>
-		{{ form.endTime(size=32, placeholder='3:00')}}<br>
-		{% for error in form.endTime.errors %}
+		{{ form.end_time.label }}<br>
+		{{ form.end_time(size=32, placeholder='3:00')}}<br>
+		{% for error in form.end_time.errors %}
 		<span style="color: red;">[{{ error }}]</span>
 		{% endfor %}
 	</p>

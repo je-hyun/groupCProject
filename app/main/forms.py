@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateTimeField, IntegerField, TimeField, SelectField,
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateTimeField, IntegerField, TimeField, SelectField
 from wtforms.validators import DataRequired, InputRequired
 
 class EventForm(FlaskForm):
@@ -20,8 +20,8 @@ class TimeSlotForm(FlaskForm):
     day = SelectField('[Day of the Week]', choices=[('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'),
                                       ('Thursday', 'Thursday'), ('Friday', 'Friday'), ('Saturday', 'Saturday'),
                                       ('Sunday', 'Sunday')], validators=[InputRequired()])
-    startTime = TimeField('Start Time:', validators=[InputRequired()], format="%H:%M")
-    endTime = TimeField('End Time:', validators=[InputRequired()], format="%H:%M")
+    start_time = TimeField('Start Time:', validators=[InputRequired()], format="%H:%M")
+    end_time = TimeField('End Time:', validators=[InputRequired()], format="%H:%M")
     submit = SubmitField('Add Time Slot')
 
 '''
