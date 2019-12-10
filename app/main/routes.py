@@ -226,8 +226,6 @@ def login():
     return render_template('login.html', title='Sign In', form=form)
 
 
-
-
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
@@ -247,10 +245,6 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
-
-
-
-
 
 
 '''
