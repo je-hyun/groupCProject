@@ -71,6 +71,9 @@
                 {% for event in event_list[day+(week-1)*7] %}
                   <li><a href="/event/{{event.id}}">{{event.name}} {{event.start}} to {{event.end}}</a></li>
                 {% endfor %}
+                {% for event in recommended_events[day+(week-1)*7] %}
+                  <li><a href="/event/{{event.id}}" style="color:#808080;">Recommended: <br/>{{event.name}} {{event.start}} to {{event.end}}</a></li>
+                {% endfor %}
               </div>
             {%endif%}
           {%endfor%}

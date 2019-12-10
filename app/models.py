@@ -80,7 +80,6 @@ class User(db.Model):
     def is_Attending(self, event):
         attending = False;
         userAttendEvent = self.events
-        print(userAttendEvent)
         for x in userAttendEvent:
             if x==event:
                 attending = True

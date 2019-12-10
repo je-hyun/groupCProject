@@ -39,6 +39,7 @@ def calendar_page_monthly(year, month):
         return ("Oops, the month is out of range!")
     # Initialize some useful variables:
     current_user_id = 0
+    current_user = User.query.get(current_user_id)
     c = calendar.TextCalendar(calendar.SUNDAY) # Calendar object starting on Sunday
     now = datetime.datetime.now()
     event_list = Event.query.all()
@@ -52,11 +53,40 @@ def calendar_page_monthly(year, month):
     event_list = [None] * len(daylist)
     # The following loop creates an event_list with event objects inside
     # The indices correspond with the indices in daylist
+
+    # for day_index in range(len(daylist)):
+    #     if daylist[day_index] != 0:
+    #         day = datetime.datetime(year, month, daylist[day_index])
+    #         event_list[day_index] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
+
+
+    #
+    recommended_events = [None] * len(daylist)
+    user_preferences = Preference.query.filter(Preference.user_id == current_user_id).all()
+    if len(user_preferences) == 1 :
+        user_preferences = user_preferences[0]
     for day_index in range(len(daylist)):
         if daylist[day_index] != 0:
             day = datetime.datetime(year, month, daylist[day_index])
             event_list[day_index] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
-    return render_template("calender.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list)
+            # Recommending Events Below:
+
+            recommended_events[day_index] = Event.query.filter(Event.start >= day, Event.start < day+day_delta)
+
+            #Find if the current user has any preference categories that match any event categories.
+            user_categories = [u.id for u in user_preferences.categories]
+            recommended_events[day_index] = recommended_events[day_index].filter(Event.categories.any(Category.id.in_(user_categories)))
+
+            if user_preferences.price != None:
+                recommended_events[day_index] = recommended_events[day_index].filter(Event.price<=user_preferences.price).all()
+            if user_preferences.distance != None or user_preferences.distance != 0:
+                for event in reversed(recommended_events[day_index]):
+                    if user_preferences.distance_preference_conflicts_with_event(event):
+                        recommended_events[day_index].remove(event)
+            for event in reversed(recommended_events[day_index]):
+                if current_user.is_Attending(event):
+                    recommended_events[day_index].remove(event)
+    return render_template("calender.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, recommended_events=recommended_events)
 
 @bp.route('/calendar_page/weekly/<int:year>/<int:month>/<int:week>')
 def calendar_page_weekly(year, month, week):
@@ -70,6 +100,7 @@ def calendar_page_weekly(year, month, week):
     month_name = calendar.month_name[month]
     daylist = list(c.itermonthdays(year, month))
     day_delta = datetime.timedelta(days=1)
+    current_user = User.query.get(current_user_id)
     # daylist is the list of numbers to put in each box of the calendar,
     # where 0 is an empty box, and 1 is the 1st of the month, etc.
     # example: [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 0, 0]
@@ -83,14 +114,32 @@ def calendar_page_weekly(year, month, week):
 
     event_list = [None] * len(daylist)
 
+
     week_of_today = (daylist.index(now.day) // 7) + 1
     # The following loop creates an event_list with event objects inside
     # The indices correspond with the indices in daylist
+    recommended_events = [None] * len(daylist)
+    user_preferences = Preference.query.filter(Preference.user_id == current_user_id).all()
+    if len(user_preferences) == 1 :
+        user_preferences = user_preferences[0]
     for day_index in range(len(daylist)):
         if daylist[day_index] != 0:
             day = datetime.datetime(year, month, daylist[day_index])
             event_list[day_index] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
-    return render_template("calender_week.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, week=week, days_in_previous_month=days_in_previous_month, week_of_today=week_of_today)
+            # Recommending Events Below:
+            recommended_events[day_index] = Event.query.filter(Event.start >= day, Event.start < day+day_delta)
+            if user_preferences.price != None:
+                recommended_events[day_index] = recommended_events[day_index].filter(Event.price<=user_preferences.price).all()
+            if user_preferences.distance != None or user_preferences.distance != 0:
+                for event in reversed(recommended_events[day_index]):
+                    if user_preferences.distance_preference_conflicts_with_event(event):
+                        recommended_events[day_index].remove(event)
+            for event in reversed(recommended_events[day_index]):
+                if current_user.is_Attending(event):
+                    recommended_events[day_index].remove(event)
+
+
+    return render_template("calender_week.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, week=week, days_in_previous_month=days_in_previous_month, week_of_today=week_of_today,recommended_events=recommended_events)
 
 
 @bp.route('/calendar_page/daily/<int:year>/<int:month>/<int:currentDay>')
@@ -118,30 +167,32 @@ def calendar_page_daily(year, month, currentDay):
 
     event_list = [None]
 
-
-    user_preferences = Preference.query.filter(Preference.user_id == current_user_id).all()
-    recommended_events = Event.query.all()
-    if len(user_preferences) == 1 :
-        user_preferences = user_preferences[0]
-        if user_preferences.price != None:
-            recommended_events = Event.query.filter(Event.price<=user_preferences.price).all()
-        if user_preferences.distance != None or user_preferences.distance != 0:
-            for event in recommended_events:
-                if user_preferences.distance_preference_conflicts_with_event(event):
-                    recommended_events.remove(event)
-
-
     # The following loop creates an event_list with event objects inside
-    # The indices correspond with the indices in daylist
+    # The indices correspond with the indices in daylist for attending_events
     day = datetime.datetime(year, month, currentDay)
     event_list[0] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
 
 
 
-    #TODO: Delete this line for testing:
-    event_list[0] = recommended_events
+    # List of Recommended Events
+    recommended_events = [None]
+    user_preferences = Preference.query.filter(Preference.user_id == current_user_id).all()
+    # The indices correspond with the indices in daylist for recommended_events
+    recommended_events[0] = Event.query.filter(Event.start >= day, Event.start < day+day_delta)
+    current_user = User.query.get(current_user_id)
+    if len(user_preferences) == 1 :
+        user_preferences = user_preferences[0]
+        if user_preferences.price != None:
+            recommended_events[0] = recommended_events[0].filter(Event.price<=user_preferences.price).all()
+        if user_preferences.distance != None or user_preferences.distance != 0:
+            for event in reversed(recommended_events[0]):
+                if user_preferences.distance_preference_conflicts_with_event(event):
+                    recommended_events[0].remove(event)
+        for event in reversed(recommended_events[0]):
+            if current_user.is_Attending(event):
+                recommended_events[0].remove(event)
 
-    return render_template("calender_day.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, currentDay=currentDay, days_in_previous_month=days_in_previous_month, days_in_current_month=days_in_current_month)
+    return render_template("calender_day.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, currentDay=currentDay, days_in_previous_month=days_in_previous_month, days_in_current_month=days_in_current_month, recommended_events=recommended_events)
 
 
 
