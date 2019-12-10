@@ -118,16 +118,14 @@ def event(id):
 
 @bp.route('/add_time_slot', methods=['GET', 'POST'])
 def add_time_slot():
-    timeslot_form = TimeSlotForm()
-    if timeslot_form.validate_on_submit():
-        timeslot = TimeSlot(day=timeslot_form.day.data,
-                            startTime=timeslot_form.startTime.data,
-                            endTime=timeslot_form.endTime.data)
+    form = TimeSlotForm()
+    if form.validate_on_submit():
+        timeslot = TimeSlot(day=form.day.data, startTime=form.startTime.data, endTime=form.endTime.data)
         db.session.add(timeslot)
         db.session.commit()
         flash('Time Slot Added.')
     #timeslot = TimeSlot.query.all()
-    return render_template('workingtime_form.html', timeslot_form=timeslot_form)
+    return render_template('workingtime_form.html', form=form)
 
 
 '''
