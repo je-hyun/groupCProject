@@ -120,7 +120,7 @@ def event(id):
 def add_time_slot():
     form = TimeSlotForm()
     if form.validate_on_submit():
-        timeslot = TimeSlot(day=form.day.data, startTime=form.startTime.data, endTime=form.endTime.data)
+        timeslot = TimeSlot(day=form.day.data, start_time=form.start_time.data, end_time=form.end_time.data)
         db.session.add(timeslot)
         db.session.commit()
         flash('Time Slot Added.')
