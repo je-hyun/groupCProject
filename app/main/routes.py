@@ -50,9 +50,9 @@ def index():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            login_user(user)  # , remember=form.remember_me.data
+            #login_user(user)  # , remember=form.remember_me.data
             flash('Invalid Username or Password')
-            return redirect(url_for('main.login'))
+            return redirect(url_for('main.index'))
 
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
