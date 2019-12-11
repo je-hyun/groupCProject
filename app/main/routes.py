@@ -31,14 +31,32 @@ def testroute():
     return render_template("test.html", map_lat=0.0, map_lon=0.0)
 
 '''
-
-
+'''
+now = datetime.datetime.now()
+    return redirect(url_for('main.calendar_page_monthly', year=now.year, month=now.month))
+'''
 
 @bp.route('/', methods=['GET', 'POST'])
 #@login_required
 def index():
-    now = datetime.datetime.now()
-    return redirect(url_for('main.calendar_page_monthly', year=now.year, month=now.month))
+    form = LoginForm()
+    if current_user.is_authenticated:
+        now = datetime.datetime.now()
+        return redirect(url_for('main.calendar_page_monthly', year=now.year, month=now.month))
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            # login_user(user)  # , remember=form.remember_me.data
+            flash('Invalid Username or Password')
+            return redirect(url_for('main.login'))
+
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('main.index')
+        return redirect(next_page)
+        # return redirect(url_for('index'))
+    return render_template('login.html', title='Sign In', form=form)
+
 
 @bp.route('/calendar_page/monthly/<int:year>/<int:month>/')
 def calendar_page_monthly(year, month):
@@ -205,8 +223,8 @@ def add_time_slot():
 
 
 #######################################################################
-
-@bp.route('/login', methods=['GET', 'POST'])
+'''
+@bp.route('/', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if current_user.is_authenticated:
@@ -224,7 +242,7 @@ def login():
         return redirect(next_page)
         #return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
-
+'''
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
