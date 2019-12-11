@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e632e08-c4a9-4880-b9a1-7e0ea13dda70" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_management/sprints/D02_Sprint_01/D02_Sprint_01_completion_report.md" beforeDir="false" afterPath="$PROJECT_DIR$/project_management/sprints/D02_Sprint_01/D02_Sprint_01_completion_report.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_management/sprints/D02_Sprint_01/D02_Sprint_01_specification 2.md" beforeDir="false" afterPath="$PROJECT_DIR$/project_management/sprints/D02_Sprint_01/D02_Sprint_01_specification 2.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_management/sprints/D04_Sprint_03/D04_Sprint_03_specification.md" beforeDir="false" afterPath="$PROJECT_DIR$/project_management/sprints/D04_Sprint_03/D04_Sprint_03_specification.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +14,7 @@
     <session id="-1291689774">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="23" />
+          <entry key="project.closed" value="24" />
           <entry key="project.open.time.0" value="3" />
           <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.15" value="1" />
@@ -36,13 +29,15 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="PNG" value="1" />
           <entry key="Pipfile" value="1" />
           <entry key="css" value="1" />
           <entry key="db" value="20" />
           <entry key="gitignore" value="2" />
           <entry key="html" value="134" />
           <entry key="js" value="4" />
-          <entry key="md" value="9" />
+          <entry key="md" value="10" />
+          <entry key="png" value="1" />
           <entry key="py" value="293" />
           <entry key="yml" value="1" />
         </counts>
@@ -51,8 +46,9 @@
         <counts>
           <entry key="CSS" value="1" />
           <entry key="HTML" value="134" />
+          <entry key="Image" value="2" />
           <entry key="JavaScript" value="4" />
-          <entry key="Markdown" value="9" />
+          <entry key="Markdown" value="10" />
           <entry key="PLAIN_TEXT" value="23" />
           <entry key="Python" value="293" />
           <entry key="YAML" value="1" />
@@ -89,18 +85,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/main/routes.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="246" lean-forward="true" selection-start-line="246" selection-end-line="246" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project_management/backlog/backlog 2.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
@@ -155,7 +139,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project_management/sprints/D04_Sprint_03/D04_Sprint_03_specification.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -168,6 +152,26 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project_management/use_cases_docs/007/use_case_description.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor />
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project_management/use_cases_docs/006/Sprint2 UML.PNG">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/project_management/use_cases_docs/006/Sprint2 SSD.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project_management/sprints/D03_Sprint_02/D03_Sprint_02_specification.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -175,32 +179,6 @@
                 <caret line="20" column="32" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="32" />
               </first_editor>
               <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/workingtime_form.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-              <folding>
-                <element signature="n#style#0;n#span#0;n#p#0;n#form#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#p#1;n#form#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#p#2;n#form#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/layout.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
-              <folding>
-                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -335,6 +313,19 @@
               <item name="sprints" type="462c0819:PsiDirectoryNode" />
               <item name="D04_Sprint_03" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="groupCProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="groupCProject" type="462c0819:PsiDirectoryNode" />
+              <item name="project_management" type="462c0819:PsiDirectoryNode" />
+              <item name="use_cases_docs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="groupCProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="groupCProject" type="462c0819:PsiDirectoryNode" />
+              <item name="project_management" type="462c0819:PsiDirectoryNode" />
+              <item name="use_cases_docs" type="462c0819:PsiDirectoryNode" />
+              <item name="007" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -346,6 +337,14 @@
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Polska\PycharmProjects\groupCProject\project_management\use_cases_docs\013" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Polska\PycharmProjects\groupCProject\project_management\use_cases_docs\007" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -520,9 +519,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17970401" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17970401" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -533,7 +531,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32962137" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32962137" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49788582" visible="true" weight="0.3129176" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49788582" weight="0.7037862" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5015856" side_tool="true" weight="0.40868598" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32962137" />
       <window_info anchor="bottom" id="Messages" order="11" />
@@ -874,6 +872,20 @@
           <second_editor />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project_management/use_cases_docs/007/use_case_description.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project_management/use_cases_docs/006/Sprint2 UML.PNG">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project_management/use_cases_docs/006/Sprint2 SSD.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
   </component>
 </project>
