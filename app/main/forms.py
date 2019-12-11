@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateTimeField, IntegerField, TimeField, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateTimeField, IntegerField, TimeField, SelectField, FloatField, RadioField
 from wtforms.validators import DataRequired, InputRequired
 
 class EventForm(FlaskForm):
@@ -17,8 +17,6 @@ class EventsPageForm(FlaskForm):
     event_id = IntegerField('Event ID')
     submit = SubmitField('Attend')
 
-
-
 class PreferenceForm(FlaskForm):
     Price = FloatField('Price', validators=[DataRequired()])
     Distance = IntegerField('Distance', validators=[DataRequired()])
@@ -34,13 +32,13 @@ class TimeSlotForm(FlaskForm):
                                                     ('Friday', 'Friday'),
                                                     ('Saturday', 'Saturday'),
                                                     ('Sunday', 'Sunday')], validators=[InputRequired()])
-    start_time = TimeField('Start Time:', validators=[InputRequired()], format="%H:%M")
-    end_time = TimeField('End Time:', validators=[InputRequired()], format="%H:%M")
+    start_time = TimeField('Start Time (24-hour format):', validators=[InputRequired()], format="%H:%M")
+    end_time = TimeField('End Time (24-hour format):', validators=[InputRequired()], format="%H:%M")
     submit = SubmitField('Add Time Slot')
+
 
 '''
 timeslot_id = IntegerField('timeslot_id')
-
 
 @bp.route('/add_TimeSlot/', methods=['GET', 'POST'])
 def add_TimeSlot():
@@ -56,6 +54,4 @@ def add_TimeSlot():
 
 class EventsPageForm(FlaskForm):
     submit = SubmitField('Attend Event')
-
-
 '''

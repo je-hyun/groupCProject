@@ -1,7 +1,7 @@
 from app.main import bp
 from flask import Flask, render_template, request, flash, redirect, url_for
 import calendar
-from app.main.forms import EventForm, EventsPageForm, PreferenceForm
+from app.main.forms import EventForm, EventsPageForm, PreferenceForm, TimeSlotForm
 from app.models import *
 from app import db, models
 from flask_sqlalchemy import SQLAlchemy
@@ -195,9 +195,6 @@ def calendar_page_daily(year, month, currentDay):
                 recommended_events[0].remove(event)
 
     return render_template("calender_day.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, currentDay=currentDay, days_in_previous_month=days_in_previous_month, days_in_current_month=days_in_current_month, recommended_events=recommended_events)
-
-
-
 
 
 

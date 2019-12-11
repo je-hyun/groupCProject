@@ -143,7 +143,8 @@ class Preference(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    def get_address(self):
+    #def get_address(self):
+
 
 class TimeSlot(db.Model):
     __tablename__ = 'timeslot'
@@ -154,7 +155,7 @@ class TimeSlot(db.Model):
 
 
 def get_address(self):
-        return coordinatesToAddress(self.latitude, self.longitude)
+    return coordinatesToAddress(self.latitude, self.longitude)
 
     def distance_preference_conflicts_with_event(self, event):
         if geodesic((self.latitude,self.longitude), (event.latitude,event.longitude)).miles<self.distance:
