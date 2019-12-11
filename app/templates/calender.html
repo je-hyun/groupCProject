@@ -69,10 +69,10 @@
               <div class="calendar__day day">{{daylist[day + week * 7]}}
                 <br/>
                 {% for event in event_list[day+week*7] %}
-                  <li><a href="/event/{{event.id}}">{{event.name}} {{event.start}} to {{event.end}}</a></li>
+                  <li><a href="/event/{{event.id}}">{{event.name}} {{event.start.time()}} to {{event.end.time()}}</a></li>
                 {% endfor %}
                 {% for event in recommended_events[day+week*7] %}
-                  <li><a href="/event/{{event.id}}" style="color:#808080;">Recommended: <br/>{{event.name}} {{event.start}} to {{event.end}}</a></li>
+                  <li><a href="/event/{{event.id}}" style="color:#808080;">Recommended: <br/>{{event.name}} {{event.start.time()}} to {{event.end.time()}}</a></li>
                 {% endfor %}
               </div>
             {%endif%}

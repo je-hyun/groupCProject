@@ -22,7 +22,7 @@
                </div>
                <div class="col-xs-4">
                  <label>Categories</label>
-                 {{ pref_form.Categories(size=30, placeholder="e.g. Holiday, School, Athletic, Other", class="form-control") }}
+                 {{ pref_form.Categories(size=30, placeholder="e.g. Holiday, School, Athletic, Other", class="form-control", value=preference_list) }}
                </div>
             </div>
             <br/>
@@ -79,4 +79,8 @@ function hideSize() {
 {%else%}
 {{ map_input_scripts(preference.latitude, preference.longitude, 3000) }}
 {%endif%}
+<script>
+  var leaflet_form = document.getElementsByClassName('leaflet-control-geocoder-form')[0].firstChild;
+  leaflet_form.value = "{{user_address}}";
+</script>
 {% endblock %}
