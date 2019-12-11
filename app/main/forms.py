@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateTimeField, IntegerField, TimeField, SelectField, FloatField, RadioField
-from wtforms.validators import DataRequired, InputRequired
+from wtforms.validators import DataRequired, InputRequired, Length, Email, EqualTo
+
 
 class EventForm(FlaskForm):
     name = StringField('Event Name', validators=[DataRequired()])
