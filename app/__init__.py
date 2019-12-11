@@ -6,17 +6,26 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 
 db = SQLAlchemy()
 migrate = Migrate()
-login_manager = LoginManager()
-from app.models import User
+
+#from app.models import User
 
 def create_app():
     app = Flask(__name__, template_folder="templates")
     app.config.from_object(Config)
     from app.models import db
+
     db.init_app(app)
     migrate.init_app(app, db)
+
+    login_manager = LoginManager()
+    login_manager.login_view = 'main.index'
     login_manager.init_app(app)
-    login_manager.login_view = 'login'
+
+    from app.models import User
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+
     # Build the database every time "flask run" is executed.
 
     with app.test_request_context():

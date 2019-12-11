@@ -5,7 +5,7 @@ from app.main.forms import EventForm, EventsPageForm, TimeSlotForm, LoginForm, R
 from app.main.forms import EventForm, EventsPageForm, PreferenceForm, TimeSlotForm
 from app.models import *
 from app import db
-from app import db, models
+from app import db, models, login_manager
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 from werkzeug.security import generate_password_hash
@@ -13,31 +13,9 @@ from werkzeug.urls import url_parse
 from flask_login import LoginManager, logout_user, login_required, current_user, login_user, current_user, login_manager
 
 '''
-@bp.route('/testroute', methods=['GET','POST'])
-def testroute():
-    users = db.session.query(User).all()
-    my_user = db.session.query(User).get(0)
-
-     event = Event(
-        id = 0,
-        start = datetime.datetime(2018, 8, 1),
-        end = datetime.datetime(2018, 8, 2),
-        name = "Rock climbing event",
-        price = "10",
-        location = "NYC"
-    )
-
-    #succesfullyAdded = db.session.query(User).get(0).attend_event(event)
-    #succesfullyAdded = db.session.query(User).get(1).attend_event(event)
-    #succesfullyAdded = db.session.query(User).get(2).attend_event(event)
-    #print(succesfullyAdded)
-    return render_template("test.html", map_lat=0.0, map_lon=0.0)
-
-'''
-
-'''
-now = datetime.datetime.now()
-    return redirect(url_for('main.calendar_page_monthly', year=now.year, month=now.month))
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 '''
 
 @bp.route('/', methods=['GET', 'POST'])
@@ -49,8 +27,9 @@ def index():
         return redirect(url_for('main.calendar_page_monthly', year=now.year, month=now.month))
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
+        login_user(user)  # , remember=form.remember_me.data
+
         if user is None or not user.check_password(form.password.data):
-            #login_user(user)  # , remember=form.remember_me.data
             flash('Invalid Username or Password')
             return redirect(url_for('main.index'))
 
@@ -61,6 +40,27 @@ def index():
         return redirect(next_page)
         # return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
+
+@bp.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Congratulations, you are now a registered user!')
+        return redirect(url_for('main.index'))
+    return render_template('register.html', title='Register', form=form)
+
+
+@bp.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('main.index'))
 
 
 @bp.route('/calendar_page/monthly/<int:year>/<int:month>/')
@@ -89,7 +89,6 @@ def calendar_page_monthly(year, month):
     #     if daylist[day_index] != 0:
     #         day = datetime.datetime(year, month, daylist[day_index])
     #         event_list[day_index] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
-
 
     #
     recommended_events = [None] * len(daylist)
@@ -205,7 +204,6 @@ def calendar_page_daily(year, month, currentDay):
     return render_template("calender_day.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, currentDay=currentDay, days_in_previous_month=days_in_previous_month, days_in_current_month=days_in_current_month)
 
 
-
     # List of Recommended Events
     recommended_events = [None]
     user_preferences = Preference.query.filter(Preference.user_id == current_user_id).all()
@@ -227,15 +225,13 @@ def calendar_page_daily(year, month, currentDay):
     return render_template("calender_day.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, currentDay=currentDay, days_in_previous_month=days_in_previous_month, days_in_current_month=days_in_current_month, recommended_events=recommended_events)
 
 
-
-
-
 @bp.route('/events_page/<int:sortby>/', methods=['GET', 'POST'])
 def events_page(sortby):
     #sortby can be [0,1,2,3,4], representing sorting by:
     #ID/Start Time/Name/Price/Location Respectively
-    current_user_id = 0
-    current_user = User.query.get(current_user_id)
+
+    #current_user_id = 0
+    #current_user = User.query.get(current_user_id)
     events_user_attend = current_user.events
     attend_form = EventsPageForm()
     if attend_form.is_submitted():
@@ -246,8 +242,6 @@ def events_page(sortby):
             current_user.unattend_event(selected_event_to_attend)
 
         flash('Successfully Added')
-
-
 
     if sortby==0:
         events = Event.query.order_by(Event.id)
@@ -382,26 +376,6 @@ def login():
     return render_template('login.html', title='Sign In', form=form)
 '''
 
-@bp.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegistrationForm()
-    if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
-    if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
-        user.set_password(form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        flash('Congratulations, you are now a registered user!')
-        return redirect(url_for('main.index'))
-    return render_template('register.html', title='Register', form=form)
-
-@bp.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('main.index'))
-
 
 '''
 @auth.route('/signup', methods=['POST'])
@@ -475,4 +449,32 @@ def add_TimeSlot():
     
     
 timeslot_id=timeslot_form.timeslot_id.data, 
+'''
+
+'''
+@bp.route('/testroute', methods=['GET','POST'])
+def testroute():
+    users = db.session.query(User).all()
+    my_user = db.session.query(User).get(0)
+
+     event = Event(
+        id = 0,
+        start = datetime.datetime(2018, 8, 1),
+        end = datetime.datetime(2018, 8, 2),
+        name = "Rock climbing event",
+        price = "10",
+        location = "NYC"
+    )
+
+    #succesfullyAdded = db.session.query(User).get(0).attend_event(event)
+    #succesfullyAdded = db.session.query(User).get(1).attend_event(event)
+    #succesfullyAdded = db.session.query(User).get(2).attend_event(event)
+    #print(succesfullyAdded)
+    return render_template("test.html", map_lat=0.0, map_lon=0.0)
+
+'''
+
+'''
+now = datetime.datetime.now()
+    return redirect(url_for('main.calendar_page_monthly', year=now.year, month=now.month))
 '''

@@ -9,8 +9,6 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user, login_manager
 from app import db
 
-
-
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap
 from config import Config
@@ -177,6 +175,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     events = db.relationship('Event', secondary='attendEvent', back_populates="attending_user")
+    preference = db.relationship('Preference', uselist=False, backref="user")
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -186,6 +185,32 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+    def is_Attending(self, event):
+        attending = False;
+        userAttendEvent = self.events
+        for x in userAttendEvent:
+            if x == event:
+                attending = True
+        return attending
+
+    def attend_event(self, event):
+        # checks if event conflicts with any event inside the user's event list
+        #   adds event to the user's events list
+        conflicts = False;
+        userAttendEvent = self.events
+        print(userAttendEvent)
+        for x in userAttendEvent:
+            if x.conflicts_with_event(event):
+                conflicts = True
+        if conflicts:
+            return False
+        else:
+            self.events.append(event)
+            db.session.add(event)
+            db.session.add(self)
+            db.session.commit()
+            return True
 
 '''
 @login_manager.user_loader
