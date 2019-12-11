@@ -31,6 +31,7 @@ def testroute():
     return render_template("test.html", map_lat=0.0, map_lon=0.0)
 
 '''
+
 '''
 now = datetime.datetime.now()
     return redirect(url_for('main.calendar_page_monthly', year=now.year, month=now.month))
@@ -61,7 +62,7 @@ def index():
 
 @bp.route('/calendar_page/monthly/<int:year>/<int:month>/')
 def calendar_page_monthly(year, month):
-
+    now = datetime.datetime.now()
     if (month > 12 or month < 1):
         return ("Oops, the month is out of range!")
     # Initialize some useful variables:
