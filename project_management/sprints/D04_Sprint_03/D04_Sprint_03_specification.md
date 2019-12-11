@@ -3,8 +3,8 @@
     * Actor: Regular User
     * Assigned to : George Stephanoff
     * Refs: use-case_doc, issue
-*ID:013 , Use-case: List the next ten events on your calendar
-    * Description: There will be a list the goes through the calendar and displays the next ten events and show how many more days thill the event will happen
+*ID:013 , Use-case: Login and Registration
+    * Description: The user can register an account and it will allow them to login and see their profiles and the events that they chose. If the user has no account yet, they can click on a link in the login page to register an account.
     * Actor: Regular User
     * Assigned to: Kamil Peza
 * ID:014 , Day Calendar Page with Event Recommendations

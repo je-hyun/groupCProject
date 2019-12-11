@@ -24,7 +24,7 @@
       * Matthew Nguyen
         * Create functionality to check if an event conflicts with user_schedule
       * Kamil Peza
-        * Design and implement database table for user_schedule
+        * Design and implement database table for user
       * George Stephanoff
         * Add navigation menu item button including calendar (In template format)
         * Style the calendar page

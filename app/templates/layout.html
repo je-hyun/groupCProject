@@ -19,16 +19,20 @@
 </head>
 
 <body>
+
+
   <div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading"><img src="{{url_for('static', filename='img/cal_icon.png')}}" style="height:1em; color:black !important;"></img> Outing Scout</div>
       <div class="list-group list-group-flush">
-        <a href="/" class="list-group-item list-group-item-action bg-light">Calender</a>
+        <a href="/calendar_page/monthly/2019/12/" class="list-group-item list-group-item-action bg-light">Calender</a>
         <a href="/pref" class="list-group-item list-group-item-action bg-light">Preferences</a>
         <a href="/add_events" class="list-group-item list-group-item-action bg-light">Add Events</a>
         <a href="/events_page/0/" class="list-group-item list-group-item-action bg-light">Events</a>
+        <a href="/add_time_slot" class="list-group-item list-group-item-action bg-light">Time Unavailable</a>
+
         <!--<a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>-->
       </div>
@@ -42,17 +46,18 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           {{title|default("Outing Scout - Find Events")}}
-          <!--
+
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{{ url_for('main.index') }}">Home<span class="sr-only">(current)</span></a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="#">Options</a>
+              <a class="nav-link" href="/">Logout</a>
             </li>
           </ul>
-        -->
+
         </div>
       </nav>
 
