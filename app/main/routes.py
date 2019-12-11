@@ -52,7 +52,8 @@ def index():
 
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('main.index')
+            now = datetime.datetime.now()
+            next_page = url_for('main.calendar_page_monthly', year=now.year, month=now.month)
         return redirect(next_page)
         # return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
@@ -149,9 +150,6 @@ def calendar_page_daily(year, month, currentDay):
     day = datetime.datetime(year, month, currentDay)
     event_list[0] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
     return render_template("calender_day.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, currentDay=currentDay, days_in_previous_month=days_in_previous_month, days_in_current_month=days_in_current_month)
-
-
-
 
 
 @bp.route('/events_page/<int:sortby>/', methods=['GET', 'POST'])

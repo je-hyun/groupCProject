@@ -25,7 +25,7 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading"><img src="{{url_for('static', filename='img/cal_icon.png')}}" style="height:1em; color:black !important;"></img> Outing Scout</div>
       <div class="list-group list-group-flush">
-        <a href="/" class="list-group-item list-group-item-action bg-light">Calender</a>
+        <a href="/calendar_page/monthly/<int:year>/<int:month>/" class="list-group-item list-group-item-action bg-light">Calender</a>
         <a href="/pref" class="list-group-item list-group-item-action bg-light">Preferences</a>
         <a href="/add_events" class="list-group-item list-group-item-action bg-light">Add Events</a>
         <a href="/events_page/0/" class="list-group-item list-group-item-action bg-light">Events</a>
