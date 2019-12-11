@@ -1,11 +1,16 @@
-from app.main import bp
+from app.main import bp, auth
 from flask import Flask, render_template, request, flash, redirect, url_for
 import calendar
+from app.main.forms import EventForm, EventsPageForm, TimeSlotForm, LoginForm, RegistrationForm
 from app.main.forms import EventForm, EventsPageForm, PreferenceForm, TimeSlotForm
 from app.models import *
+from app import db
 from app import db, models
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+from werkzeug.security import generate_password_hash
+from werkzeug.urls import url_parse
+from flask_login import LoginManager, logout_user, login_required, current_user, login_user, current_user, login_manager
 
 '''
 @bp.route('/testroute', methods=['GET','POST'])
@@ -13,14 +18,14 @@ def testroute():
     users = db.session.query(User).all()
     my_user = db.session.query(User).get(0)
 
-    """ event = Event(
+     event = Event(
         id = 0,
         start = datetime.datetime(2018, 8, 1),
         end = datetime.datetime(2018, 8, 2),
         name = "Rock climbing event",
         price = "10",
         location = "NYC"
-    ) """
+    )
 
     #succesfullyAdded = db.session.query(User).get(0).attend_event(event)
     #succesfullyAdded = db.session.query(User).get(1).attend_event(event)
@@ -30,13 +35,37 @@ def testroute():
 
 '''
 
-@bp.route('/', methods=['GET', 'POST'])
-def index():
-    now = datetime.datetime.now()
+'''
+now = datetime.datetime.now()
     return redirect(url_for('main.calendar_page_monthly', year=now.year, month=now.month))
+'''
+
+@bp.route('/', methods=['GET', 'POST'])
+#@login_required
+def index():
+    form = LoginForm()
+    if current_user.is_authenticated:
+        now = datetime.datetime.now()
+        return redirect(url_for('main.calendar_page_monthly', year=now.year, month=now.month))
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            # login_user(user)  # , remember=form.remember_me.data
+            flash('Invalid Username or Password')
+            return redirect(url_for('main.login'))
+
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            now = datetime.datetime.now()
+            next_page = url_for('main.calendar_page_monthly', year=now.year, month=now.month)
+        return redirect(next_page)
+        # return redirect(url_for('index'))
+    return render_template('login.html', title='Sign In', form=form)
+
 
 @bp.route('/calendar_page/monthly/<int:year>/<int:month>/')
 def calendar_page_monthly(year, month):
+    now = datetime.datetime.now()
     if (month > 12 or month < 1):
         return ("Oops, the month is out of range!")
     # Initialize some useful variables:
@@ -173,6 +202,7 @@ def calendar_page_daily(year, month, currentDay):
     # The indices correspond with the indices in daylist for attending_events
     day = datetime.datetime(year, month, currentDay)
     event_list[0] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
+    return render_template("calender_day.html", now=now, month_name=month_name, month=month, year=year, daylist=daylist, event_list=event_list, currentDay=currentDay, days_in_previous_month=days_in_previous_month, days_in_current_month=days_in_current_month)
 
 
 
@@ -328,6 +358,82 @@ def add_time_slot():
 
     added_timeslots = db.session.query(TimeSlot).all()
     return render_template('workingtime_form.html', added_timeslots=added_timeslots, form=form)
+
+
+#######################################################################
+'''
+@bp.route('/', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))# trying to redirect to intro page
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            #login_user(user)  # , remember=form.remember_me.data
+            flash('Invalid Username or Password')
+            return redirect(url_for('main.login'))
+
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('main.index')
+        return redirect(next_page)
+        #return redirect(url_for('index'))
+    return render_template('login.html', title='Sign In', form=form)
+'''
+
+@bp.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Congratulations, you are now a registered user!')
+        return redirect(url_for('main.index'))
+    return render_template('register.html', title='Register', form=form)
+
+@bp.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('main.index'))
+
+
+'''
+@auth.route('/signup', methods=['POST'])
+def signup_post():
+    form = RegisteredForm()
+    user = User.query.filter_by(email=form).first()
+
+    if user:
+        flash('Email address already exists.')
+        return(redirect(url_for('auth.login')))
+
+    new_user = User(email=email. username=username, password=generate_password_hash(password, method='sha256')
+
+    return render_template('signup.html', form=form)
+
+
+
+@auth
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+@auth.route
+
+@bp.after_request
+def sendsms(response):
+    return response
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+'''
+
 
 
 '''

@@ -36,9 +36,37 @@ class TimeSlotForm(FlaskForm):
     end_time = TimeField('End Time (24-hour format):', validators=[InputRequired()], format="%H:%M")
     submit = SubmitField('Add Time Slot')
 
+#Kamil Peza Login and Register Forms:
+#https://github.com/PrettyPrinted/building_user_login_system/blob/master/finish/app.py
+
+#https://hackersandslackers.com/authenticating-users-with-flask-login/
+class LoginForm(FlaskForm):
+    username = StringField('Username:', validators=[InputRequired(), Length(min=4, max=15)])
+    password = PasswordField('Password:', validators=[InputRequired(), Length(min=8, max=20)])
+    #remember = BooleanField('remember me')
+    submit = SubmitField('Log In')
+
+class RegistrationForm(FlaskForm):
+    username = StringField('Username:', validators=[InputRequired(), Length(min=4, max=15)])
+    email = StringField('Email:', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
+    password = PasswordField('Password:', validators=[InputRequired(), Length(min=8, max=20)])
+    password2 = PasswordField('Confirm Password:', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Register')
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('Please use a different username.')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is not None:
+            raise ValidationError('Please use a different email address.')
+
 
 '''
 timeslot_id = IntegerField('timeslot_id')
+
 
 @bp.route('/add_TimeSlot/', methods=['GET', 'POST'])
 def add_TimeSlot():
@@ -54,4 +82,6 @@ def add_TimeSlot():
 
 class EventsPageForm(FlaskForm):
     submit = SubmitField('Attend Event')
+
+
 '''

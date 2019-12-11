@@ -1,14 +1,27 @@
+from flask import app
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from app.location_utils import coordinatesToAddress, addressToCoordinates
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
-from app import db
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user #, user_loader
+from app import db, login_manager
+
+
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_bootstrap import Bootstrap
+from config import Config
 
 #from app import db
 #db = SQLAlchemy()
 
+#login_manager = LoginManager()
+#login_manager.login_view = 'login'
+#login_manager.init_app(app)
+
+#Manager.add_command('db', MigrateCommand)
 
 class Event(db.Model):
     __tablename__ = 'event'
@@ -71,6 +84,7 @@ class PreferenceCategory(db.Model):
     preference_id = db.Column(db.Integer, db.ForeignKey('preference.preference_id'), primary_key=True)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), primary_key=True)
 
+'''
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
@@ -105,6 +119,7 @@ class User(db.Model):
             db.session.commit()
             return True
 
+'''
 
 class AttendEvent(db.Model):
     __tablename__ = 'attendEvent'
@@ -126,6 +141,7 @@ class Preference(db.Model):
     DayFree = db.Column(db.String)
     hoursFree = db.Column(db.String)
 
+#Kamil WorkingForm
     categories = db.relationship('Category', secondary='preferenceCategory', back_populates="preferences")
 
     def save_list_of_categories(self, category_name_list):
@@ -153,6 +169,32 @@ class TimeSlot(db.Model):
     start_time = db.Column(db.Time)
     end_time = db.Column(db.Time)
 
+#Kamil Login (databse for users)
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), index=True, unique=True)
+    email = db.Column(db.String(120), index=True, unique=True)
+    password_hash = db.Column(db.String(128))
+    events = db.relationship('Event', secondary='attendEvent', back_populates="attending_user")
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def __repr__(self):
+        return '<User {}>'.format(self.username)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+
+'''
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+'''
 
 def get_address(self):
     return coordinatesToAddress(self.latitude, self.longitude)
