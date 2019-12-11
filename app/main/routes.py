@@ -104,6 +104,7 @@ def calendar_page_weekly(year, month, week):
     # daylist is the list of numbers to put in each box of the calendar,
     # where 0 is an empty box, and 1 is the 1st of the month, etc.
     # example: [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 0, 0]
+
     if len(daylist) <= (week-1) * 7 or week < 1:
         return ("Oops, the week is out of range!")
 
@@ -128,6 +129,10 @@ def calendar_page_weekly(year, month, week):
             event_list[day_index] = Event.query.filter(Event.start >= day, Event.start < day+day_delta, Event.attending_user.any(User.id==current_user_id)).all()
             # Recommending Events Below:
             recommended_events[day_index] = Event.query.filter(Event.start >= day, Event.start < day+day_delta)
+
+            #Find if the current user has any preference categories that match any event categories.
+            user_categories = [u.id for u in user_preferences.categories]
+            recommended_events[day_index] = recommended_events[day_index].filter(Event.categories.any(Category.id.in_(user_categories)))
             if user_preferences.price != None:
                 recommended_events[day_index] = recommended_events[day_index].filter(Event.price<=user_preferences.price).all()
             if user_preferences.distance != None or user_preferences.distance != 0:
@@ -167,6 +172,7 @@ def calendar_page_daily(year, month, currentDay):
 
     event_list = [None]
 
+
     # The following loop creates an event_list with event objects inside
     # The indices correspond with the indices in daylist for attending_events
     day = datetime.datetime(year, month, currentDay)
@@ -177,11 +183,18 @@ def calendar_page_daily(year, month, currentDay):
     # List of Recommended Events
     recommended_events = [None]
     user_preferences = Preference.query.filter(Preference.user_id == current_user_id).all()
-    # The indices correspond with the indices in daylist for recommended_events
-    recommended_events[0] = Event.query.filter(Event.start >= day, Event.start < day+day_delta)
-    current_user = User.query.get(current_user_id)
     if len(user_preferences) == 1 :
         user_preferences = user_preferences[0]
+        # The indices correspond with the indices in daylist for recommended_events
+        recommended_events[0] = Event.query.filter(Event.start >= day, Event.start < day+day_delta)
+
+        #Find if the current user has any preference categories that match any event categories.
+        user_categories = [u.id for u in user_preferences.categories]
+        recommended_events[0] = recommended_events[0].filter(Event.categories.any(Category.id.in_(user_categories)))
+
+
+
+        current_user = User.query.get(current_user_id)
         if user_preferences.price != None:
             recommended_events[0] = recommended_events[0].filter(Event.price<=user_preferences.price).all()
         if user_preferences.distance != None or user_preferences.distance != 0:
