@@ -6,6 +6,7 @@ from app.models import *
 from app import db, models
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+from app.location_utils import addressToCoordinates, coordinatesToAddress
 
 @bp.route('/testroute', methods=['GET','POST'])
 def testroute():
@@ -258,7 +259,8 @@ def events_page(sortby):
 def add_events():
     event_form = EventForm()
     if event_form.validate_on_submit():
-        event = Event(start=event_form.start.data, end=event_form.end.data, name=event_form.name.data, price=event_form.price.data, latitude=event_form.locationLatitude.data, longitude=event_form.locationLongitude.data)
+        location = coordinatesToAddress(event_form.locationLatitude.data, event_form.locationLongitude.data)
+        event = Event(start=event_form.start.data, end=event_form.end.data, name=event_form.name.data, price=event_form.price.data, latitude=event_form.locationLatitude.data, longitude=event_form.locationLongitude.data,location=location)
         db.session.add(event)
         db.session.commit()
         event.save_list_of_categories(event_form.Categories.data.split(','))
@@ -270,6 +272,8 @@ def preferences():
     pref_form = PreferenceForm()
     userid = 0
     pref = db.session.query(Preference).filter(Preference.user_id == userid).first()
+    user_address = ""
+
     if pref is None:
         pref = Preference()
         pref.price = 0
@@ -277,7 +281,11 @@ def preferences():
         pref.size = "large"
         pref.latitude = 0
         pref.longitude = 0
-    return render_template("Preference.html", preference=pref, pref_form=pref_form)
+        preference_list = ""
+    else:
+        preference_list = ', '.join([i.name for i in pref.categories])
+        user_address = coordinatesToAddress(pref.latitude, pref.longitude)
+    return render_template("Preference.html", preference=pref, pref_form=pref_form, preference_list=preference_list, user_address=user_address)
 
 @bp.route('/save_preference', methods=['GET', 'POST'])
 def save_preference():

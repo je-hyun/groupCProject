@@ -61,7 +61,7 @@
               {% endfor %}
 
               {% for event in recommended_events[0] %}
-                <li><a href="/event/{{event.id}}" style="color:#808080;">Recommended: <br/>{{event.name}} {{event.start}} to {{event.end}}</a></li>
+                <li><a href="/event/{{event.id}}" style="color:#808080;">Recommended: <br/>{{event.name}} {{event.start.time()}} to {{event.end.time()}}</a></li>
               {% endfor %}
             </div>
       </div>
