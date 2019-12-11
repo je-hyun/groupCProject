@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Your Busy Time Slot List</h1>
+<p>Select a day of the week, then the start and end time of when you are working or unavailable to attend events.</p>
+
+<form action="" method="POST">
+	{{form.hidden_tag()}}
+
+	<p>
+		{{ form.day.label }}<br>
+		{{ form.day(size=5) }}<br>
+		{% for error in form.day.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.start_time.label }}<br>
+		{{ form.start_time(size=32, placeholder='1:00') }}<br>
+		{% for error in form.start_time.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.end_time.label }}<br>
+		{{ form.end_time(size=32, placeholder='3:00')}}<br>
+		{% for error in form.end_time.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+		{% endfor %}
+	</p>
+
+	<p>{{ form.submit()}}</p>
+</form>
+
+<div>
+	<ul>
+		{% for timeslot in added_timeslots %}
+		{{ timeslot.day}} - {{ timeslot.start_time}} - {{ timeslot.end_time }}<br>
+		{% endfor %}
+	</ul>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+

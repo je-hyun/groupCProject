@@ -2,6 +2,8 @@ from flask_sqlalchemy import SQLAlchemy
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from app.location_utils import coordinatesToAddress, addressToCoordinates
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
 from app import db
 
 #from app import db
@@ -104,25 +106,6 @@ class User(db.Model):
             return True
 
 
-    def unattend_event(self, event):
-        # checks if event conflicts with any event inside the user's event list
-        #   adds event to the user's events list
-        hasEvent = False;
-        userAttendEvent = self.events
-        print(userAttendEvent)
-        for x in userAttendEvent:
-            if x==event:
-                hasEvent = True
-
-
-        if not hasEvent:
-            return False
-        else:
-            self.events.remove(event)
-            db.session.commit()
-            return True
-
-
 class AttendEvent(db.Model):
     __tablename__ = 'attendEvent'
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
@@ -161,6 +144,16 @@ class Preference(db.Model):
         db.session.commit()
 
     def get_address(self):
+
+class TimeSlot(db.Model):
+    __tablename__ = 'timeslot'
+    timeslot_id = db.Column(db.Integer, primary_key=True)
+    day = db.Column(db.String)
+    start_time = db.Column(db.Time)
+    end_time = db.Column(db.Time)
+
+
+def get_address(self):
         return coordinatesToAddress(self.latitude, self.longitude)
 
     def distance_preference_conflicts_with_event(self, event):
@@ -168,3 +161,6 @@ class Preference(db.Model):
             return False
         else:
             return True
+
+if __name__ == "__main__":
+    Manager.run()
